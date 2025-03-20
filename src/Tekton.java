@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 
 public class Tekton {
+    static int MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH = 10;
+
     private ArrayList<Tekton> neighbours;
     private ArrayList<Spore> spores;
     private ArrayList<Mycelium> myceliums;
@@ -100,7 +102,12 @@ public class Tekton {
     public void onRoundStart(){}
 
     public MushroomBody growMushroom(MushroomMaster master){
-        return null; //TODO
+        if(canGrowMushroom(master)){
+            MushroomBody newMushroom = new MushroomBody();
+            mushroomBody = newMushroom;
+            return newMushroom;
+        }
+        return null;
     }
 
     public Mycelium growMycelium(MushroomMaster master, Tekton target){
@@ -118,7 +125,8 @@ public class Tekton {
         return false;
     }
 
-    public boolean canGrowMushroom(){
+    public boolean canGrowMushroom(MushroomMaster master){
+        if(mushroomBody != null) return false;
         return true; //TODO
     }
 
