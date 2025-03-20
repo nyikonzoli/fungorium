@@ -61,6 +61,10 @@ public class Tekton {
         insects.remove(i);
     }
 
+    public void setInsects(ArrayList<Insect> insects){
+        this.insects = insects;
+    }
+
     public ArrayList<Spore> getSpores(){
         return spores;
     }
@@ -108,7 +112,10 @@ public class Tekton {
     }
 
     public boolean canReachTektonViaMycelium(Tekton t){
-        return true; //TODO
+        for (Mycelium mycelium : myceliums) {
+            if(mycelium.getTektonStart() == t || mycelium.getTektonEnd() == t) return true;
+        }
+        return false;
     }
 
     public boolean canGrowMushroom(){

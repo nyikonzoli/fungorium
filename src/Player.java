@@ -15,5 +15,7 @@ public abstract class Player {
 
     public void selfReport(){}
 
-    public void incrementScore(){}
+    public void incrementScore(){
+        score++;
+    }
 }
