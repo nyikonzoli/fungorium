@@ -31,8 +31,4 @@ public class Mycelium {
         System.out.println("Mycelium.decreaseTTL()");
         timeToLive--;
     }
-
-    public void disappear(){
-        System.out.println("Mycelium.disappear()");
-    }
 }

@@ -15,7 +15,7 @@ public abstract class Player {
 
     }
 
-    public void selfReport(){
+    public void selfReport(Game g){
 
     }
 
