@@ -16,6 +16,7 @@ public abstract class Player {
     public void selfReport(){}
 
     public void incrementScore(){
+        System.err.println("Player.incrementScore()"); // TODO: lehet Overrideolni kell a gyerekekben csak a skeletonhoz
         score++;
     }
 }

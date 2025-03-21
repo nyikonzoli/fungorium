@@ -50,4 +50,15 @@ public class Menu {
 
         sc.close();
     }
+
+    public static boolean userDecision() {
+        System.out.println("[y/n]: ");
+        Scanner sc = new Scanner(System.in);
+        char c = 0;
+        while (c != 'y' || c != 'n') {
+            c = (char)sc.nextByte();
+        }
+        sc.close();
+        return c == 'y';
+    }
 }

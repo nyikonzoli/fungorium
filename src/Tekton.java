@@ -27,8 +27,9 @@ public class Tekton {
         mushroomBody = m;
     }
 
-    public boolean deductNetworkAction(){
-        return true; //TODO
+    public boolean deductNetworkAction(MushroomMaster mm){
+        System.out.println("deductNetworkAction(MushroomMaster mm)\nWas successful?");
+        return Menu.userDecision(); 
     }
 
     public ArrayList<Tekton> split(){
@@ -90,9 +91,10 @@ public class Tekton {
     public void setSpores(ArrayList<Spore> spores){
         this.spores = spores;
     }
-
+    //TODO: overrideolni kell tekton leszármazottaknál
     public boolean addMycelium(Mycelium m){
-        return myceliums.add(m); //TODO
+        System.out.println("Tekton.addMycelium(Mycelium m)");
+        return myceliums.add(m);
     }
 
     public void removeMycelium(Mycelium m){
@@ -101,7 +103,7 @@ public class Tekton {
 
     public void onRoundStart(){}
 
-    public MushroomBody growMushroom(MushroomMaster master){
+    public MushroomBody growMushroom(MushroomMaster master){ //TODO
         if(canGrowMushroom(master)){
             MushroomBody newMushroom = new MushroomBody();
             mushroomBody = newMushroom;
@@ -111,10 +113,18 @@ public class Tekton {
     }
 
     public Mycelium growMycelium(MushroomMaster master, Tekton target){
-        return null; //TODO
+        System.out.println("Tekton.growMycelium(MushroomMaster master, Tekton target)");
+        Mycelium myc2 = null;
+        if (isNeighbour(target) && deductNetworkAction(master)) {
+            myc2 = new Mycelium(master, this, target);
+            this.addMycelium(myc2);
+            target.addMycelium(myc2);
+        }
+        return myc2; 
     }
 
     public boolean isNeighbour(Tekton t){
+        System.out.println("Tekton.isNeighbor(Tekton t)");
         return neighbours.contains(t);
     }
 
