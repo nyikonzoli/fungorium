@@ -1,5 +1,5 @@
 public class ParalyzingSpore extends Spore {
     public void applyEffect(Insect i){
-        System.out.println("applyEffect(Insect i)");
+        System.out.println("ParalyzingSpore.applyEffect(Insect i)");
     }
 }

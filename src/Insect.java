@@ -6,6 +6,7 @@ public class Insect {
     public Insect(){}
 
     public Tekton getLocation(){
+        System.out.println("Insect.getLocation()");
         return location;
     }
 
@@ -19,24 +20,32 @@ public class Insect {
     }
 
     public int getActionPoints(){
+        System.out.println("Insect.getActionPoints()");
         return actionPoints;
     }
 
     public void setActionPoints(int points){
+        System.out.println("Insect.setActionPoints(int points)");
         actionPoints = points;
     }
 
     public boolean getCanCutMycelium(){
+        System.out.println("Insect.getCanCutMycelium()");
         return canCutMycelium;
     }
 
     public void setCanCutMycelium(boolean value){
+        System.out.println("Insect.setCanCutMycelium(boolean value)");
         canCutMycelium = value;
     }
 
-    public void eatSpore(){}
+    public void eatSpore(){
+        System.out.println("Insect.eatSpore()");
+    }
 
-    public void cutMycelium(Mycelium mycelium){}
+    public void cutMycelium(Mycelium mycelium){
+        System.out.println("Insect.cutMycelium(Mycelium mycelium)");
+    }
 
     public void decrementActionPoint(){
         actionPoints--;
