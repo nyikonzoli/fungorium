@@ -142,6 +142,7 @@ public class Tekton {
     }
 
     public boolean canGrowMushroom(MushroomMaster master){
+        System.out.println("Tekton.canGrowMushroom(MushroomMaster master)");
         if(mushroomBody != null) return false;
         return true; //TODO
     }

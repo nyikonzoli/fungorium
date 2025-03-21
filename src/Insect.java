@@ -3,7 +3,9 @@ public class Insect {
     private int actionPoints;
     private boolean canCutMycelium = true;
 
-    public Insect(){}
+    public Insect(){
+        System.out.println("Insect.ctor()");
+    }
 
     public Tekton getLocation(){
         System.out.println("Insect.getLocation()");
