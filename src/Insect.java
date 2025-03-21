@@ -10,7 +10,12 @@ public class Insect {
     }
 
     public void moveTo(Tekton newLocation){
-        location = newLocation;
+        System.out.println("Insect.moveTo(Tekton newLocation)");
+        boolean canReach = location.canReachTektonViaMycelium(newLocation);
+        if(canReach){
+            location = newLocation;
+        }
+        
     }
 
     public int getActionPoints(){
@@ -33,5 +38,13 @@ public class Insect {
 
     public void cutMycelium(Mycelium mycelium){}
 
-    public void decrementActionPoint(){}
+    public void decrementActionPoint(){
+        actionPoints--;
+        System.out.println("Insect.decrementActionPoint()");
+    }
+
+    public void setTekton(Tekton newLocation){
+        System.out.println("Insect.setTekton(Tekton newLocation)");
+        location = newLocation;
+    }
 }

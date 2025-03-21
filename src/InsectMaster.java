@@ -13,7 +13,10 @@ public class InsectMaster extends Player {
 
     public void initiateSporeEating(Tekton t){}
 
-    public void initiateMovement(Tekton t){}
+    public void initiateMovement(Tekton t){
+        System.out.println("InsectMaster.initiateMovement(Tekton t)");
+        insect.moveTo(t);
+    }
 
     public void initiateMyceliumCutting(Mycelium m){}
 

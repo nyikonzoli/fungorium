@@ -32,7 +32,8 @@ public class Tekton {
     }
 
     public ArrayList<Tekton> split(){
-        return null; //TODO
+        System.out.println("Tekton.split()");
+        return null;
     }
 
     public ArrayList<Tekton> getNeighbours(){
@@ -44,6 +45,7 @@ public class Tekton {
     }
 
     public void addNeighbours(ArrayList<Tekton> tektons){
+        System.out.println("addNeighbours(ArrayList<Tekton> tektons)");
         neighbours.addAll(tektons);
     }
 
@@ -57,10 +59,12 @@ public class Tekton {
 
     public void addInsect(Insect i){
         insects.add(i);
+        System.out.println("Tekton.addInsect(Insect i)");
     }
 
     public void removeInsect(Insect i){
         insects.remove(i);
+        System.out.println("Tekton.removeInsect(Insect i)");
     }
 
     public void setInsects(ArrayList<Insect> insects){
@@ -96,6 +100,7 @@ public class Tekton {
     }
 
     public void removeMycelium(Mycelium m){
+        System.out.println("Tekton.removeMycelium(Mycelium m)");
         myceliums.remove(m);
     }
 
@@ -119,6 +124,7 @@ public class Tekton {
     }
 
     public boolean canReachTektonViaMycelium(Tekton t){
+        System.out.println("Tekton.canReachTektonViaMycelium(Tekton t)");
         for (Mycelium mycelium : myceliums) {
             if(mycelium.getTektonStart() == t || mycelium.getTektonEnd() == t) return true;
         }
@@ -131,6 +137,7 @@ public class Tekton {
     }
 
     public boolean hasInsect(){
+        System.out.println("Tekton.hasInsect()");
         return !insects.isEmpty();
     }
 
