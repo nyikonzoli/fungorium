@@ -6,6 +6,7 @@ public class Mycelium {
     private Tekton tektonStart, tektonEnd;
 
     public Mycelium(MushroomMaster m, Tekton start, Tekton end){
+        System.out.println("Mycelium.Mycelium(MushroomMaster m, Tekton start, Tekton end)");
         grower = m;
         tektonStart = start;
         tektonEnd = end;
@@ -13,14 +14,21 @@ public class Mycelium {
     }
 
     public Tekton getTektonStart(){
+        System.out.println("Mycelium.getTektonStart()");
         return tektonStart;
     }
 
     public Tekton getTektonEnd(){
+        System.out.println("Mycelium.getTektonEnd()");
         return tektonEnd;
     }
 
+    public void disappear() {
+        System.out.println("Mycelium.disappear()");
+    }
+
     public void decreaseTTL(){
+        System.out.println("Mycelium.decreaseTTL()");
         timeToLive--;
     }
 }

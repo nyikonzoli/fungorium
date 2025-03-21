@@ -11,9 +11,13 @@ public abstract class Player {
         this.score = score;
     }
 
-    public void onRoundStart(){}
+    public void onRoundStart(){
 
-    public void selfReport(){}
+    }
+
+    public void selfReport(){
+
+    }
 
     public void incrementScore(){
         System.err.println("Player.incrementScore()"); // TODO: lehet Overrideolni kell a gyerekekben csak a skeletonhoz
