@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Skeleton {
@@ -84,22 +85,98 @@ public class Skeleton {
     }
 
     public void eatRegularSpore(){
+        Skeleton s = new Skeleton();
+        Tekton tN = new Tekton();
+        InsectMaster imaster = new InsectMaster();
+        Insect insect = new Insect();
+        RegularSpore regularspore = new RegularSpore();
+
+        insect.setLocation(tN);
+        imaster.setInsect(insect);
+        ArrayList<Spore> spores = new ArrayList<>();
+        spores.add(regularspore);
+        tN.setSpores(spores);
+
+        s.objects.put("tN", tN);
+        s.objects.put("insect", insect);
+        s.objects.put("imaster", imaster);
+        s.objects.put("regularspore", regularspore);
 
     }
 
     public void eatSpeedingSpore(){
-        
+        Skeleton s = new Skeleton();
+        Tekton tN = new Tekton();
+        InsectMaster imaster = new InsectMaster();
+        Insect insect = new Insect();
+        SpeedingSpore speedingSpore = new SpeedingSpore();
+
+        insect.setLocation(tN);
+        imaster.setInsect(insect);
+        ArrayList<Spore> spores = new ArrayList<>();
+        spores.add(speedingSpore);
+        tN.setSpores(spores);
+
+        s.objects.put("tN", tN);
+        s.objects.put("insect", insect);
+        s.objects.put("imaster", imaster);
+        s.objects.put("speedingSpore", speedingSpore);
     }
 
     public void eatSlowingSpore(){
-        
+        Skeleton s = new Skeleton();
+        Tekton tN = new Tekton();
+        InsectMaster imaster = new InsectMaster();
+        Insect insect = new Insect();
+        SlowingSpore slowingSpore = new SlowingSpore();
+
+        insect.setLocation(tN);
+        imaster.setInsect(insect);
+        ArrayList<Spore> spores = new ArrayList<>();
+        spores.add(slowingSpore);
+        tN.setSpores(spores);
+
+        s.objects.put("tN", tN);
+        s.objects.put("insect", insect);
+        s.objects.put("imaster", imaster);
+        s.objects.put("slowingSpore", slowingSpore);
     }
 
     public void eatParalyzingSpore(){
-        
+        Skeleton s = new Skeleton();
+        Tekton tN = new Tekton();
+        InsectMaster imaster = new InsectMaster();
+        Insect insect = new Insect();
+        ParalyzingSpore paralyzingSpore = new ParalyzingSpore();
+
+        insect.setLocation(tN);
+        imaster.setInsect(insect);
+        ArrayList<Spore> spores = new ArrayList<>();
+        spores.add(paralyzingSpore);
+        tN.setSpores(spores);
+
+        s.objects.put("tN", tN);
+        s.objects.put("insect", insect);
+        s.objects.put("imaster", imaster);
+        s.objects.put("paralyzingSpore", paralyzingSpore);
     }
 
     public void eatCutBlockingSpore(){
-        
+        Skeleton s = new Skeleton();
+        Tekton tN = new Tekton();
+        InsectMaster imaster = new InsectMaster();
+        Insect insect = new Insect();
+        CutBlockingSpore cbSpore = new CutBlockingSpore();
+
+        insect.setLocation(tN);
+        imaster.setInsect(insect);
+        ArrayList<Spore> spores = new ArrayList<>();
+        spores.add(cbSpore);
+        tN.setSpores(spores);
+
+        s.objects.put("tN", tN);
+        s.objects.put("insect", insect);
+        s.objects.put("imaster", imaster);
+        s.objects.put("cbSpore", cbSpore);
     }
 }
