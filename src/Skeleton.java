@@ -59,6 +59,7 @@ public class Skeleton {
         tN2.addNeighbour(tN);
 
         insect.setLocation(tN);
+        tN.addInsect(insect);
         imaster.setInsect(insect);
 
         game.extendField(tI);
