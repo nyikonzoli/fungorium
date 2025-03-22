@@ -12,6 +12,10 @@ public class Insect {
         return location;
     }
 
+    public void setLocation(Tekton t) {
+        location = t;
+    }
+
     public void moveTo(Tekton newLocation){
         System.out.println("Insect.moveTo(Tekton newLocation)");
         boolean canReach = location.canReachTektonViaMycelium(newLocation);

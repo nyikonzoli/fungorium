@@ -32,4 +32,19 @@ public class Game {
         System.out.println("Game.reportScore()");
     }
 
+    public void addPlayer(Player p){
+        players.add(p);
+    }
+
+    public void removePlayer(Player p){
+        players.remove(p);
+    }
+
+    public void extendField(Tekton t){
+        gameField.add(t);
+    }
+
+    public void shrinkField(Tekton t){
+        gameField.remove(t);
+    }
 }
