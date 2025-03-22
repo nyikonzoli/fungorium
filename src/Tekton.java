@@ -87,8 +87,12 @@ public class Tekton {
     public void addSpores(ArrayList<Spore> spores){
         this.spores.addAll(spores);
     }
-
-    public Spore popSpores(){
+    /**
+     * Removes the most recently added element in the spores list
+     * @return The Spore that was removed
+     */
+    public Spore popSpore(){
+        System.out.println("Tekton.popSpore()");
         return spores.removeLast();
     }
 

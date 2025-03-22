@@ -44,9 +44,17 @@ public class Insect {
         System.out.println("Insect.setCanCutMycelium(boolean value)");
         canCutMycelium = value;
     }
-
-    public void eatSpore(){
+    /**
+     * Eats the most recently added Spore on the Tekton it's on
+     * @param imaster The Player responsible for the Insect
+     */
+    public void eatSpore(Player imaster){
         System.out.println("Insect.eatSpore()");
+        Spore s = location.popSpore();
+        if (s != null) {
+            s.applyEffect(this);
+            imaster.incrementScore();
+        }
     }
     /**
      * The Insect cuts the Mycelium by calling it's disappear() function

@@ -14,9 +14,13 @@ public class InsectMaster extends Player {
         System.out.println("InsectMaster.setInsect(Insect newInsect)");
         insect = newInsect;
     }
-
+    /**
+     * Initiates the process of eating a spore on the given tectonic plate
+     * @param t The Tekton where the Insect will try to eat a Spore
+     */
     public void initiateSporeEating(Tekton t){
         System.out.println("InsectMaster.initiateSporeEating(Tekton t)");
+        insect.eatSpore(this);
     }
 
     public void initiateMovement(Tekton t){

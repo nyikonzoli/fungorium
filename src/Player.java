@@ -18,9 +18,11 @@ public abstract class Player {
     public void selfReport(Game g){
 
     }
-
+    /** 
+     * Increments the Player's score by 1
+     */
     public void incrementScore(){
-        System.err.println("Player.incrementScore()"); // TODO: lehet Overrideolni kell a gyerekekben csak a skeletonhoz
+        System.out.println("Player.incrementScore()"); // TODO: lehet Overrideolni kell a gyerekekben csak a skeletonhoz
         score++;
     }
 }
