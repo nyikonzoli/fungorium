@@ -44,14 +44,24 @@ public class Insect {
     public void eatSpore(){
         System.out.println("Insect.eatSpore()");
     }
-
+    /**
+     * The Insect cuts the Mycelium by calling it's disappear() function
+     * @param mycelium Mycelium to be removed
+     */
     public void cutMycelium(Mycelium mycelium){
-        System.out.println("Insect.cutMycelium(Mycelium mycelium)");
-    }
+        System.out.println("Insect.cutMycelium(Mycelium mycelium)\nCan cut mycelium?");
+        if (Menu.userDecision()) {
+            mycelium.disappear();
+            decrementActionPoint();
+        }
 
+    }
+    /**
+     * Decrements the Instect's action points by 1
+     */
     public void decrementActionPoint(){
-        actionPoints--;
         System.out.println("Insect.decrementActionPoint()");
+        actionPoints--;
     }
 
     public void setTekton(Tekton newLocation){

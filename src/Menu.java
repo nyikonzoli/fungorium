@@ -50,7 +50,10 @@ public class Menu {
 
         sc.close();
     }
-
+    /**
+     * Asks the user to make a yes-or-no decision
+     * @return Returns a boolean corresponding to the user's answer
+     */
     public static boolean userDecision() {
         System.out.println("[y/n]: ");
         Scanner sc = new Scanner(System.in);

@@ -23,9 +23,13 @@ public class InsectMaster extends Player {
         System.out.println("InsectMaster.initiateMovement(Tekton t)");
         insect.moveTo(t);
     }
-
+    /**
+     * Initiates the process of removing a mycelium between two tectonic plates
+     * @param m Mycelium to be removed
+     */
     public void initiateMyceliumCutting(Mycelium m){
         System.out.println("InsectMaster.initiateMyceliumCutting(Mycelium m)");
+        insect.cutMycelium(m);
     }
 
     public void onRoundStart(){

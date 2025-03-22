@@ -22,9 +22,15 @@ public class Mycelium {
         System.out.println("Mycelium.getTektonEnd()");
         return tektonEnd;
     }
-
+    
+    
+    /**
+     * Starts the process of destroying this Mycelium instance
+     */
     public void disappear() {
         System.out.println("Mycelium.disappear()");
+        tektonStart.removeMycelium(this);
+        tektonEnd.removeMycelium(this);
     }
 
     public void decreaseTTL(){

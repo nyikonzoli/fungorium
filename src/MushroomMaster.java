@@ -17,7 +17,11 @@ public class MushroomMaster extends Player{
             this.incrementScore();
         }
     }
-
+    /**
+     * Initiates mycelium growth between two tectonic plates.
+     * @param start Starting Tekton 
+     * @param end   Target Tekton
+     */
     public void initiateMyceliumGrowth(Tekton start, Tekton end) {
         System.out.println("MushroomMaster.initiateMyceliumGrowth(Tekton start, Tekton end)");
         start.growMycelium(this, end);

@@ -26,7 +26,11 @@ public class Tekton {
     public void setMushroomBody(MushroomBody m){
         mushroomBody = m;
     }
-
+    /**
+     * Deducts an action point from a mushroom on the same mycelium network as tectonic plate
+     * @param mm Owner of the mycelium network
+     * @return Returns whether the deduction was successful
+     */
     public boolean deductNetworkAction(MushroomMaster mm){
         System.out.println("deductNetworkAction(MushroomMaster mm)\nWas successful?");
         return Menu.userDecision(); 
@@ -96,11 +100,19 @@ public class Tekton {
         this.spores = spores;
     }
     //TODO: overrideolni kell tekton leszármazottaknál
+    /**
+     * Tries to add a mycelium to a tectonic plate
+     * @param m The Mycelium to be added
+     * @return Boolean indicating whether the operation was successful 
+     */
     public boolean addMycelium(Mycelium m){
         System.out.println("Tekton.addMycelium(Mycelium m)");
         return myceliums.add(m);
     }
-
+    /**
+     * Removes mycelium from tectonic plate
+     * @param m Mycelium to be removed
+     */
     public void removeMycelium(Mycelium m){
         System.out.println("Tekton.removeMycelium(Mycelium m)");
         myceliums.remove(m);
@@ -116,9 +128,17 @@ public class Tekton {
         }
         return null;
     }
-
+    /**
+     * Grows a mycelium connection between two tectonic plates
+     * @param master The owner of the new mycelium connection
+     * @param target The target Tekton
+     * @return Newly created Mycelium object
+     */
     public Mycelium growMycelium(MushroomMaster master, Tekton target){
-        System.out.println("Tekton.growMycelium(MushroomMaster master, Tekton target)");
+        System.out.println("Tekton.growMycelium(MushroomMaster master, Tekton target)\nIs there already Mycelium with different owner on the Tekton?");
+        if (Menu.userDecision()) {
+            return null;
+        }
         Mycelium myc2 = null;
         if (isNeighbour(target) && deductNetworkAction(master)) {
             myc2 = new Mycelium(master, this, target);
@@ -127,7 +147,11 @@ public class Tekton {
         }
         return myc2; 
     }
-
+    /**
+     * Decides if two tectonic plates are neighbors
+     * @param t Target Tekton
+     * @return Boolean that is true when the two tectonic plates are neighbors
+     */
     public boolean isNeighbour(Tekton t){
         System.out.println("Tekton.isNeighbor(Tekton t)");
         return neighbours.contains(t);
