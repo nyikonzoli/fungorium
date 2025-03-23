@@ -84,6 +84,11 @@ public class Skeleton {
         game.addPlayer(imaster);
         game.addPlayer(mmaster);
 
+        MushroomBody mushroom = new MushroomBody();
+        mushroom.setLocation(tH);
+        tH.setMushroomBody(mushroom);
+        mmaster.addMushroom(mushroom);
+
         Mycelium myc1 = new Mycelium(mmaster, tH, tN);
         tH.addMycelium(myc1);
         tN.addMycelium(myc1);
@@ -99,6 +104,7 @@ public class Skeleton {
         objects.put("insect", insect);
         objects.put("game", game);
         objects.put("myc1", myc1);
+        objects.put("mushroom", mushroom);
 
         System.out.println("---SEQUENCE DIALOGUE START---");
     }
