@@ -1,7 +1,10 @@
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MushroomBody {
+    public static int SPORE_SPREAD_COUNT = 3;
+
     private List<Spore> sporeLevel;
     private Tekton location;
     private boolean  alive;
@@ -17,8 +20,25 @@ public class MushroomBody {
         System.out.println("Mushroombody.produceSpore()");
     }
 
+    public Tekton getLocation(){
+        System.out.println("MushroomBody.getLocation()");
+        return location;
+    }
+
+    public void setLocation(Tekton t){
+        location = t;
+    }
+
     public void spreadSpore(Tekton t){
         System.out.println("Mushroombody.spreadSpore(Tekton t)");
+        getLocation().isNeighbour(t);
+        if(Menu.userDecision()){
+            ArrayList<Spore> newSpores = new ArrayList<>();
+            for (int i = 0; i < SPORE_SPREAD_COUNT; i++) {
+                newSpores.add(new Spore());
+            }
+            t.addSpores(newSpores);
+        }
     }
 
     public SuperMushroomBody promoteTSuperMushroomBody(){

@@ -85,6 +85,7 @@ public class Tekton {
     }
 
     public void addSpores(ArrayList<Spore> spores){
+        System.out.println("Tekton.addSpores(List<Spore> spores)");
         this.spores.addAll(spores);
     }
     /**

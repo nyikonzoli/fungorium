@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class MushroomMaster extends Player{
@@ -6,6 +7,7 @@ public class MushroomMaster extends Player{
 
     public MushroomMaster() {
         super();
+        mushrooms = new ArrayList<>();
         System.out.println("MushroomMaster.ctor()");
     }
 
@@ -29,6 +31,7 @@ public class MushroomMaster extends Player{
 
     public void initiateSporeSpreading(MushroomBody m, Tekton t){
         System.out.println("MushroomMaster.initiateSporeSpreading(MushroomBody m, Tekton t)");
+        m.spreadSpore(t);
     }
 
     public void initiateSuperMushroomGrowth(MushroomBody m){
