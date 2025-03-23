@@ -23,6 +23,11 @@ public class Game {
 
     public void nextRound(){
         System.out.println("Game.nextRound()");
+        for(Player p : players){
+            if(p instanceof  MushroomMaster)
+                currentPlayer = p;
+        }
+        currentPlayer.onRoundStart();
     }
 
     public void end(){
@@ -51,5 +56,14 @@ public class Game {
 
     public void shrinkField(Tekton t){
         gameField.remove(t);
+    }
+
+    public List<Tekton> getGameField(){
+        return gameField;
+    }
+
+    public void selfReport(MushroomMaster mm){
+        System.out.println("Game.selfReport(MushroomMaster mm)");
+        mm.getScore();
     }
 }

@@ -148,7 +148,9 @@ public class Tekton {
         myceliums.remove(m);
     }
 
-    public void onRoundStart(){}
+    public void onRoundStart(){
+        System.out.println("Tekton.onRoundStart()");
+    }
     /**
      * Grows a mushroom, and adds it to the tecton, and to the mushroom master, who initiated the growth
      * @param master The mushroom master, who started the action

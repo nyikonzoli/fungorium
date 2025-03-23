@@ -29,6 +29,16 @@ public class MushroomBody {
         location = t;
     }
 
+    public void setActions(int a){
+        actions = a;
+        System.out.println("MushroomBody.setActions(int a)");
+    }
+
+    public int getActions(){
+        System.out.println("MushroomBody.getActions()");
+        return actions;
+    }
+
     public void spreadSpore(Tekton t){
         System.out.println("MushroomBody.spreadSpore(Tekton t)");
         getLocation().isNeighbour(t);

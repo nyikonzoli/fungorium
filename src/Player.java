@@ -4,6 +4,7 @@ public abstract class Player {
     public Player(){}
 
     public int getScore(){
+        System.out.println("Player.getScore()");
         return score;
     }
 
