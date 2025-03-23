@@ -26,8 +26,7 @@ public class Skeleton {
     }
 
     public void sixTekton(){
-        Skeleton s = new Skeleton();
-
+        objects.clear();
         InfertileTekton tI = new InfertileTekton();
         DeadEndTekton tD = new DeadEndTekton();
         AbsorbingTekton tA = new AbsorbingTekton();
@@ -85,20 +84,21 @@ public class Skeleton {
         game.addPlayer(imaster);
         game.addPlayer(mmaster);
 
-        s.objects.put("tI", tI);
-        s.objects.put("tD", tD);
-        s.objects.put("tA", tA);
-        s.objects.put("tH", tH);
-        s.objects.put("tN", tN);
-        s.objects.put("tN2", tN2);
-        s.objects.put("mmaster", mmaster);
-        s.objects.put("imaster", imaster);
-        s.objects.put("insect", insect);
-        s.objects.put("game", game);
+        objects.put("tI", tI);
+        objects.put("tD", tD);
+        objects.put("tA", tA);
+        objects.put("tH", tH);
+        objects.put("tN", tN);
+        objects.put("tN2", tN2);
+        objects.put("mmaster", mmaster);
+        objects.put("imaster", imaster);
+        objects.put("insect", insect);
+        objects.put("game", game);
     }
 
     public void eatRegularSpore(){
-        Skeleton s = new Skeleton();
+        objects.clear();
+
         Tekton tN = new Tekton();
         InsectMaster imaster = new InsectMaster();
         Insect insect = new Insect();
@@ -110,15 +110,16 @@ public class Skeleton {
         spores.add(regularspore);
         tN.setSpores(spores);
 
-        s.objects.put("tN", tN);
-        s.objects.put("insect", insect);
-        s.objects.put("imaster", imaster);
-        s.objects.put("regularspore", regularspore);
+        objects.put("tN", tN);
+        objects.put("insect", insect);
+        objects.put("imaster", imaster);
+        objects.put("regularspore", regularspore);
 
     }
 
     public void eatSpeedingSpore(){
-        Skeleton s = new Skeleton();
+        objects.clear();
+
         Tekton tN = new Tekton();
         InsectMaster imaster = new InsectMaster();
         Insect insect = new Insect();
@@ -130,14 +131,15 @@ public class Skeleton {
         spores.add(speedingSpore);
         tN.setSpores(spores);
 
-        s.objects.put("tN", tN);
-        s.objects.put("insect", insect);
-        s.objects.put("imaster", imaster);
-        s.objects.put("speedingSpore", speedingSpore);
+        objects.put("tN", tN);
+        objects.put("insect", insect);
+        objects.put("imaster", imaster);
+        objects.put("speedingSpore", speedingSpore);
     }
 
     public void eatSlowingSpore(){
-        Skeleton s = new Skeleton();
+        objects.clear();
+
         Tekton tN = new Tekton();
         InsectMaster imaster = new InsectMaster();
         Insect insect = new Insect();
@@ -149,14 +151,15 @@ public class Skeleton {
         spores.add(slowingSpore);
         tN.setSpores(spores);
 
-        s.objects.put("tN", tN);
-        s.objects.put("insect", insect);
-        s.objects.put("imaster", imaster);
-        s.objects.put("slowingSpore", slowingSpore);
+        objects.put("tN", tN);
+        objects.put("insect", insect);
+        objects.put("imaster", imaster);
+        objects.put("slowingSpore", slowingSpore);
     }
 
     public void eatParalyzingSpore(){
-        Skeleton s = new Skeleton();
+        objects.clear();
+
         Tekton tN = new Tekton();
         InsectMaster imaster = new InsectMaster();
         Insect insect = new Insect();
@@ -168,14 +171,15 @@ public class Skeleton {
         spores.add(paralyzingSpore);
         tN.setSpores(spores);
 
-        s.objects.put("tN", tN);
-        s.objects.put("insect", insect);
-        s.objects.put("imaster", imaster);
-        s.objects.put("paralyzingSpore", paralyzingSpore);
+        objects.put("tN", tN);
+        objects.put("insect", insect);
+        objects.put("imaster", imaster);
+        objects.put("paralyzingSpore", paralyzingSpore);
     }
 
     public void eatCutBlockingSpore(){
-        Skeleton s = new Skeleton();
+        objects.clear();
+
         Tekton tN = new Tekton();
         InsectMaster imaster = new InsectMaster();
         Insect insect = new Insect();
@@ -187,9 +191,9 @@ public class Skeleton {
         spores.add(cbSpore);
         tN.setSpores(spores);
 
-        s.objects.put("tN", tN);
-        s.objects.put("insect", insect);
-        s.objects.put("imaster", imaster);
-        s.objects.put("cbSpore", cbSpore);
+        objects.put("tN", tN);
+        objects.put("insect", insect);
+        objects.put("imaster", imaster);
+        objects.put("cbSpore", cbSpore);
     }
 }

@@ -36,13 +36,47 @@ public class Menu {
                 System.out.println("Invalid input");
                 sc.next();
             }
-
+            Skeleton skeleton = new Skeleton();
             choice = sc.nextInt();
-
-            if(choice < 0 || choice > 16){
-                System.out.println("Invalid input");
+            switch (choice) {
+                case 1:
+                    break;
+                case 2:
+                    skeleton.sixTekton();
+                    MushroomMaster mm = (MushroomMaster)skeleton.objects.get("mmaster");
+                    mm.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tN"), (Tekton)skeleton.objects.get("tN2"));
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+                case 11:
+                    break;
+                case 12:
+                    break;
+                case 13:
+                    break;
+                case 14:
+                    break;
+                case 15:
+                    break;
+                case 16:
+                    break;
+                default:
+                    System.out.println("Invalid input");
             }
-
         }
         while (choice != 0);
 
@@ -58,8 +92,8 @@ public class Menu {
         System.out.println("[y/n]: ");
         Scanner sc = new Scanner(System.in);
         char c = 0;
-        while (c != 'y' || c != 'n') {
-            c = (char)sc.nextByte();
+        while (c != 'y' && c != 'n') {
+            c = sc.next().charAt(0);
         }
         sc.close();
         return c == 'y';

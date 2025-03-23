@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -9,6 +10,10 @@ public class Game {
     private int roundCount;
 
     public Game(){
+        players = new ArrayList<>();
+        topInsectMasters = new ArrayList<>();
+        topMushroomMasters = new ArrayList<>();
+        gameField = new ArrayList<>();
         System.out.println("Game.ctor()");
     }
 
