@@ -105,7 +105,6 @@ public class Tekton {
     public void setSpores(ArrayList<Spore> spores){
         this.spores = spores;
     }
-    //TODO: overrideolni kell tekton leszármazottaknál
     /**
      * Tries to add a mycelium to a tectonic plate
      * @param m The Mycelium to be added

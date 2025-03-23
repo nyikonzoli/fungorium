@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 public class Menu {
     private static Scanner sc;
+    /**
+     * Displays the menu options 
+     */
     public static void displayMenu() {
         System.out.print("""
                 
@@ -25,7 +28,9 @@ public class Menu {
                 0: Exit
                 """);
     }
-    
+    /**
+     * Method to read and evaluate user input on the System.in stream
+     */
     public static void chooseOption() {
         int choice;
         sc = new Scanner(System.in);
@@ -47,14 +52,23 @@ public class Menu {
                     break;
                 case 2:
                     skeleton.sixTekton();
-                    MushroomMaster mm = (MushroomMaster)skeleton.objects.get("mmaster");
-                    mm.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tN"), (Tekton)skeleton.objects.get("tN2"));
+                    MushroomMaster mm2 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    mm2.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tN"), (Tekton)skeleton.objects.get("tN2"));
                     break;
                 case 3:
+                    skeleton.sixTekton();
+                    MushroomMaster mm3 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    mm3.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tH"), (Tekton)skeleton.objects.get("tI"));
                     break;
                 case 4:
+                    skeleton.sixTekton();
+                    MushroomMaster mm4 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    mm4.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tH"), (Tekton)skeleton.objects.get("tA"));
                     break;
                 case 5:
+                    skeleton.sixTekton();
+                    MushroomMaster mm5 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    mm5.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tH"), (Tekton)skeleton.objects.get("tD"));
                     break;
                 case 6:
                     break;

@@ -83,6 +83,10 @@ public class Skeleton {
         game.extendField(tN2);
         game.addPlayer(imaster);
         game.addPlayer(mmaster);
+        
+        Mycelium myc1 = new Mycelium(mmaster, tH, tN);
+        tH.addMycelium(myc1);
+        tN.addMycelium(myc1);
 
         objects.put("tI", tI);
         objects.put("tD", tD);
@@ -94,6 +98,7 @@ public class Skeleton {
         objects.put("imaster", imaster);
         objects.put("insect", insect);
         objects.put("game", game);
+        objects.put("myc1", myc1);
     }
 
     public void eatRegularSpore(){
