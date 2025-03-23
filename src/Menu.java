@@ -25,7 +25,7 @@ public class Menu {
                 0: Exit
                 """);
     }
-
+    
     public static void chooseOption() {
         int choice;
         sc = new Scanner(System.in);

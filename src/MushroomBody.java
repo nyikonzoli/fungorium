@@ -41,7 +41,7 @@ public class MushroomBody {
         }
     }
 
-    public SuperMushroomBody promoteTSuperMushroomBody(){
+    public SuperMushroomBody promoteToSuperMushroomBody(){
         System.out.println("Mushroombody.promoteTSuperMushroomBody()");
         SuperMushroomBody smb = new SuperMushroomBody();
         return smb;
