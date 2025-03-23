@@ -32,10 +32,10 @@ public class MushroomBody {
     public void spreadSpore(Tekton t){
         System.out.println("Mushroombody.spreadSpore(Tekton t)");
         getLocation().isNeighbour(t);
-        if(Menu.userDecision()){
+        if(true){
             ArrayList<Spore> newSpores = new ArrayList<>();
             for (int i = 0; i < SPORE_SPREAD_COUNT; i++) {
-                newSpores.add(new Spore());
+                newSpores.add(new RegularSpore());
             }
             t.addSpores(newSpores);
         }
