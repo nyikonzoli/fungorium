@@ -39,25 +39,38 @@ public class Skeleton {
         InsectMaster imaster = new InsectMaster();
         Game game = new Game();
 
-        tH.addNeighbour(tI);
-        tH.addNeighbour(tA);
-        tH.addNeighbour(tD);
-        tH.addNeighbour(tN);
+        
+        ArrayList<Tekton> tH_neighbours = new ArrayList<>();
+        tH_neighbours.add(tI);
+        tH_neighbours.add(tA);
+        tH_neighbours.add(tD);
+        tH_neighbours.add(tN);
+        tH.addNeighbours(tH_neighbours);
 
-        tI.addNeighbour(tH);
-        tI.addNeighbour(tD);
+        ArrayList<Tekton> tI_neighbours = new ArrayList<>();
+        tI_neighbours.add(tH);
+        tI_neighbours.add(tD);
+        tI.addNeighbours(tI_neighbours);
 
-        tD.addNeighbour(tI);
-        tD.addNeighbour(tH);
-        tD.addNeighbour(tA);
+        ArrayList<Tekton> tD_neighbours = new ArrayList<>();
+        tD_neighbours.add(tI);
+        tD_neighbours.add(tH);
+        tD_neighbours.add(tA);
+        tD.addNeighbours(tD_neighbours);
 
-        tA.addNeighbour(tN);
-        tA.addNeighbour(tH);
-        tA.addNeighbour(tD);
+        ArrayList<Tekton> tA_neighbours = new ArrayList<>();
+        tA_neighbours.add(tN);
+        tA_neighbours.add(tH);
+        tA_neighbours.add(tD);
+        tA.addNeighbours(tA_neighbours);
 
-        tN.addNeighbour(tN2);
+        ArrayList<Tekton> tN_neighbours = new ArrayList<>();
+        tN_neighbours.add(tN2);
+        tN.addNeighbours(tN_neighbours);
 
-        tN2.addNeighbour(tN);
+        ArrayList<Tekton> tN2_neighbours = new ArrayList<>();
+        tN2_neighbours.add(tN);
+        tN2.addNeighbours(tN2_neighbours);
 
         insect.setLocation(tN);
         tN.addInsect(insect);
