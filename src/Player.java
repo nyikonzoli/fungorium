@@ -11,19 +11,21 @@ public abstract class Player {
     public void setScore(int score){
         this.score = score;
     }
-
+    /**
+     * Sets the player up for a new round
+     */
     public void onRoundStart(){
 
     }
 
     public void selfReport(Game g){
-
+        // Might be obsolete
     }
     /** 
      * Increments the Player's score by 1
      */
     public void incrementScore(){
-        System.out.println("Player.incrementScore()"); // TODO: lehet Overrideolni kell a gyerekekben csak a skeletonhoz
+        System.out.println("Player.incrementScore()");
         score++;
     }
 }

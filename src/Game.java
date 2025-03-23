@@ -20,20 +20,27 @@ public class Game {
     public void start(){
         System.out.println("Game.start()");
     }
-
+    /**
+     * Starts a new round, contains all the pre-round setup required
+     */
     public void nextRound(){
         System.out.println("Game.nextRound()");
         for(Player p : players){
-            if(p instanceof  MushroomMaster)
-                currentPlayer = p;
+            p.onRoundStart();
+            selfReport(p);
         }
-        currentPlayer.onRoundStart();
+        winCheck(); 
+        for(Tekton t : gameField){
+            t.onRoundStart();
+        }
     }
 
     public void end(){
         System.out.println("Game.end()");
     }
-
+    /**
+     * Checks for win condition
+     */
     public void winCheck(){
         System.out.println("Game.winCheck()");
     }
@@ -61,9 +68,12 @@ public class Game {
     public List<Tekton> getGameField(){
         return gameField;
     }
-
-    public void selfReport(MushroomMaster mm){
-        System.out.println("Game.selfReport(MushroomMaster mm)");
-        mm.getScore();
+    /**
+     * Compares players to the currently winning players
+     * @param p Player to compare to the currently winning players
+     */
+    public void selfReport(Player p){
+        System.out.println("Game.selfReport(Player p)");
+        int test = p.getScore();
     }
 }

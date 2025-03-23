@@ -35,12 +35,13 @@ public class InsectMaster extends Player {
         System.out.println("InsectMaster.initiateMyceliumCutting(Mycelium m)");
         insect.cutMycelium(m);
     }
-
+    @Override
     public void onRoundStart(){
         System.out.println("InsectMaster.onRoundStart()");
+        insect.setActionPoints(1);
     }
-
-    public void selfReport(){
+    @Override
+    public void selfReport(Game g){
         System.out.println("InsectMaster.selfReport()");
     }
 }

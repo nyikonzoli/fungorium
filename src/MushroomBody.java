@@ -15,7 +15,9 @@ public class MushroomBody {
         super();
         System.out.println("MushroomBody.MushroomBody()");
     }
-
+    /**
+     * Produces an amount of spores required on the start of a new round
+     */
     public void produceSpore(){
         System.out.println("MushroomBody.produceSpore()");
     }

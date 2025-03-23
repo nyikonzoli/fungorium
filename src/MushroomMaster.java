@@ -51,13 +51,9 @@ public class MushroomMaster extends Player{
     public void onRoundStart(){
         System.out.println("MushroomMaster.onRoundStart()");
 
-        // Hozzáadok egy elemet, hogy lehessen min tesztelni a hívásokat
-        //MushroomBody mb = new MushroomBody();
-        //addMushroom(mb);1
-
-        for(MushroomBody bodies : mushrooms){
-            bodies.produceSpore();
-            bodies.setActions(1);
+        for(MushroomBody body : mushrooms){
+            body.produceSpore();
+            body.setActions(1);
         }
     }
 

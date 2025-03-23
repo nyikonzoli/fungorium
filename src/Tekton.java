@@ -147,7 +147,9 @@ public class Tekton {
         System.out.println("Tekton.removeMycelium(Mycelium m)");
         myceliums.remove(m);
     }
-
+    /**
+     * Sets the tekton up for a new round
+     */
     public void onRoundStart(){
         System.out.println("Tekton.onRoundStart()");
     }
@@ -156,7 +158,7 @@ public class Tekton {
      * @param master The mushroom master, who started the action
      * @return The new mushroom body, or null, if growing was not possible
      */
-    public MushroomBody growMushroom(MushroomMaster master){ //TODO
+    public MushroomBody growMushroom(MushroomMaster master){ 
         if(canGrowMushroom(master)){
             MushroomBody newMushroom = new MushroomBody();
             mushroomBody = newMushroom;

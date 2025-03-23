@@ -53,12 +53,6 @@ public class Menu {
                     skeleton.sixTekton();
                     Game game = (Game)skeleton.objects.get("game");
                     game.nextRound();
-                    MushroomMaster mm = (MushroomMaster)skeleton.objects.get("mmaster");
-                    game.selfReport(mm);
-                    game.winCheck();
-                    for(Tekton t : game.getGameField()){
-                        t.onRoundStart();
-                    }
                     break;
                 case 2:
                     skeleton.sixTekton();
