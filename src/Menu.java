@@ -100,12 +100,29 @@ public class Menu {
                     InsectMaster im11 = (InsectMaster)skeleton.objects.get("imaster");
                     im11.initiateSporeEating((Tekton)skeleton.objects.get("tN"));
                     break;
-                case 12:
-                    break;
-                case 13:
-                    break;
-                case 14:
-                    break;
+                    case 12:
+                    { 
+                        skeleton.sixTekton();
+                        InsectMaster iMaster = (InsectMaster)skeleton.objects.get("imaster");
+                        HeterogeneousTekton tH = (HeterogeneousTekton)skeleton.objects.get("tH");
+                        iMaster.initiateMovement(tH);
+                        break;
+                    }
+                    case 13:
+                    {
+                        skeleton.sixTekton();
+                        Tekton tN2 = (Tekton)skeleton.objects.get("tN2");
+                        tN2.split();
+                        break;
+                    }
+                    case 14:
+                    {
+                        skeleton.sixTekton();
+                        MushroomMaster mMaster = (MushroomMaster)skeleton.objects.get("mmaster");
+                        Tekton tN = (Tekton)skeleton.objects.get("tN");
+                        mMaster.initiateMushroomGrowth(tN);
+                        break;
+                    }
                 case 15:
                     skeleton.tektonsWithMushroom();
                     MushroomMaster mushroomMaster15 = (MushroomMaster)skeleton.objects.get("mmaster");
