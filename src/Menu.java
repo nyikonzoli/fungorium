@@ -20,7 +20,8 @@ public class Menu {
                 13: Tekton split
                 14: Grow mushroom
                 15: Grow super mushroom
-                16: Spread spores as super mushroom
+                16: Spread spores as normal mushroom
+                17: Spread spores as super mushroom
                 0: Exit
                 """);
     }
@@ -74,8 +75,17 @@ public class Menu {
                 case 14:
                     break;
                 case 15:
+                    skeleton.tektonsWithMushroom();
+                    MushroomMaster mushroomMaster15 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    MushroomBody mushroomBody15 = (MushroomBody)skeleton.objects.get("mushroom");
+                    mushroomMaster15.initiateSuperMushroomGrowth(mushroomBody15);
                     break;
                 case 16:
+                    skeleton.tektonsWithMushroom();
+                    MushroomMaster mushroomMaster16 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    MushroomBody mushroomBody = (MushroomBody)skeleton.objects.get("mushroom");
+                    Tekton tN = (Tekton)skeleton.objects.get("tN");
+                    mushroomMaster16.initiateSporeSpreading(mushroomBody, tN);
                     break;
                 default:
                     System.out.println("Invalid input");

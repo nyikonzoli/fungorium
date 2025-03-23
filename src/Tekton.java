@@ -24,6 +24,7 @@ public class Tekton {
     }
 
     public void setMushroomBody(MushroomBody m){
+        System.out.println("Tekton.setMushroomBody(MushroomBody m)");
         mushroomBody = m;
     }
     /**
@@ -85,6 +86,7 @@ public class Tekton {
     }
 
     public void addSpores(ArrayList<Spore> spores){
+        System.out.println("Tekton.addSpores(List<Spore> spores)");
         this.spores.addAll(spores);
     }
     /**
