@@ -24,6 +24,7 @@ public class Tekton {
     }
 
     public void setMushroomBody(MushroomBody m){
+        System.out.println("Tekton.setMushroomBody(MushroomBody m)");
         mushroomBody = m;
     }
     /**

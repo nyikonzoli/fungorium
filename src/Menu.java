@@ -72,14 +72,17 @@ public class Menu {
                 case 14:
                     break;
                 case 15:
-                    
+                    skeleton.tektonsWithMushroom();
+                    MushroomMaster mushroomMaster15 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    MushroomBody mushroomBody15 = (MushroomBody)skeleton.objects.get("mushroom");
+                    mushroomMaster15.initiateSuperMushroomGrowth(mushroomBody15);
                     break;
                 case 16:
                     skeleton.tektonsWithMushroom();
-                    MushroomMaster mushroomMaster = (MushroomMaster)skeleton.objects.get("mmaster");
+                    MushroomMaster mushroomMaster16 = (MushroomMaster)skeleton.objects.get("mmaster");
                     MushroomBody mushroomBody = (MushroomBody)skeleton.objects.get("mushroom");
                     Tekton tN = (Tekton)skeleton.objects.get("tN");
-                    mushroomMaster.initiateSporeSpreading(mushroomBody, tN);
+                    mushroomMaster16.initiateSporeSpreading(mushroomBody, tN);
                     break;
                 default:
                     System.out.println("Invalid input");
