@@ -25,6 +25,7 @@ public class Menu {
                 15: Grow super mushroom
                 16: Spread spores as normal mushroom
                 17: Spread spores as super mushroom
+                18: Grow mycelium to Heterogeneous Tekton
                 0: Exit
                 """);
     }
@@ -58,17 +59,17 @@ public class Menu {
                 case 3:
                     skeleton.sixTekton();
                     MushroomMaster mm3 = (MushroomMaster)skeleton.objects.get("mmaster");
-                    mm3.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tH"), (Tekton)skeleton.objects.get("tI"));
+                    mm3.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tI"), (Tekton)skeleton.objects.get("tH"));
                     break;
                 case 4:
                     skeleton.sixTekton();
                     MushroomMaster mm4 = (MushroomMaster)skeleton.objects.get("mmaster");
-                    mm4.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tH"), (Tekton)skeleton.objects.get("tA"));
+                    mm4.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tA"), (Tekton)skeleton.objects.get("tH"));
                     break;
                 case 5:
                     skeleton.sixTekton();
                     MushroomMaster mm5 = (MushroomMaster)skeleton.objects.get("mmaster");
-                    mm5.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tH"), (Tekton)skeleton.objects.get("tD"));
+                    mm5.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tD"), (Tekton)skeleton.objects.get("tH"));
                     break;
                 case 6:
                     skeleton.sixTekton();
@@ -135,6 +136,13 @@ public class Menu {
                     MushroomBody mushroomBody = (MushroomBody)skeleton.objects.get("mushroom");
                     Tekton tN = (Tekton)skeleton.objects.get("tN");
                     mushroomMaster16.initiateSporeSpreading(mushroomBody, tN);
+                    break;
+                case 17:
+                    break;
+                case 18:
+                    skeleton.sixTekton();
+                    MushroomMaster mm18 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    mm18.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tH"), (Tekton)skeleton.objects.get("tN"));
                     break;
                 default:
                     System.out.println("Invalid input");
