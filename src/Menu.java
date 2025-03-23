@@ -71,6 +71,9 @@ public class Menu {
                     mm5.initiateMyceliumGrowth((Tekton)skeleton.objects.get("tH"), (Tekton)skeleton.objects.get("tD"));
                     break;
                 case 6:
+                    skeleton.sixTekton();
+                    InsectMaster im6 = (InsectMaster)skeleton.objects.get("imaster");
+                    im6.initiateMyceliumCutting((Mycelium)skeleton.objects.get("myc1"));
                     break;
                 case 7:
                     break;
