@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 public class Menu {
-    public void displayMenu() {
+    private static Scanner sc;
+    public static void displayMenu() {
         System.out.print("""
                 
                 1: Start new round
@@ -24,11 +25,11 @@ public class Menu {
                 """);
     }
 
-    public void chooseOption() {
-        Scanner sc = new Scanner(System.in);
+    public static void chooseOption() {
         int choice;
-
+        sc = new Scanner(System.in);
         do {
+
             displayMenu();
             System.out.print("Enter your choice: ");
 
@@ -39,6 +40,8 @@ public class Menu {
             Skeleton skeleton = new Skeleton();
             choice = sc.nextInt();
             switch (choice) {
+                case 0:
+                    break;
                 case 1:
                     break;
                 case 2:
@@ -79,10 +82,9 @@ public class Menu {
             }
         }
         while (choice != 0);
-
+        sc.close();
         System.out.println("\n");
 
-        sc.close();
     }
     /**
      * Asks the user to make a yes-or-no decision
@@ -90,12 +92,12 @@ public class Menu {
      */
     public static boolean userDecision() {
         System.out.println("[y/n]: ");
-        Scanner sc = new Scanner(System.in);
         char c = 0;
         while (c != 'y' && c != 'n') {
-            c = sc.next().charAt(0);
+            if (sc.hasNext()) {
+                c = sc.next().charAt(0);
+            }
         }
-        sc.close();
         return c == 'y';
     }
 }
