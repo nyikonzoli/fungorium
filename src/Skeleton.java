@@ -83,7 +83,7 @@ public class Skeleton {
         game.extendField(tN2);
         game.addPlayer(imaster);
         game.addPlayer(mmaster);
-        
+
         Mycelium myc1 = new Mycelium(mmaster, tH, tN);
         tH.addMycelium(myc1);
         tN.addMycelium(myc1);
@@ -99,6 +99,8 @@ public class Skeleton {
         objects.put("insect", insect);
         objects.put("game", game);
         objects.put("myc1", myc1);
+
+        System.out.println("---SEQUENCE DIALOGUE START---");
     }
 
     public void eatRegularSpore(){
@@ -120,6 +122,8 @@ public class Skeleton {
         objects.put("imaster", imaster);
         objects.put("regularspore", regularspore);
 
+        System.out.println("---SEQUENCE DIALOGUE START---");
+
     }
 
     public void eatSpeedingSpore(){
@@ -140,6 +144,9 @@ public class Skeleton {
         objects.put("insect", insect);
         objects.put("imaster", imaster);
         objects.put("speedingSpore", speedingSpore);
+
+        System.out.println("---SEQUENCE DIALOGUE START---");
+
     }
 
     public void eatSlowingSpore(){
@@ -160,6 +167,9 @@ public class Skeleton {
         objects.put("insect", insect);
         objects.put("imaster", imaster);
         objects.put("slowingSpore", slowingSpore);
+
+        System.out.println("---SEQUENCE DIALOGUE START---");
+
     }
 
     public void eatParalyzingSpore(){
@@ -180,6 +190,9 @@ public class Skeleton {
         objects.put("insect", insect);
         objects.put("imaster", imaster);
         objects.put("paralyzingSpore", paralyzingSpore);
+
+        System.out.println("---SEQUENCE DIALOGUE START---");
+
     }
 
     public void eatCutBlockingSpore(){
@@ -200,6 +213,9 @@ public class Skeleton {
         objects.put("insect", insect);
         objects.put("imaster", imaster);
         objects.put("cbSpore", cbSpore);
+
+        System.out.println("---SEQUENCE DIALOGUE START---");
+
     }
 
     public void tektonsWithMushroom(){
@@ -220,5 +236,8 @@ public class Skeleton {
         objects.put("tN2", tN2);
         objects.put("mmaster", mmaster);
         objects.put("mushroom", mushroom);
+
+        System.out.println("---SEQUENCE DIALOGUE START---");
+
     }
 }
