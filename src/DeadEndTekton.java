@@ -1,4 +1,7 @@
 public class DeadEndTekton extends Tekton {
+    public DeadEndTekton() {
+        System.out.println("DeadEndTekton.DeadEndTekton()");
+    }
     /**
      * Grows a mycelium connection between two tectonic plates
      * @param master The owner of the new mycelium connection

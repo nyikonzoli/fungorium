@@ -2,7 +2,7 @@ public class SuperMushroomBody extends  MushroomBody {
 
     public SuperMushroomBody() {
         super();
-        System.out.println("SuperMushroombody.ctor()");
+        System.out.println("SuperMushroomBody.SuperMushroomBody()");
     }
 
     @Override

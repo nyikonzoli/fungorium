@@ -13,6 +13,7 @@ public class Tekton {
     private MushroomBody mushroomBody;
 
     public Tekton(){
+        System.out.println("Tekton.Tekton()");
         neighbours = new ArrayList<>();
         spores = new ArrayList<>();
         myceliums = new ArrayList<>();

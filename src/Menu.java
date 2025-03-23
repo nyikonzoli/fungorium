@@ -76,14 +76,29 @@ public class Menu {
                     im6.initiateMyceliumCutting((Mycelium)skeleton.objects.get("myc1"));
                     break;
                 case 7:
+                    skeleton.eatRegularSpore();
+                    InsectMaster im7 = (InsectMaster)skeleton.objects.get("imaster");
+                    im7.initiateSporeEating((Tekton)skeleton.objects.get("tN"));
                     break;
                 case 8:
+                    skeleton.eatSlowingSpore();
+                    InsectMaster im8 = (InsectMaster)skeleton.objects.get("imaster");
+                    im8.initiateSporeEating((Tekton)skeleton.objects.get("tN"));
                     break;
                 case 9:
+                    skeleton.eatSpeedingSpore();
+                    InsectMaster im9 = (InsectMaster)skeleton.objects.get("imaster");
+                    im9.initiateSporeEating((Tekton)skeleton.objects.get("tN"));
                     break;
                 case 10:
+                    skeleton.eatParalyzingSpore();
+                    InsectMaster im10 = (InsectMaster)skeleton.objects.get("imaster");
+                    im10.initiateSporeEating((Tekton)skeleton.objects.get("tN"));
                     break;
                 case 11:
+                    skeleton.eatCutBlockingSpore();
+                    InsectMaster im11 = (InsectMaster)skeleton.objects.get("imaster");
+                    im11.initiateSporeEating((Tekton)skeleton.objects.get("tN"));
                     break;
                 case 12:
                     break;

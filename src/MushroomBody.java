@@ -13,11 +13,11 @@ public class MushroomBody {
 
     public MushroomBody() {
         super();
-        System.out.println("Mushroombody.ctor()");
+        System.out.println("MushroomBody.MushroomBody()");
     }
 
     public void produceSpore(){
-        System.out.println("Mushroombody.produceSpore()");
+        System.out.println("MushroomBody.produceSpore()");
     }
 
     public Tekton getLocation(){
@@ -30,7 +30,7 @@ public class MushroomBody {
     }
 
     public void spreadSpore(Tekton t){
-        System.out.println("Mushroombody.spreadSpore(Tekton t)");
+        System.out.println("MushroomBody.spreadSpore(Tekton t)");
         getLocation().isNeighbour(t);
         if(true){
             ArrayList<Spore> newSpores = new ArrayList<>();
@@ -42,13 +42,13 @@ public class MushroomBody {
     }
 
     public SuperMushroomBody promoteToSuperMushroomBody(){
-        System.out.println("Mushroombody.promoteTSuperMushroomBody()");
+        System.out.println("MushroomBody.promoteTSuperMushroomBody()");
         SuperMushroomBody smb = new SuperMushroomBody();
         return smb;
     }
 
     public void die(){
-        System.out.println("Mushroombody.die()");
+        System.out.println("MushroomBody.die()");
         alive = false;
     }
 

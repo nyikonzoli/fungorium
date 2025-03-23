@@ -1,4 +1,7 @@
 public class HeterogeneousTekton extends Tekton {
+    public HeterogeneousTekton() {
+        System.out.println("HeterogeneousTekton.HeterogeneousTekton()");
+    }
     /**
      * Grows a mycelium connection between two tectonic plates
      * @param master The owner of the new mycelium connection

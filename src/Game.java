@@ -14,7 +14,7 @@ public class Game {
         topInsectMasters = new ArrayList<>();
         topMushroomMasters = new ArrayList<>();
         gameField = new ArrayList<>();
-        System.out.println("Game.ctor()");
+        System.out.println("Game.Game()");
     }
 
     public void start(){

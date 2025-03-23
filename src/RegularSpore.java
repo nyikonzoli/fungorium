@@ -1,7 +1,7 @@
 
 public class RegularSpore extends Spore {
     public RegularSpore() {
-        System.out.println("RegularSpore.ctor()");
+        System.out.println("RegularSpore.RegularSpore()");
     }
 
     public void applyEffect(Insect i){

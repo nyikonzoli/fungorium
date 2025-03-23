@@ -8,7 +8,7 @@ public class MushroomMaster extends Player{
     public MushroomMaster() {
         super();
         mushrooms = new ArrayList<>();
-        System.out.println("MushroomMaster.ctor()");
+        System.out.println("MushroomMaster.MushroomMaster()");
     }
 
     // TODO: ezt a szekvenciát még befejzni
