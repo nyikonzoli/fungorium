@@ -16,11 +16,19 @@ public class Insect {
         location = t;
     }
 
+    /**
+     * Moves the insect from one tecton to another
+     * If the new tecton is reachable, the insect is removed from the tecton, and placed on the other
+     * @param newLocation The tecton, where the insect moves
+     */
     public void moveTo(Tekton newLocation){
         System.out.println("Insect.moveTo(Tekton newLocation)");
         boolean canReach = location.canReachTektonViaMycelium(newLocation);
-        if(canReach){
-            location = newLocation;
+        if(Menu.userDecision()) {
+            location.removeInsect(this);
+            newLocation.addInsect(this);
+            setTekton(newLocation);
+            decrementActionPoint();
         }
         
     }

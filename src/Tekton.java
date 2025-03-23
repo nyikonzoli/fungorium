@@ -38,8 +38,27 @@ public class Tekton {
         return Menu.userDecision(); 
     }
 
+    /**
+     * Breaks the tecton into two, if it has no insectsand cuts all myceliums
+     * @return The 2 new tecton
+     */
     public ArrayList<Tekton> split(){
         System.out.println("Tekton.split()");
+        if(hasInsect()){
+            return null;
+        }
+        Mycelium m = new Mycelium();
+        myceliums.add(m);
+        for (Mycelium mycelium : myceliums) {
+            mycelium.disappear();
+        }
+
+        Tekton tektonA = new Tekton();
+        Tekton tektonB = new Tekton();
+
+        tektonA.addNeighbours(new ArrayList<Tekton>());
+        tektonB.addNeighbours(new ArrayList<Tekton>());
+
         return null;
     }
 
@@ -48,9 +67,14 @@ public class Tekton {
     }
 
     public void addNeighbour(Tekton t){
+
         neighbours.add(t);
     }
 
+    /**
+     * Adds the neighboring tectons to a tecton
+     * @param tektons The tectons, which are next to the tecton
+     */
     public void addNeighbours(ArrayList<Tekton> tektons){
         System.out.println("addNeighbours(ArrayList<Tekton> tektons)");
         neighbours.addAll(tektons);
@@ -125,7 +149,11 @@ public class Tekton {
     }
 
     public void onRoundStart(){}
-
+    /**
+     * Grows a mushroom, and adds it to the tecton, and to the mushroom master, who initiated the growth
+     * @param master The mushroom master, who started the action
+     * @return The new mushroom body, or null, if growing was not possible
+     */
     public MushroomBody growMushroom(MushroomMaster master){ //TODO
         if(canGrowMushroom(master)){
             MushroomBody newMushroom = new MushroomBody();
@@ -162,7 +190,11 @@ public class Tekton {
         System.out.println("Tekton.isNeighbor(Tekton t)");
         return neighbours.contains(t);
     }
-
+    /**
+     * Checks two tectons if they are connected via mycelium
+     * @param t The neighbor tecton
+     * @return Boolean, true, if they are connected
+     */
     public boolean canReachTektonViaMycelium(Tekton t){
         System.out.println("Tekton.canReachTektonViaMycelium(Tekton t)");
         for (Mycelium mycelium : myceliums) {
@@ -170,16 +202,30 @@ public class Tekton {
         }
         return false;
     }
-
+    /**
+     * Decides if a mushroom can grow on a tecton
+     * @param master The mushroomMaster, who initiates the growth
+     * @return Boolean that is true if the master can grow a mushroom body
+     */
     public boolean canGrowMushroom(MushroomMaster master){
         System.out.println("Tekton.canGrowMushroom(MushroomMaster master)");
-        if(mushroomBody != null) return false;
-        return true; //TODO
+        if(Menu.userDecision()) {
+            return true;
+        }
+        return false;
     }
 
+    /**
+     * Checks, wether the tecton has any insect on it, or not
+     * @return Boolean, true if the tecton has insect on it, otherwise false
+     */
     public boolean hasInsect(){
         System.out.println("Tekton.hasInsect()");
-        return !insects.isEmpty();
+        if(Menu.userDecision()) {
+            return true;
+        }
+        return false;
+        //return !insects.isEmpty();
     }
 
 }

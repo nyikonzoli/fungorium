@@ -111,8 +111,8 @@ public class Menu {
                 case 13:
                 {
                     skeleton.sixTekton();
-                    Tekton tN2 = (Tekton)skeleton.objects.get("tN2");
-                    tN2.split();
+                    Tekton tN = (Tekton)skeleton.objects.get("tN");
+                    tN.split();
                     break;
                 }
                 case 14:
