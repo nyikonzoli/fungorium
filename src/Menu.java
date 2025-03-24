@@ -136,11 +136,16 @@ public class Menu {
                 case 16:
                     skeleton.tektonsWithMushroom();
                     MushroomMaster mushroomMaster16 = (MushroomMaster)skeleton.objects.get("mmaster");
-                    MushroomBody mushroomBody = (MushroomBody)skeleton.objects.get("mushroom");
+                    SuperMushroomBody mushroomBody = (SuperMushroomBody)skeleton.objects.get("mushroom");
                     Tekton tN = (Tekton)skeleton.objects.get("tN");
                     mushroomMaster16.initiateSporeSpreading(mushroomBody, tN);
                     break;
                 case 17:
+                    skeleton.tektonsWithSuperMushroom();
+                    MushroomMaster mushroomMaster17 = (MushroomMaster)skeleton.objects.get("mmaster");
+                    MushroomBody superMushroomBody = (MushroomBody)skeleton.objects.get("smushroom");
+                    Tekton tN17 = (Tekton)skeleton.objects.get("tN");
+                    mushroomMaster17.initiateSporeSpreading(superMushroomBody, tN17);
                     break;
                 case 18:
                     skeleton.sixTekton();

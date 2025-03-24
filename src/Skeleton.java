@@ -246,4 +246,32 @@ public class Skeleton {
         System.out.println("---SEQUENCE DIALOGUE START---");
 
     }
+
+    public void tektonsWithSuperMushroom(){
+        objects.clear();
+
+        Tekton tN1 = new Tekton();
+        Tekton tN2 = new Tekton();
+        Tekton tN3 = new Tekton();
+
+
+        tN1.addNeighbour(tN2);
+        tN2.addNeighbour(tN1);
+
+        tN2.addNeighbour(tN3);
+        tN3.addNeighbour(tN2);
+
+        MushroomMaster mmaster = new MushroomMaster();
+        SuperMushroomBody mushroom = new SuperMushroomBody();
+        mushroom.setLocation(tN1);
+        mmaster.addMushroom(mushroom);
+
+        objects.put("tN", tN1);
+        objects.put("tN2", tN2);
+        objects.put("mmaster", mmaster);
+        objects.put("smushroom", mushroom);
+
+        System.out.println("---SEQUENCE DIALOGUE START---");
+
+    }
 }
