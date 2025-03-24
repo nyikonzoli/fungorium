@@ -1,16 +1,29 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Mushroom Master, a type of Player that manages mushroom bodies
+ * and interacts with the game environment by growing mushrooms, spreading spores,
+ * and initiating mycelium growth.
+ */
 public class MushroomMaster extends Player{
     
     private List<MushroomBody> mushrooms;
 
+    /**
+     * Constructs a MushroomMaster object, initializing the mushroom list.
+     */
     public MushroomMaster() {
         super();
         mushrooms = new ArrayList<>();
         System.out.println("MushroomMaster.MushroomMaster()");
     }
 
+    /**
+     * Initiates the growth of a mushroom on the given Tekton.
+     *
+     * @param t the Tekton where the mushroom might grow
+     */
     // TODO: ezt a szekvenciát még befejzni
     public void initiateMushroomGrowth(Tekton t){
         System.out.println("MushroomMaster.initiateMushroomGrowth(Tekton t)");
@@ -29,11 +42,22 @@ public class MushroomMaster extends Player{
         start.growMycelium(this, end);
     }
 
+    /**
+     * Initiates the spreading of spores from a MushroomBody to a given Tekton.
+     *
+     * @param m the MushroomBody spreading the spores
+     * @param t the target Tekton
+     */
     public void initiateSporeSpreading(MushroomBody m, Tekton t){
         System.out.println("MushroomMaster.initiateSporeSpreading(MushroomBody m, Tekton t)");
         m.spreadSpore(t);
     }
 
+    /**
+     * Attempts to promote a MushroomBody to a SuperMushroomBody.
+     *
+     * @param m the MushroomBody to be promoted
+     */
     public void initiateSuperMushroomGrowth(MushroomBody m){
         System.out.println("MushroomMaster.initiateSuperMushroomGrowth(MushroomBody m)\nCan grow super mushroom body?");
         if(Menu.userDecision()){
@@ -42,11 +66,20 @@ public class MushroomMaster extends Player{
         }
     }
 
+    /**
+     * Adds a MushroomBody to the list of mushrooms managed by this MushroomMaster.
+     *
+     * @param m the MushroomBody to add
+     */
     public void addMushroom(MushroomBody m){
         System.out.println("MushroomMaster.addMushroom(MushroomBody m)");
         mushrooms.add(m);
     }
 
+    /**
+     * Executes actions at the start of a round, triggering spore production
+     * and resetting actions for all mushrooms under this master's control.
+     */
     @Override
     public void onRoundStart(){
         System.out.println("MushroomMaster.onRoundStart()");
@@ -57,6 +90,11 @@ public class MushroomMaster extends Player{
         }
     }
 
+    /**
+     * Reports the state of this MushroomMaster to the given Game instance.
+     *
+     * @param g the Game instance to report to
+     */
     @Override
     public void selfReport(Game g){
         System.out.println("MushroomMaster.selfReport(Game g)");

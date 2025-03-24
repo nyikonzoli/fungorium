@@ -20,10 +20,18 @@ public class Tekton {
         insects = new ArrayList<>();
     }
 
+    /**
+     * Retrieves the MushroomBody associated with this Tekton.
+     * @return The MushroomBody instance, or null if none exists.
+     */
     public MushroomBody getMushroomBody(){
         return mushroomBody;
     }
 
+    /**
+     * Sets the mushroom body for this tectonic plate.
+     * @param m The MushroomBody to associate with this tectonic plate.
+     */
     public void setMushroomBody(MushroomBody m){
         System.out.println("Tekton.setMushroomBody(MushroomBody m)");
         mushroomBody = m;
@@ -62,10 +70,18 @@ public class Tekton {
         return null;
     }
 
+    /**
+     * Retrieves the neighboring tectonic plates.
+     * @return A list of neighboring Tekton instances.
+     */
     public ArrayList<Tekton> getNeighbours(){
         return neighbours;
     }
 
+    /**
+     * Adds a single neighboring Tekton to this Tekton's list of neighbors.
+     * @param t The Tekton to be added as a neighbor.
+     */
     public void addNeighbour(Tekton t){
 
         neighbours.add(t);
@@ -80,36 +96,68 @@ public class Tekton {
         neighbours.addAll(tektons);
     }
 
+    /**
+     * Sets the list of neighboring Tektons for this Tekton.
+     * @param tektons The list of Tektons to set as neighbors.
+     */
     public void setNeighbours(ArrayList<Tekton> tektons){
         neighbours = tektons;
     }
 
+    /**
+     * Retrieves the insects present on this tectonic plate.
+     * @return A list of insects.
+     */
     public ArrayList<Insect> getInsects(){
         return insects;
     }
 
+    /**
+     * Add an insect to this tectonic plate.
+     * @param i The insect to be added.
+     */
     public void addInsect(Insect i){
         insects.add(i);
         System.out.println("Tekton.addInsect(Insect i)");
     }
 
+    /**
+     * Removes a specific insect from this tectonic plate.
+     * @param i The insect to be removed.
+     */
     public void removeInsect(Insect i){
         insects.remove(i);
         System.out.println("Tekton.removeInsect(Insect i)");
     }
 
+    /**
+     * Sets the list of insects currently occupying this Tekton.
+     * @param insects The list of insects to be assigned.
+     */
     public void setInsects(ArrayList<Insect> insects){
         this.insects = insects;
     }
 
+    /**
+     * Retrieves the spores present on this tectonic plate.
+     * @return A list of spores.
+     */
     public ArrayList<Spore> getSpores(){
         return spores;
     }
 
+    /**
+     * Adds a single spore to this tectonic plate.
+     * @param s The spore to add.
+     */
     public void addSpore(Spore s){
         spores.add(s);
     }
 
+    /**
+     * Adds multiple spores to this tectonic plate.
+     * @param s The list of spores to add.
+     */
     public void addSpores(ArrayList<Spore> spores){
         System.out.println("Tekton.addSpores(List<Spore> spores)");
         this.spores.addAll(spores);
@@ -123,10 +171,18 @@ public class Tekton {
         return spores.removeLast();
     }
 
+    /**
+     * Removes a specific spore from this tectonic plate.
+     * @param s The spore to be removed.
+     */
     public void removeSpore(Spore s){
         spores.remove(s);
     }
 
+    /**
+     * Sets the list of spores currently present on this Tekton.
+     * @param spores The list of spores to be assigned.
+     */
     public void setSpores(ArrayList<Spore> spores){
         this.spores = spores;
     }
