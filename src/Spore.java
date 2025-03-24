@@ -1,3 +1,6 @@
+/**
+ * Represents an abstract spore that can apply effects on insects.
+ */
 public abstract class Spore {
     /**
      * Applies an effect on an insect

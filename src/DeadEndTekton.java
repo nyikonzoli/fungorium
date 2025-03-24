@@ -1,4 +1,9 @@
+/**
+ * A specialized type of Tekton that does not allow the growth of mycelium connections.
+ */
 public class DeadEndTekton extends Tekton {
+    /**
+     * Constructs a DeadEndTekton instance.     */
     public DeadEndTekton() {
         System.out.println("DeadEndTekton.DeadEndTekton()");
     }

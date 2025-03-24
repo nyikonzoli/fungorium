@@ -1,4 +1,11 @@
+/**
+ – This class extends Tekton and overrides the growMycelium(MushroomMaster, Tekton) method to implement the functionality
+ * for heterogeneous mycelium growth.
+ */
 public class HeterogeneousTekton extends Tekton {
+    /**
+     * Constructs a new HeterogeneousTekton instance.
+     */
     public HeterogeneousTekton() {
         System.out.println("HeterogeneousTekton.HeterogeneousTekton()");
     }

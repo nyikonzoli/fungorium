@@ -1,8 +1,10 @@
 
 import java.util.ArrayList;
 
-
-
+/**
+ * Represents a tectonic plate in the mushroom ecosystem. 
+ * Tektons can have neighbors, spores, mycelium connections, insects, and mushrooms growing on them.
+ */
 public class Tekton {
     static int MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH = 10;
 
