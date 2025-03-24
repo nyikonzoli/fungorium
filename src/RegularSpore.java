@@ -1,5 +1,11 @@
-
+/**
+ * Represents a regular spore in the game that can be applied to insects. 
+ * This spore does not apply any special effects to the insect when activated.
+ */
 public class RegularSpore extends Spore {
+    /**
+     * Constructs a new RegularSpore.
+     */
     public RegularSpore() {
         System.out.println("RegularSpore.RegularSpore()");
     }

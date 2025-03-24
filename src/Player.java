@@ -1,13 +1,31 @@
+/**
+ * Represents a player in the game.
+ */
 public abstract class Player {
     private int score;
 
-    public Player(){}
+    /**
+     * Constructs a new Player.
+     */
+    public Player(){
+        score = 0;
+    }
 
+    /**
+     * Returns the score of the player.
+     * 
+     * @return The current score of the player.
+     */
     public int getScore(){
         System.out.println("Player.getScore()");
         return score;
     }
 
+    /**
+     * Sets the score of the player.
+     * 
+     * @param score The new score for the player.
+     */
     public void setScore(int score){
         this.score = score;
     }
@@ -18,6 +36,11 @@ public abstract class Player {
 
     }
 
+    /**
+     * A method for reporting the player's status in the game.
+     * 
+     * @param g The game instance to report the player's status to.
+     */
     public void selfReport(Game g){
         // Might be obsolete
     }
