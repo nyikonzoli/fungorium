@@ -33,7 +33,9 @@ public class Game {
      */
     public void start(){
 
+        //TODO: pálya beolvasása
 
+        
 
         System.out.println("Game.start()");
     }
@@ -89,7 +91,7 @@ public class Game {
                 int score   = p.getScore();
 
                 //mushroomMaster
-                if ("Mushroom Master".equals(type)) {
+                if ("Mushroom Master".equals(type)) { //TODO: ezt lehet jobb lenne enum-mal megoldani
                     if (score > maxMushroomScore) {
                         maxMushroomScore = score;
                         topMushroomMasters.clear(); //if there is a new max there is one top player
