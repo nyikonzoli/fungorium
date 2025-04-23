@@ -5,6 +5,7 @@ public class Insect {
     private Tekton location;
     private int actionPoints;
     private boolean canCutMycelium = true;
+    private boolean isStunned = false;
 
     /**
      * Constructs a new {@code Insect} instance.
@@ -129,4 +130,17 @@ public class Insect {
         System.out.println("Insect.setTekton(Tekton newLocation)");
         location = newLocation;
     }
+
+
+    /**
+     * Tells if the insect is stunned or not
+     * 
+     * @return true if the insect is stunned
+     */
+    public boolean isStunned(){
+
+        return isStunned;
+    }
+
+    
 }

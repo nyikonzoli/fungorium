@@ -11,6 +11,8 @@ public abstract class Player {
         score = 0;
     }
 
+    public abstract String getTypeName();
+
     /**
      * Returns the score of the player.
      * 

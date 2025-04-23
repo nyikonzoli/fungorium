@@ -5,9 +5,12 @@ import java.util.List;
  * Represents the game, managing players, game field, and rounds.
  */
 public class Game {
+    int finishGame = 10;
+
     private List<Player> players;
-    private List<MushroomMaster> topMushroomMasters;
-    private List<InsectMaster> topInsectMasters;
+    private List<Player> topMushroomMasters;
+    private List<Player> topInsectMasters;
+    
     private Player currentPlayer;
     private List<Tekton> gameField;
     private int roundCount;
@@ -21,6 +24,7 @@ public class Game {
         topInsectMasters = new ArrayList<>();
         topMushroomMasters = new ArrayList<>();
         gameField = new ArrayList<>();
+        roundCount = 0;
         System.out.println("Game.Game()");
     }
 
@@ -28,6 +32,9 @@ public class Game {
      * Starts the game, setting up the initial game state.
      */
     public void start(){
+
+
+
         System.out.println("Game.start()");
     }
 
@@ -36,34 +43,96 @@ public class Game {
      */
     public void nextRound(){
         System.out.println("Game.nextRound()");
+
+        roundCount++;
+
         for(Player p : players){
             p.onRoundStart();
             selfReport(p);
         }
-        winCheck(); 
         for(Tekton t : gameField){
             t.onRoundStart();
         }
+
+        winCheck(); 
     }
 
     /**
-     * Ends the game and performs necessary clean-up or state changes.
+     * Ends the game, announces the winners and performs necessary clean-up or state changes.
      */
     public void end(){
+        System.out.println("Final Mushroom Master Winner: "  + topMushroomMasters.getFirst().getScore() + " pts)");
+        System.out.println("Final Insect Master Winner: "  + topInsectMasters.getFirst().getScore() + " pts)");
+
         System.out.println("Game.end()");
+
     }
     /**
-     * Checks for win condition
+     * updates top players and ends the game, when its over
      */
     public void winCheck(){
         System.out.println("Game.winCheck()");
+
+        
+        if(roundCount >= finishGame){
+
+            topInsectMasters.clear();
+            topMushroomMasters.clear();
+            
+            int maxMushroomScore = -1;
+            int maxInsectScore = -1;
+
+
+
+            for (Player p : players) {
+                String type = p.getTypeName();
+                int score   = p.getScore();
+
+                //mushroomMaster
+                if ("Mushroom Master".equals(type)) {
+                    if (score > maxMushroomScore) {
+                        maxMushroomScore = score;
+                        topMushroomMasters.clear(); //if there is a new max there is one top player
+                        topMushroomMasters.add(p);
+                    } else if (score == maxMushroomScore) {  //draw
+                        topMushroomMasters.add(p);
+                    }
+
+                //insectMaster
+                } else if ("Insect Master".equals(type)) {
+                    if (score > maxInsectScore) {
+                        maxInsectScore = score;
+                        topInsectMasters.clear();
+                        topInsectMasters.add(p);
+                    } else if (score == maxInsectScore) {  //draw
+                        topInsectMasters.add(p);
+                    }
+                }
+            }
+
+            
+            if (topInsectMasters.size() == 1 && topMushroomMasters.size() == 1){
+                end(); 
+            } else{
+                finishGame++; //the game goes on until there is 1 winner from each team
+                nextRound();
+            }
+        }
+
     }
+
+
 
     /**
      * Reports the current scores of all players.
      */
     public void reportScore(){
         System.out.println("Game.reportScore()");
+
+        System.out.println("Current scores:");
+        for (Player p : players) {
+            System.out.println(p.getTypeName() + ": " + p.getScore() + " points\n");
+        }
     }
 
     /**
@@ -105,6 +174,7 @@ public class Game {
     public List<Tekton> getGameField(){
         return gameField;
     }
+
     /**
      * Compares players to the currently winning players
      * @param p Player to compare to the currently winning players

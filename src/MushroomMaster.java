@@ -19,6 +19,17 @@ public class MushroomMaster extends Player{
         System.out.println("MushroomMaster.MushroomMaster()");
     }
 
+
+    /**
+     * Gets the name of the Player type
+     * @return name of the player type
+     */
+    @Override
+    public String getTypeName() {
+        return "Mushroom Master";
+    }
+
+
     /**
      * Initiates the growth of a mushroom on the given Tekton.
      *

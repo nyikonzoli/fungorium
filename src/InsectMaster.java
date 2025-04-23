@@ -11,6 +11,16 @@ public class InsectMaster extends Player {
         System.out.println("InsectMaster.InsectMaster()");
     }
 
+
+    /**
+     * Gets the name of the Player type
+     * @return name of the player type
+     */
+    @Override
+    public String getTypeName() {
+        return "Insect Master";
+    }
+
     /**
      * Gets the insect controlled by the InsectMaster.
      * 

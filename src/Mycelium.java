@@ -1,3 +1,8 @@
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
 /**
  * Represents a mycelium connection between two tectonic plates in the game.
  */
@@ -54,8 +59,8 @@ public class Mycelium {
      */
     public void disappear() {
         System.out.println("Mycelium.disappear()");
-        //tektonStart.removeMycelium(this);
-        //tektonEnd.removeMycelium(this);
+        tektonStart.removeMycelium(this);
+        tektonEnd.removeMycelium(this);
     }
 
     /**
@@ -64,5 +69,64 @@ public class Mycelium {
     public void decreaseTTL(){
         System.out.println("Mycelium.decreaseTTL()");
         timeToLive--;
+    }
+
+    /**
+     * Decreases ttl if the myceleum is not connected to a Mushroom
+     * @param decreaseTTLifNotConnected true if its not connected
+     */
+    public void onRoundStart(boolean decreaseTTLifNotConnected){
+        if(decreaseTTLifNotConnected){
+            decreaseTTL();
+        }
+
+    }
+
+
+    /**
+     * Checks if the Myceleum network is connected to a mushroomBody
+     * @return true if there is a mushroomBody on the network, false if not
+     */
+    public boolean isConnectedToMushroom(){
+        Set<Tekton> visited = new HashSet<>();       
+        Queue<Tekton> queue = new LinkedList<>();    
+        queue.add(tektonStart);    
+        
+        while (!queue.isEmpty()) {
+            Tekton currentTekton = queue.poll();
+            if (visited.contains(currentTekton))
+                continue;
+            visited.add(currentTekton);
+
+            if (currentTekton.getMushroomBody() != null) {     
+                return true;                 
+            }
+
+            //check all the Mycelium on the Tekton
+            for (Mycelium m : currentTekton.getMyceliums()) {
+                //get the Tekton from the Myceleum regardless of the direction
+                Tekton neighbour = m.tektonStart == currentTekton ? m.tektonEnd : m.tektonStart;
+
+                if (!visited.contains(neighbour)) {
+                    queue.add(neighbour);
+                }
+            }
+        }
+        return false;
+    }
+
+    
+    /**
+     * starts the insect eating
+     * @param i The Insect that has to be eaten
+     * @param t The Tekton which the insect is on
+     */
+    public void eatInsect(Insect i, Tekton t){
+        if(i.isStunned()){
+            t.removeInsect(i);
+            MushroomBody mb = t.growMushroom(grower);
+            grower.incrementScore();
+            grower.addMushroom(mb);
+        }
     }
 }

@@ -197,6 +197,16 @@ public class Tekton {
         System.out.println("Tekton.addMycelium(Mycelium m)");
         return myceliums.add(m);
     }
+
+    /**
+     * The myceliums on this tectonic plate
+     * @return A list of myceleums
+     */
+    public ArrayList<Mycelium> getMyceliums(){
+        return myceliums;
+    }
+
+
     /**
      * Removes mycelium from tectonic plate
      * @param m Mycelium to be removed
@@ -289,5 +299,8 @@ public class Tekton {
         return false;
         //return !insects.isEmpty();
     }
+
+
+  
 
 }
