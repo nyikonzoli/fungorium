@@ -11,6 +11,10 @@ public abstract class Player {
         score = 0;
     }
 
+    /**
+     * Gets the name of the Player type
+     * @return name of the player type
+     */
     public abstract String getTypeName();
 
     /**
