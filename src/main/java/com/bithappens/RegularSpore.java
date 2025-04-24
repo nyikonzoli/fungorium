@@ -15,7 +15,9 @@ public class RegularSpore extends Spore {
      * Applies an effect on an insect
      * @param i Insect subject to the applied effect
      */
+    @Override
     public void applyEffect(Insect i){
-        System.out.println("RegularSpore.applyEffect(Insect i)");
+        //System.out.println("RegularSpore.applyEffect(Insect i)");
+        // Nem csinál semmit, csak returnol
     }
 }

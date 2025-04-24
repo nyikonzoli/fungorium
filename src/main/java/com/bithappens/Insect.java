@@ -7,6 +7,10 @@ public class Insect {
     private int actionPoints;
     private boolean canCutMycelium = true;
     private boolean isStunned = false;
+    private InsectMaster imaster;
+
+
+    /// KONSTRUKTOROK
 
     /**
      * Constructs a new {@code Insect} instance.
@@ -14,6 +18,20 @@ public class Insect {
     public Insect(){
         System.out.println("Insect.Insect()");
     }
+
+    public Insect(Tekton t, int a, InsectMaster i){
+        location = t;
+        actionPoints = a;
+        imaster = i;
+    }
+
+    public Insect(Tekton t, InsectMaster i){
+        location = t;
+        actionPoints = 0;
+        imaster = i;
+    }
+
+    // GETTEREK, SETTEREK
 
     /**
      * Gets the current location of the insect.
@@ -34,24 +52,7 @@ public class Insect {
         location = t;
     }
 
-    /**
-     * Moves the insect from one tecton to another
-     * If the new tecton is reachable, the insect is removed from the tecton, and placed on the other
-     * @param newLocation The tecton, where the insect moves
-     */
-    public void moveTo(Tekton newLocation){
-        System.out.println("Insect.moveTo(Tekton newLocation)");
-        boolean canReach = location.canReachTektonViaMycelium(newLocation);
-        if(Menu.userDecision()) {
-            location.removeInsect(this);
-            newLocation.addInsect(this);
-            setTekton(newLocation);
-            decrementActionPoint();
-        }
-        
-    }
-
-    /**
+        /**
      * Gets the current action points of the insect.
      * 
      * @return The current number of action points.
@@ -71,7 +72,7 @@ public class Insect {
         actionPoints = points;
     }
 
-    /**
+        /**
      * Gets whether the insect can cut mycelium.
      * 
      * @return true if the insect can cut mycelium, false otherwise.
@@ -90,12 +91,57 @@ public class Insect {
         System.out.println("Insect.setCanCutMycelium(boolean value)");
         canCutMycelium = value;
     }
+
     /**
-     * Eats the most recently added Spore on the Tekton it's on
-     * @param imaster The Player responsible for the Insect
+     * Tells if the insect is stunned or not
+     * 
+     * @return true if the insect is stunned
      */
-    public void eatSpore(Player imaster){
-        System.out.println("Insect.eatSpore()");
+    public boolean getIsStunned(){
+        return isStunned;
+    }
+
+    public void setIsStunned(boolean s){
+        isStunned = s;
+    }
+
+    public InsectMaster getImaster(){
+        return imaster;
+    }
+
+    public void setImaster(InsectMaster i){
+        imaster = i;
+    }
+
+
+
+    /// FÜGGVÉNYEK
+
+
+    /**
+     * Moves the insect from one tecton to another
+     * If the new tecton is reachable, the insect is removed from the tecton, and placed on the other
+     * @param newLocation The tecton, where the insect moves
+     */
+    public boolean moveTo(Tekton newLocation){
+        //System.out.println("Insect.moveTo(Tekton newLocation)");
+        boolean canReach = location.canReachTektonViaMycelium(newLocation);
+
+        if(canReach){
+            location.removeInsect(this);
+            newLocation.addInsect(this);
+            setLocation(newLocation);
+            decrementActionPoint(1);
+            return  true;
+        }
+        return false;
+    }
+
+
+    // EatSpore-nak mégsem kell paraméterként az insectMaster, ha azt eltároljuk a rovarban is
+
+    public void eatSpore(){
+        //System.out.println("Insect.eatSpore()");
         Spore s = location.popSpore();
         if (s != null) {
             s.applyEffect(this);
@@ -107,41 +153,22 @@ public class Insect {
      * @param mycelium Mycelium to be removed
      */
     public void cutMycelium(Mycelium mycelium){
-        System.out.println("Insect.cutMycelium(Mycelium mycelium)\nCan cut mycelium?");
-        if (Menu.userDecision()) {
+        //System.out.println("Insect.cutMycelium(Mycelium mycelium)\nCan cut mycelium?");
+        if(canCutMycelium){
             mycelium.disappear();
-            decrementActionPoint();
+            decrementActionPoint(1);
         }
-
     }
+
     /**
      * Decrements the Instect's action points by 1
      */
-    public void decrementActionPoint(){
-        System.out.println("Insect.decrementActionPoint()");
-        actionPoints--;
+    public void decrementActionPoint(int minus){
+        actionPoints = actionPoints - minus >= 0 ? actionPoints - minus : 0;
     }
 
-    /**
-     * Sets the insect's location to a new tecton.
-     * 
-     * @param newLocation The new Tekton location for the insect.
-     */
-    public void setTekton(Tekton newLocation){
-        System.out.println("Insect.setTekton(Tekton newLocation)");
-        location = newLocation;
+    public void addActionPoint(int plus){
+        actionPoints += plus;
     }
-
-
-    /**
-     * Tells if the insect is stunned or not
-     * 
-     * @return true if the insect is stunned
-     */
-    public boolean isStunned(){
-
-        return isStunned;
-    }
-
     
 }

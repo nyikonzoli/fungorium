@@ -16,8 +16,9 @@ public class SlowingSpore extends Spore {
      * 
      * @param i The insect subject to the applied effect. The insect's action points will be set to zero.
      */
+    @Override
     public void applyEffect(Insect i){
-        System.out.println("SlowingSpore.applyEffect(Insect i)");
-        i.setActionPoints(0);
+        //System.out.println("SlowingSpore.applyEffect(Insect i)");
+        i.decrementActionPoint(2);
     }
 }

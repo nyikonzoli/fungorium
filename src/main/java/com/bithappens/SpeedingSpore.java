@@ -15,8 +15,9 @@ public class SpeedingSpore extends Spore {
      * 
      * @param i The insect subject to the applied effect.
      */
+    @Override
     public void applyEffect(Insect i){
         System.out.println("SpeedingSpore.applyEffect(Insect i)");
-        i.setActionPoints(100);
+        i.addActionPoint(2);
     }
 }

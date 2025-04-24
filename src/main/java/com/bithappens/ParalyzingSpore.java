@@ -16,8 +16,10 @@ public class ParalyzingSpore extends Spore {
      * 
      * @param i The Insect that will be affected by the paralyzing spore.
      */
+    @Override
     public void applyEffect(Insect i){
-        System.out.println("ParalyzingSpore.applyEffect(Insect i)");
+        //System.out.println("ParalyzingSpore.applyEffect(Insect i)");
         i.setActionPoints(0);
+        i.setIsStunned(true);
     }
 }
