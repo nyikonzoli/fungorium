@@ -2,6 +2,11 @@ package com.bithappens;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/* 
+ * -----------
+ * OBSOLETE  |
+ * -----------
+ */
 public class Skeleton {
     HashMap<String, Object> objects;
 
