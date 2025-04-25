@@ -7,3 +7,7 @@ Ezt mindenki magának a projekt root mappájában kiadott `./mvnw clean install`
 **Extra:**
 
 A Maven fájrendszere kicsit bloated, de csak jobban vannak nestelve a mappák meg ilyesmi, tűrhető. Illetve a .gitignore is be lett állítva, hogy a sok felesleget defaultból ne vegye a commithoz.
+
+## Tesztek
+
+**Figyelem, ez csak tervezet!** Minden tesztesethez a `/src/test/resources` mappában kell egy teszteset nevű mappa, benne `start.txt`, `expected.txt`, `commands.txt`, melyek a kiinduló állapotot, az elvárt végállapotot és a bemeneti parancsokat tartalmazzák.
