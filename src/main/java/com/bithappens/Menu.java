@@ -1,6 +1,9 @@
 package com.bithappens;
 import java.util.Scanner;
 
+// TODO: A Prototype osztályt a Menu-ben kell példányosítani. 
+// TODO: A Prototype.handleInput-ot minden user által kiadott parancsra használandó.
+
 public class Menu {
     private static Scanner sc;
     /**

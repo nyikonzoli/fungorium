@@ -10,7 +10,7 @@ public class Prototype {
     HashMap<String, Object> objects = new HashMap<>();
 
     /**
-     * Completes the action specified in it's parameter.
+     * Completes the action specified in it's parameter. Needs to be called for every new line on input.
      * @param inputLine One line of input to be interpreted as a command and executed.
      * @return The output of the command.
      */
