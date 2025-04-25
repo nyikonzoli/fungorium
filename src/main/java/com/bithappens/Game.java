@@ -34,13 +34,20 @@ public class Game {
      */
     public void start(){
 
-        //TODO: pálya beolvasása
+        //TODO: pálya beolvasása, Megjegyzés: a load-dal történő pályabeolvasást egyelőre a prototípus végzi, ugyanis ennek nyilván kell tartania az objetumokat neveik szerint
 
         
 
         System.out.println("Game.start()");
     }
-
+    /**
+     * 
+     */
+    public void nextPlayer() {
+        int nextIdx = players.indexOf(currentPlayer) + 1;
+        if (nextIdx >= players.size()) nextIdx = 0;
+        currentPlayer = players.get(nextIdx);
+    }
     /**
      * Starts a new round, contains all the pre-round setup required
      */
