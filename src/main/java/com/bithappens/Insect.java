@@ -6,11 +6,12 @@ public class Insect {
     private Tekton location;
     private int actionPoints;
     private boolean canCutMycelium = true;
-    private boolean isStunned = false;
+    private boolean stunned = false;
+
     private InsectMaster imaster;
 
 
-    /// KONSTRUKTOROK
+    /// CONSTRUCTORS
 
     /**
      * Constructs a new {@code Insect} instance.
@@ -31,7 +32,7 @@ public class Insect {
         imaster = i;
     }
 
-    // GETTEREK, SETTEREK
+    // GETTERS, SETTERS
 
     /**
      * Gets the current location of the insect.
@@ -97,12 +98,12 @@ public class Insect {
      * 
      * @return true if the insect is stunned
      */
-    public boolean getIsStunned(){
-        return isStunned;
+    public boolean isStunned(){
+        return stunned;
     }
 
-    public void setIsStunned(boolean s){
-        isStunned = s;
+    public void setStunned(boolean s){
+        stunned = s;
     }
 
     public InsectMaster getImaster(){
@@ -115,7 +116,7 @@ public class Insect {
 
 
 
-    /// FÜGGVÉNYEK
+    // METHODS
 
 
     /**
