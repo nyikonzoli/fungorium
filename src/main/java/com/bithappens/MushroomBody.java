@@ -2,6 +2,7 @@ package com.bithappens;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Represents a MushroomBody, which can spread spores, grow, and interact with its environment.
@@ -12,33 +13,38 @@ public class MushroomBody {
      */
     public static int SPORE_SPREAD_COUNT = 3;
 
-    private List<Spore> sporeLevel;
-    private Tekton location;
-    private boolean  alive;
-    private  int sporeCount;
-    private  int actions;
+    protected List<Spore> sporeLevel;
+    protected Tekton location;
+    protected boolean  alive;
+    protected int sporeCount;
+    protected int actions;
+
+    /// KONSTRUKTOROK
 
     /**
      * Constructs a MushroomBody instance.
      */
     public MushroomBody() {
-        super();
         System.out.println("MushroomBody.MushroomBody()");
     }
-    /**
-     * Produces an amount of spores required on the start of a new round
-     */
-    public void produceSpore(){
-        System.out.println("MushroomBody.produceSpore()");
+
+    public MushroomBody(Tekton l){
+        location = l;
+        alive = true;
+        sporeCount = 15;
+        actions = 3;
     }
 
-    /**
+
+    /// GETTEREK/SETTEREK
+    
+        /**
      * Retrieves the location of this MushroomBody.
      * 
      * @return the Tekton where this MushroomBody is located
      */
     public Tekton getLocation(){
-        System.out.println("MushroomBody.getLocation()");
+        //System.out.println("MushroomBody.getLocation()");
         return location;
     }
 
@@ -58,7 +64,7 @@ public class MushroomBody {
      */
     public void setActions(int a){
         actions = a;
-        System.out.println("MushroomBody.setActions(int a)");
+        //System.out.println("MushroomBody.setActions(int a)");
     }
 
     /**
@@ -67,8 +73,72 @@ public class MushroomBody {
      * @return the number of actions
      */
     public int getActions(){
-        System.out.println("MushroomBody.getActions()");
+        //System.out.println("MushroomBody.getActions()");
         return actions;
+    }
+
+    public void setSpores(List<Spore> s){
+        sporeLevel = s;
+    }
+
+    public List<Spore> getSpores(){
+        return  sporeLevel;
+    }
+
+    public void setAlive(boolean a){
+        alive = a;
+    }
+
+    public boolean getAlive(){
+        return alive;
+    }
+
+    public void setSporeCount(int sc){
+        sporeCount = sc;
+    }
+
+    public int getSporeCount(){
+        return sporeCount;
+    }
+
+    /// FÜGGVÉNYEK
+
+    /**
+     * Produces an amount of spores required on the start of a new round
+     */
+    public void produceSpore(){
+
+        Random randomSpore = new Random();
+        int randomSporeType = randomSpore.nextInt(6);
+
+        switch (randomSporeType) {
+            case 0:
+                Spore regular = new RegularSpore();
+                sporeLevel.add(regular);
+                break;
+            case 1:
+                Spore slow = new SlowingSpore();
+                sporeLevel.add(slow);
+                break;
+            case 2:
+                Spore speed = new SpeedingSpore();
+                sporeLevel.add(speed);
+                break;
+            case 3:
+                Spore cutBlocking = new  CutBlockingSpore();
+                sporeLevel.add(cutBlocking);
+                break;
+            case 4:
+                Spore paralyze = new ParalyzingSpore();
+                sporeLevel.add(paralyze);
+                break;
+            case 5:
+                Spore splitting = new SplittingSpore();
+                sporeLevel.add(splitting);
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
 
     /**
@@ -76,15 +146,23 @@ public class MushroomBody {
      * 
      * @param t the target Tekton for spore spreading
      */
-    public void spreadSpore(Tekton t){
+    public void spreadSpore(Tekton t, MushroomMaster mmaster){
         System.out.println("MushroomBody.spreadSpore(Tekton t)");
-        getLocation().isNeighbour(t);
-        if(true){
-            ArrayList<Spore> newSpores = new ArrayList<>();
+        boolean neighboring = getLocation().isNeighbour(t);
+        if(alive && neighboring && sporeCount >= 3){
+            ArrayList<Spore> thrownSpores = new ArrayList<>();
             for (int i = 0; i < SPORE_SPREAD_COUNT; i++) {
-                newSpores.add(new RegularSpore());
+                Spore throwSpore = sporeLevel.get(0);
+                sporeLevel.remove(throwSpore);
+                throwSpore.setMushroomMaster(mmaster);
+                thrownSpores.add(throwSpore);
+                sporeCount--;
             }
-            t.addSpores(newSpores);
+            t.addSpores(thrownSpores);
+
+            if (sporeCount == 0) {
+                die();
+            }
         }
     }
 
@@ -94,8 +172,10 @@ public class MushroomBody {
      * @return a new instance of SuperMushroomBody
      */
     public SuperMushroomBody promoteToSuperMushroomBody(){
-        System.out.println("MushroomBody.promoteTSuperMushroomBody()");
-        SuperMushroomBody smb = new SuperMushroomBody();
+
+        Tekton l = location;
+        die();
+        SuperMushroomBody smb = new SuperMushroomBody(l);
         return smb;
     }
 

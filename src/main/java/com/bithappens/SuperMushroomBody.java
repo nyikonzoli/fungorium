@@ -1,7 +1,6 @@
 package com.bithappens;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -19,26 +18,45 @@ public class SuperMushroomBody extends  MushroomBody {
         System.out.println("SuperMushroomBody.SuperMushroomBody()");
     }
 
+    public SuperMushroomBody(Tekton l){
+        super(l);
+        System.out.println("SuperMushroomBody.SuperMushroomBody(Tekton l)");
+    }
+
     /**
      * Spreads spores to the given Tekton if certain conditions are met.
      *
      * @param t the Tekton to which spores might be spread
      */
     @Override
-    public void  spreadSpore(Tekton t){
+    public void  spreadSpore(Tekton t, MushroomMaster mmaster){
         System.out.println("SuperMushroombody.spreadSpore(Tekton t)");
-        Tekton tn2 = this.getLocation();
-        boolean isNeighbor = tn2.isNeighbour(t);
-        List<Tekton> neighbours = tn2.getNeighbours();
-        for (Tekton tekton : neighbours) {
-            tekton.isNeighbour(t);
-        }
-        if(Menu.userDecision()){
-            ArrayList<Spore> newSpores = new ArrayList<>();
-            for (int i = 0; i < SPORE_SPREAD_COUNT; i++) {
-                newSpores.add(new RegularSpore());
+        boolean neighboring = getLocation().isNeighbour(t);
+        // Check the neighbours of neighbours
+
+        if(!neighboring){
+            ArrayList<Tekton> neighbours = getLocation().getNeighbours();
+            for (Tekton neighbour : neighbours) {
+                if(neighbour.isNeighbour(t)){
+                    neighboring = true;
+                }
             }
-            t.addSpores(newSpores);
+        }
+
+        if(alive && neighboring && sporeCount >= 3){
+            ArrayList<Spore> thrownSpores = new ArrayList<>();
+            for (int i = 0; i < SPORE_SPREAD_COUNT; i++) {
+                Spore throwSpore = sporeLevel.get(0);
+                sporeLevel.remove(throwSpore);
+                throwSpore.setMushroomMaster(mmaster);
+                thrownSpores.add(throwSpore);
+                sporeCount--;
+            }
+            t.addSpores(thrownSpores);
+
+            if (sporeCount == 0) {
+                die();
+            }
         }
     }
 }
