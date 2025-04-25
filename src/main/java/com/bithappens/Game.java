@@ -26,7 +26,13 @@ public class Game {
         topMushroomMasters = new ArrayList<>();
         gameField = new ArrayList<>();
         roundCount = 0;
-        System.out.println("Game.Game()");
+    }
+
+    /**
+     * Gets the current player
+     */
+    public Player getCurrentPlayer(){
+        return currentPlayer;
     }
 
     /**
@@ -35,10 +41,6 @@ public class Game {
     public void start(){
 
         //TODO: pálya beolvasása, Megjegyzés: a load-dal történő pályabeolvasást egyelőre a prototípus végzi, ugyanis ennek nyilván kell tartania az objetumokat neveik szerint
-
-        
-
-        System.out.println("Game.start()");
     }
     /**
      * Next Player's turn
@@ -55,8 +57,6 @@ public class Game {
      * Starts a new round, contains all the pre-round setup required
      */
     public void nextRound(){
-        System.out.println("Game.nextRound()");
-
         roundCount++;
 
         for(Player p : players){
@@ -76,17 +76,11 @@ public class Game {
     public void end(){
         System.out.println("Final Mushroom Master Winner: "  + topMushroomMasters.getFirst().getScore() + " pts)");
         System.out.println("Final Insect Master Winner: "  + topInsectMasters.getFirst().getScore() + " pts)");
-
-        System.out.println("Game.end()");
-
     }
     /**
      * updates top players and ends the game, when its over
      */
     public void winCheck(){
-        System.out.println("Game.winCheck()");
-
-        
         if(roundCount >= finishGame){
 
             topInsectMasters.clear();
@@ -94,8 +88,6 @@ public class Game {
             
             int maxMushroomScore = -1;
             int maxInsectScore = -1;
-
-
 
             for (Player p : players) {
                 String type = p.getTypeName();
@@ -140,8 +132,6 @@ public class Game {
      * Reports the current scores of all players.
      */
     public void reportScore(){
-        System.out.println("Game.reportScore()");
-
         System.out.println("Current scores:");
         for (Player p : players) {
             System.out.println(p.getTypeName() + ": " + p.getScore() + " points\n");
@@ -193,7 +183,6 @@ public class Game {
      * @param p Player to compare to the currently winning players
      */
     public void selfReport(Player p){
-        System.out.println("Game.selfReport(Player p)");
         int test = p.getScore();
     }
 }

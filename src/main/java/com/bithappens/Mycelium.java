@@ -27,7 +27,6 @@ public class Mycelium {
      * @param end The ending Tekton of the mycelium connection.
      */
     public Mycelium(MushroomMaster m, Tekton start, Tekton end){
-        System.out.println("Mycelium.Mycelium(MushroomMaster m, Tekton start, Tekton end)");
         grower = m;
         tektonStart = start;
         tektonEnd = end;
@@ -40,7 +39,6 @@ public class Mycelium {
      * @return The Tekton where the mycelium starts.
      */
     public Tekton getTektonStart(){
-        System.out.println("Mycelium.getTektonStart()");
         return tektonStart;
     }
 
@@ -50,7 +48,6 @@ public class Mycelium {
      * @return The Tekton where the mycelium ends.
      */
     public Tekton getTektonEnd(){
-        System.out.println("Mycelium.getTektonEnd()");
         return tektonEnd;
     }
     
@@ -59,7 +56,6 @@ public class Mycelium {
      * Starts the process of destroying this Mycelium instance
      */
     public void disappear() {
-        System.out.println("Mycelium.disappear()");
         tektonStart.removeMycelium(this);
         tektonEnd.removeMycelium(this);
     }
@@ -68,7 +64,6 @@ public class Mycelium {
      * Decreases the time-to-live (TTL) value of the mycelium by 1.
      */
     public void decreaseTTL(){
-        System.out.println("Mycelium.decreaseTTL()");
         timeToLive--;
     }
 

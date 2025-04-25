@@ -1,6 +1,5 @@
 package com.bithappens;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,6 +10,8 @@ public class Prototype {
     // Game is stored differently, there can only be 1 Game instance per Prototype
     private Game game;
     public Game getGame() { return game; }
+
+    
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.
      * @param inputLine One line of input to be interpreted as a command and executed.
@@ -25,6 +26,9 @@ public class Prototype {
                 break;
             case "save":
                 retval = save(command);
+                break;
+            case "exit":
+                retval = save(command); //ha kilépésnél ha a user elfelejtené is elmentsuk a jatekot
                 break;
             case "list":
                 retval = list(command);
