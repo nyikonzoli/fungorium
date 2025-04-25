@@ -41,11 +41,14 @@ public class Game {
         System.out.println("Game.start()");
     }
     /**
-     * 
+     * Next Player's turn
      */
     public void nextPlayer() {
         int nextIdx = players.indexOf(currentPlayer) + 1;
-        if (nextIdx >= players.size()) nextIdx = 0;
+        if (nextIdx >= players.size())  {
+            nextIdx = 0;
+            nextRound();
+        }
         currentPlayer = players.get(nextIdx);
     }
     /**

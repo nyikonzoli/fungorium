@@ -52,6 +52,6 @@ public class FungoriumTest {
         assertNotNull(testCase.expectedContent);
         assertNotNull(testCase.commandsContent);
 
-        // Call your logic here with testCase.startContent, testCase.expectedContent, testCase.commandsContent
+        // TODO: implement test logic
     }
 }
