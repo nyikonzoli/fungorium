@@ -3,10 +3,15 @@ package com.bithappens;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import com.bithappens.Prototype;
+import com.bithappens.SaveGame;
 
 public class FungoriumTest {
     // Class holding the content of one test case
@@ -46,12 +51,13 @@ public class FungoriumTest {
     @ParameterizedTest
     @MethodSource("testCasesProvider")
     void testCases(TestCaseData testCase) {
-        // Example assertions — replace these with your actual test logic
-        System.out.println("Running test case: " + testCase.name);
-        assertNotNull(testCase.startContent);
-        assertNotNull(testCase.expectedContent);
-        assertNotNull(testCase.commandsContent);
-
-        // TODO: implement test logic
+        Prototype p = new Prototype();
+        SaveGame.loadSaveToPrototype(testCase.startContent, p);
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(testCase.commandsContent.split("\\r?\\n")));
+        for (String s : commands) {
+            p.handleInput(s);
+        }
+        String actualContent = SaveGame.objectStateToString(p.getGame());
+        assertTrue(SaveGame.compareSaveFileText(testCase.expectedContent, actualContent));
     }
 }

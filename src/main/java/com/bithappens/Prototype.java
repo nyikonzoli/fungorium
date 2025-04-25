@@ -8,7 +8,9 @@ import java.util.HashMap;
 // prototipus jatekallapot tarolasa hashmapben, palyaepites
 public class Prototype {
     HashMap<String, Object> objects = new HashMap<>();
-
+    // Game is stored differently, there can only be 1 Game instance per Prototype
+    private Game game;
+    public Game getGame() { return game; }
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.
      * @param inputLine One line of input to be interpreted as a command and executed.
@@ -82,6 +84,7 @@ public class Prototype {
         return "todo";
     }
     private String spreadsp(ArrayList<String> command) {
+        //System.out.println("spreadsp called");
         return "todo";
     }
     private String eatin(ArrayList<String> command) {
@@ -97,6 +100,7 @@ public class Prototype {
         return "todo";
     }
     private String nextround() {
+        //System.out.println("nextround called");
         return "todo";
     }
     private String nextplayer() {

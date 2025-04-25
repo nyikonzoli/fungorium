@@ -11,7 +11,7 @@ public class SaveGame {
      * @return The save file's text.
      */
     public static String objectStateToString(Game game) {
-        //todo
+        return "todo";
     }
     /**
      * Loads a save file's content onto a Prototype object by updating the game objects stored in it's HashMap.
@@ -19,7 +19,7 @@ public class SaveGame {
      * @param prototype The Prototype to be updated.
      */
     public static void loadSaveToPrototype(String objectState, Prototype prototype) {
-        //todo
+        // TODO: ne feledd, prototypeba game külön tárolandó
     }
     /**
      * Compares the content of the two strings extracted from savefiles.
@@ -28,8 +28,8 @@ public class SaveGame {
      * @return Whether the two strings contains the same lines, regardless of their order.
      */
     public static boolean compareSaveFileText(String expected, String actual) {
-        Set<String> lines1 = new HashSet<>(Arrays.asList(expected.split("\\R")));
-        Set<String> lines2 = new HashSet<>(Arrays.asList(actual.split("\\R")));
+        Set<String> lines1 = new HashSet<>(Arrays.asList(expected.split("\\r?\\n")));
+        Set<String> lines2 = new HashSet<>(Arrays.asList(actual.split("\\r?\\n")));
 
         return lines1.equals(lines2);
     }
