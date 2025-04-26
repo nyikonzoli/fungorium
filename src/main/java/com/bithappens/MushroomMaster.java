@@ -10,6 +10,14 @@ import java.util.List;
 public class MushroomMaster extends Player{
     
     private List<MushroomBody> mushrooms;
+    /**
+     * Getter for mushrooms.
+     * @return mushrooms
+     */
+    public List<MushroomBody> getMushrooms() {
+        return mushrooms;
+    }
+
 
     /**
      * Constructs a MushroomMaster object, initializing the mushroom list.
