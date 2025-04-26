@@ -10,7 +10,8 @@ public class SaveGame {
      * @param game The game to be saved.
      * @return The save file's text.
      */
-    public static String objectStateToString(Game game) {
+    public static String objectStateToString(Prototype prototype) {
+
         return "todo";
     }
     /**

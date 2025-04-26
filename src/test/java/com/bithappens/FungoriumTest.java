@@ -57,7 +57,7 @@ public class FungoriumTest {
         for (String s : commands) {
             p.handleInput(s);
         }
-        String actualContent = SaveGame.objectStateToString(p.getGame());
+        String actualContent = SaveGame.objectStateToString(p);
         assertTrue(SaveGame.compareSaveFileText(testCase.expectedContent, actualContent));
     }
 }

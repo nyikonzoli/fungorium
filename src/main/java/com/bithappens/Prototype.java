@@ -112,6 +112,7 @@ public class Prototype {
         return "todo";
     }
     private String split(ArrayList<String> command) {
+        // két új tekton neve: <eredeti név>-1, <eredeti név>-2
         return "todo";
     }
     private String print() {
