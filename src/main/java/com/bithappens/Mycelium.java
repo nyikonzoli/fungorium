@@ -33,6 +33,10 @@ public class Mycelium {
         timeToLive = INITITAL_TTL;
     }
 
+    public MushroomMaster getMaster(){
+        return grower;
+    }
+
     /**
      * Gets the starting tecton of the mycelium connection.
      * 
