@@ -118,6 +118,11 @@ public class Tekton {
      */
     public boolean deductNetworkAction(MushroomMaster mm){
         System.out.println("deductNetworkAction(MushroomMaster mm)\nWas successful?");
+        // TODO: 
+        // Mycelium gráfon át megkeresi az első olyan Tektont, amelyen van mm-hez tartozó MushroomBody,
+        // amelynek van pontja, és azt le is vonja
+        // Ha sikeresen levont egy networkon lévő gombáról pontot, true-val tér vissza
+        // kiegészítés: Ha már a kiinduló (ez a tekton) 
         return Menu.userDecision(); 
     }
 
