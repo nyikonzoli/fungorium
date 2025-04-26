@@ -30,6 +30,10 @@ public class MushroomMaster extends Player{
         return "Mushroom Master";
     }
 
+    public List<MushroomBody> getMushrooms(){
+        return mushrooms;
+    }
+
 
     /**
      * Initiates the growth of a mushroom on the given Tekton.

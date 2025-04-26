@@ -1,6 +1,8 @@
 package com.bithappens;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Represents a tectonic plate in the mushroom ecosystem. 
@@ -45,8 +47,26 @@ public class Tekton {
      * @return Returns whether the deduction was successful
      */
     public boolean deductNetworkAction(MushroomMaster mm){
-        System.out.println("deductNetworkAction(MushroomMaster mm)\nWas successful?");
-        return Menu.userDecision(); 
+        // System.out.println("deductNetworkAction(MushroomMaster mm)\nWas successful?");
+        // return Menu.userDecision(); 
+        if (mushroomBody != null && mm.getMushrooms().contains(mushroomBody) && mushroomBody.actions > 0){
+            mushroomBody.setActions(mushroomBody.getActions()-1);
+            return true;
+        }
+
+        ArrayList<Tekton> visited = new ArrayList<Tekton>();
+        Queue<Tekton> discoverable = new LinkedList<Tekton>();
+        discoverable.offer(this);
+
+        while (!discoverable.isEmpty()){
+            Tekton currentTekton = discoverable.poll();
+            
+        }
+
+
+
+
+        return true;
     }
 
     /**
