@@ -7,13 +7,16 @@ import java.util.ArrayList;
  * Tektons can have neighbors, spores, mycelium connections, insects, and mushrooms growing on them.
  */
 public class Tekton {
-    static int MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH = 10;
+    static int MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH = 9;
 
-    private ArrayList<Tekton> neighbours;
-    private ArrayList<Spore> spores;
-    private ArrayList<Mycelium> myceliums;
-    private ArrayList<Insect> insects;
-    private MushroomBody mushroomBody;
+    protected ArrayList<Tekton> neighbours;
+    protected ArrayList<Spore> spores;
+    protected ArrayList<Mycelium> myceliums;
+    protected ArrayList<Insect> insects;
+    protected MushroomBody mushroomBody;
+
+
+    /// KONSTRUKTOROK
 
     public Tekton(){
         System.out.println("Tekton.Tekton()");
@@ -22,6 +25,10 @@ public class Tekton {
         myceliums = new ArrayList<>();
         insects = new ArrayList<>();
     }
+
+    
+
+    /// GETTEREK/SETTEREK
 
     /**
      * Retrieves the MushroomBody associated with this Tekton.
@@ -39,6 +46,71 @@ public class Tekton {
         System.out.println("Tekton.setMushroomBody(MushroomBody m)");
         mushroomBody = m;
     }
+
+    /**
+     * Retrieves the neighboring tectonic plates.
+     * @return A list of neighboring Tekton instances.
+     */
+    public ArrayList<Tekton> getNeighbours(){
+        return neighbours;
+    }
+
+        /**
+     * Sets the list of neighboring Tektons for this Tekton.
+     * @param tektons The list of Tektons to set as neighbors.
+     */
+    public void setNeighbours(ArrayList<Tekton> tektons){
+        neighbours = tektons;
+    }
+
+        /**
+     * Retrieves the insects present on this tectonic plate.
+     * @return A list of insects.
+     */
+    public ArrayList<Insect> getInsects(){
+        return insects;
+    }
+
+            /**
+     * Sets the list of insects currently occupying this Tekton.
+     * @param insects The list of insects to be assigned.
+     */
+    public void setInsects(ArrayList<Insect> insects){
+        this.insects = insects;
+    }
+
+    /**
+     * Retrieves the spores present on this tectonic plate.
+     * @return A list of spores.
+     */
+    public ArrayList<Spore> getSpores(){
+        return spores;
+    }
+
+    /**
+     * Sets the list of spores currently present on this Tekton.
+     * @param spores The list of spores to be assigned.
+     */
+    public void setSpores(ArrayList<Spore> spores){
+        this.spores = spores;
+    }
+
+        /**
+     * The myceliums on this tectonic plate
+     * @return A list of myceleums
+     */
+    public ArrayList<Mycelium> getMyceliums(){
+        return myceliums;
+    }
+
+    public void setMyceliums(ArrayList<Mycelium> m){
+        myceliums = m;
+    }
+
+
+    /// FÜGGVÉNYEK
+
+
     /**
      * Deducts an action point from a mushroom on the same mycelium network as tectonic plate
      * @param mm Owner of the mycelium network
@@ -58,8 +130,7 @@ public class Tekton {
         if(hasInsect()){
             return null;
         }
-        Mycelium m = new Mycelium();
-        myceliums.add(m);
+
         for (Mycelium mycelium : myceliums) {
             mycelium.disappear();
         }
@@ -67,26 +138,23 @@ public class Tekton {
         Tekton tektonA = new Tekton();
         Tekton tektonB = new Tekton();
 
-        tektonA.addNeighbours(new ArrayList<Tekton>());
-        tektonB.addNeighbours(new ArrayList<Tekton>());
+        ArrayList<Tekton> A_neighbours = new ArrayList<>();
+        ArrayList<Tekton> B_neighbours = new ArrayList<>();
+
+        for(Tekton t : neighbours){
+
+        }
+
 
         return null;
     }
 
-    /**
-     * Retrieves the neighboring tectonic plates.
-     * @return A list of neighboring Tekton instances.
-     */
-    public ArrayList<Tekton> getNeighbours(){
-        return neighbours;
-    }
 
     /**
      * Adds a single neighboring Tekton to this Tekton's list of neighbors.
      * @param t The Tekton to be added as a neighbor.
      */
     public void addNeighbour(Tekton t){
-
         neighbours.add(t);
     }
 
@@ -97,22 +165,6 @@ public class Tekton {
     public void addNeighbours(ArrayList<Tekton> tektons){
         System.out.println("addNeighbours(ArrayList<Tekton> tektons)");
         neighbours.addAll(tektons);
-    }
-
-    /**
-     * Sets the list of neighboring Tektons for this Tekton.
-     * @param tektons The list of Tektons to set as neighbors.
-     */
-    public void setNeighbours(ArrayList<Tekton> tektons){
-        neighbours = tektons;
-    }
-
-    /**
-     * Retrieves the insects present on this tectonic plate.
-     * @return A list of insects.
-     */
-    public ArrayList<Insect> getInsects(){
-        return insects;
     }
 
     /**
@@ -131,22 +183,6 @@ public class Tekton {
     public void removeInsect(Insect i){
         insects.remove(i);
         System.out.println("Tekton.removeInsect(Insect i)");
-    }
-
-    /**
-     * Sets the list of insects currently occupying this Tekton.
-     * @param insects The list of insects to be assigned.
-     */
-    public void setInsects(ArrayList<Insect> insects){
-        this.insects = insects;
-    }
-
-    /**
-     * Retrieves the spores present on this tectonic plate.
-     * @return A list of spores.
-     */
-    public ArrayList<Spore> getSpores(){
-        return spores;
     }
 
     /**
@@ -171,7 +207,7 @@ public class Tekton {
      */
     public Spore popSpore(){
         System.out.println("Tekton.popSpore()");
-        return spores.removeLast();
+        return spores.remove(spores.size() - 1);
     }
 
     /**
@@ -183,13 +219,6 @@ public class Tekton {
     }
 
     /**
-     * Sets the list of spores currently present on this Tekton.
-     * @param spores The list of spores to be assigned.
-     */
-    public void setSpores(ArrayList<Spore> spores){
-        this.spores = spores;
-    }
-    /**
      * Tries to add a mycelium to a tectonic plate
      * @param m The Mycelium to be added
      * @return Boolean indicating whether the operation was successful 
@@ -198,15 +227,6 @@ public class Tekton {
         System.out.println("Tekton.addMycelium(Mycelium m)");
         return myceliums.add(m);
     }
-
-    /**
-     * The myceliums on this tectonic plate
-     * @return A list of myceleums
-     */
-    public ArrayList<Mycelium> getMyceliums(){
-        return myceliums;
-    }
-
 
     /**
      * Removes mycelium from tectonic plate
@@ -243,9 +263,7 @@ public class Tekton {
      */
     public Mycelium growMycelium(MushroomMaster master, Tekton target){
         System.out.println("Tekton.growMycelium(MushroomMaster master, Tekton target)\nIs there already Mycelium with different owner on the Tekton?");
-        if (Menu.userDecision()) {
-            return null;
-        }
+
         Mycelium myc2 = null;
         if (isNeighbour(target) && deductNetworkAction(master)) {
             myc2 = new Mycelium(master, this, target);
@@ -282,10 +300,7 @@ public class Tekton {
      */
     public boolean canGrowMushroom(MushroomMaster master){
         System.out.println("Tekton.canGrowMushroom(MushroomMaster master)");
-        if(Menu.userDecision()) {
-            return true;
-        }
-        return false;
+        return spores.size() >= MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH;
     }
 
     /**
@@ -293,15 +308,6 @@ public class Tekton {
      * @return Boolean, true if the tecton has insect on it, otherwise false
      */
     public boolean hasInsect(){
-        System.out.println("Tekton.hasInsect()");
-        if(Menu.userDecision()) {
-            return true;
-        }
-        return false;
-        //return !insects.isEmpty();
+        return !insects.isEmpty();
     }
-
-
-  
-
 }

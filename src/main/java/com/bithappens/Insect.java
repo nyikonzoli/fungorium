@@ -133,7 +133,7 @@ public class Insect {
             newLocation.addInsect(this);
             setLocation(newLocation);
             decrementActionPoint(1);
-            return  true;
+            return true;
         }
         return false;
     }
