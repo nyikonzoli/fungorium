@@ -1,19 +1,18 @@
 package com.bithappens;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import com.bithappens.Prototype;
-import com.bithappens.SaveGame;
 
 public class FungoriumTest {
     // Class holding the content of one test case

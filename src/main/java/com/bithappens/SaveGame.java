@@ -207,6 +207,7 @@ public class SaveGame {
         m.setAlive(mushroomString.get(3).equals("1"));
         m.setSporeCount(Integer.parseInt(mushroomString.get(4)));
         m.setActions(Integer.parseInt(mushroomString.get(5)));
+        t.setMushroomBody(m);   
         for (int i = 6; i < mushroomString.size(); i++) {
             switch (mushroomString.get(i)) {
                 case "CutBlockingSpore":
