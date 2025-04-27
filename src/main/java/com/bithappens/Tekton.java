@@ -2,9 +2,9 @@ package com.bithappens;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * Represents a tectonic plate in the mushroom ecosystem. 
@@ -293,7 +293,7 @@ public class Tekton {
      * @return The new mushroom body, or null, if growing was not possible
      */
     public MushroomBody growMushroom(MushroomMaster master){ 
-        if(canGrowMushroom(master)){
+        if(canGrowMushroom(master) && deductNetworkAction(master)){
             MushroomBody newMushroom = new MushroomBody();
             mushroomBody = newMushroom;
             return newMushroom;

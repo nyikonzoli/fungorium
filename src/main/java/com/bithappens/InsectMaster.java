@@ -1,5 +1,6 @@
 package com.bithappens;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a player who controls an insect in the game.
@@ -102,6 +103,17 @@ public class InsectMaster extends Player {
     @Override
     public void selfReport(Game g){
         System.out.println("InsectMaster.selfReport()");
+        List<Player> topMasters = g.getTopInsectMasters();
+        if(topMasters.size() != 0){
+            if(topMasters.get(0).getScore() == this.getScore()){
+                topMasters.add(this);
+            }
+            else if(topMasters.get(0).getScore() < this.getScore()){
+                topMasters.clear();
+                topMasters.add(this);
+            }
+            g.setTopInsectMaster(topMasters);
+        }
     }
 
     public void insectSplit(Insect i){

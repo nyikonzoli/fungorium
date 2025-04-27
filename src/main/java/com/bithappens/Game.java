@@ -58,6 +58,10 @@ public class Game {
     public List<Player> getTopMushroomMasters() {
         return topMushroomMasters;
     }
+
+    public void setTopMushroomMasters(List<Player> masters) {
+        topMushroomMasters = masters;
+    }
     /**
      * Getter for players.
      * @return players
@@ -77,7 +81,11 @@ public class Game {
      * @return topInsectMasters
      */
     public List<Player> getTopInsectMasters() {
-        return topMushroomMasters;
+        return topInsectMasters;
+    }
+
+    public void setTopInsectMaster(List<Player> masters) {
+        topInsectMasters = masters;
     }
 
 
@@ -107,7 +115,7 @@ public class Game {
 
         for(Player p : players){
             p.onRoundStart();
-            selfReport(p);
+            p.selfReport(this);
         }
         for(Tekton t : gameField){
             t.onRoundStart();
