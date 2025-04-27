@@ -113,7 +113,7 @@ public class SaveGame {
                 prototype.getGame().setCurrentPlayer((Player)prototype.objects.get(lineSplit.get(1)));
                 break;
                 case "<tekton>":
-                readTekton(lineSplit, prototype);
+                currentTekton = readTekton(lineSplit, prototype);
                 break;
                 case "<neighbors>":
                 readNeighbors(lineSplit, prototype, currentTekton);
@@ -148,20 +148,102 @@ public class SaveGame {
     private static void readGameState(ArrayList<String> gameState, Prototype prototype) {
         Game game = new Game();
         prototype.setGame(game);
-        
-        
+        game.setRoundCount(Integer.parseInt(gameState.get(1)));
+        for (int i = 2; i < gameState.size(); i+=2) {
+            Player p = gameState.get(i + 1).equals("i") ? new InsectMaster() : new MushroomMaster();
+            prototype.objects.put(gameState.get(i), p);
+        }
     }
-    private static void readTekton(ArrayList<String> tektonState, Prototype prototype) {
-        
+    private static Tekton readTekton(ArrayList<String> tektonState, Prototype prototype) {
+        Tekton t = null;
+        switch (tektonState.get(2)) {
+            case "Tekton":
+            t = new Tekton();
+            break;
+            case "AbsorbingTekton":
+            t = new AbsorbingTekton();
+            break;
+            case "DeadEndTekton":
+            t = new DeadEndTekton();
+            break;
+            case "HealingTekton":
+            t = new HealingTekton();
+            break;
+            case "HeterogeneousTekton":
+            t = new HeterogeneousTekton();
+            break;
+            case "InfertileTekton":
+            t = new InfertileTekton();
+            break;
+            default:
+            t = new Tekton();
+        }
+        prototype.objects.put(tektonState.get(1), t);
+        return t;
     }
     private static void readNeighbors(ArrayList<String> neighborsString, Prototype prototype, Tekton t) {
-        
+        for (int i = 1; i < neighborsString.size(); i++) {
+            if (prototype.objects.containsKey(neighborsString.get(i))) {
+                Tekton target = (Tekton)prototype.objects.get(neighborsString.get(i));
+                t.addNeighbour(target);
+                target.addNeighbour(t);
+            }
+
+        }
     }
     private static void readMushroom(ArrayList<String> mushroomString, Prototype prototype, Tekton t) {
-
+        MushroomBody m = null;
+        if (mushroomString.size() > 6 && mushroomString.get(6).equals("-s")) {
+            m = new SuperMushroomBody(t);
+        } else {
+            m = new MushroomBody(t);
+        }
+        prototype.objects.put(mushroomString.get(1), m);
+        MushroomMaster mm = (MushroomMaster)prototype.objects.get(mushroomString.get(2));
+        mm.getMushrooms().add(m);
+        m.setAlive(mushroomString.get(3).equals("1"));
+        m.setSporeCount(Integer.parseInt(mushroomString.get(4)));
+        m.setActions(Integer.parseInt(mushroomString.get(5)));
+        for (int i = 6; i < mushroomString.size(); i++) {
+            switch (mushroomString.get(i)) {
+                case "CutBlockingSpore":
+                    m.getSpores().add(new CutBlockingSpore());
+                    break;
+        
+                case "RegularSpore":
+                m.getSpores().add(new RegularSpore());
+                    break;
+        
+                case "ParalyzingSpore":
+                m.getSpores().add(new ParalyzingSpore());
+                    break;
+        
+                case "SlowingSpore":
+                m.getSpores().add(new SlowingSpore());
+                    break;
+        
+                case "SpeedingSpore":
+                m.getSpores().add(new SpeedingSpore());
+                    break;
+        
+                case "SplittingSpore":
+                m.getSpores().add(new SplittingSpore());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
     private static void readInsect(ArrayList<String> insectString, Prototype prototype, Tekton t) {
-
+        Insect i = new Insect(t, Integer.parseInt(insectString.get(3)), 
+            (InsectMaster)prototype.objects.get(insectString.get(2)));
+        prototype.objects.put(insectString.get(1), i);
+        if (insectString.size() > 4) {
+            i.setCanCutMycelium(insectString.get(4).equals("1"));
+        }
+        if (insectString.size() > 5) {
+            i.setStunned(insectString.get(5).equals("1"));
+        }
     }
     private static void readMycelium(ArrayList<String> myceliumString, Prototype prototype, Tekton t) {
         

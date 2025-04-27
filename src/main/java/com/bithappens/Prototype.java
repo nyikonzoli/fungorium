@@ -297,7 +297,7 @@ public class Prototype {
 
         currentMaster.initiateMyceliumGrowth(source, target);
         
-        // Ellenorzes - bugos lehet, ha mar egy masik uton el tudja erni myc-en keresztul
+        // Ellenorzes - kicsit felokositva
         for (Mycelium m : source.getMyceliums()) {
             if (m.getTektonEnd().equals(target) || m.getTektonStart().equals(target)) {
                 objects.put("m" + (++mycCount), m);
@@ -372,6 +372,9 @@ public class Prototype {
 
     }
     private String eatsp(ArrayList<String> command) {
+        // TODO: valami okos megoldást kitalálni splittingspore esetére,
+        // hogy rendesen <név>-1 <név>-2 formában jelenjenek meg splitelt rovarok a 
+        // hashmapben
         return "todo";
     }
     private String cut(ArrayList<String> command) {

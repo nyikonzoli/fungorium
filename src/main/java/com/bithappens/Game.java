@@ -17,6 +17,13 @@ public class Game {
     private List<Tekton> gameField;
     private int roundCount;
     
+    /**
+     * Setter for roundcount
+     * @param roundCount
+     */
+    public void setRoundCount(int roundCount) {
+        this.roundCount = roundCount;
+    }
 
     /**
      * Constructs a new Game instance.
