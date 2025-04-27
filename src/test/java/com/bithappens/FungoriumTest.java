@@ -2,9 +2,11 @@ package com.bithappens;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -58,6 +60,12 @@ public class FungoriumTest {
             p.handleInput(s);
         }
         String actualContent = SaveGame.objectStateToString(p);
+        try {
+            Files.write(Paths.get("src/test/resources/" + testCase.name + "/actual.txt"), 
+                Collections.singletonList(actualContent), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+        } catch (IOException e) {
+            
+        }
         assertTrue(SaveGame.compareSaveFileText(testCase.expectedContent, actualContent));
     }
 }

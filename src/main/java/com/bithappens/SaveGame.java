@@ -43,7 +43,7 @@ public class SaveGame {
             if (!t.getNeighbours().isEmpty()) {
                 retval.append("<neighbors>");
                 for (Tekton n : t.getNeighbours()) {
-                    retval.append(" " + n.getClass().getSimpleName());
+                    retval.append(" " + getKey(n, map));
                 }
                 retval.append("\n");
             }
@@ -85,10 +85,11 @@ public class SaveGame {
             for (Spore s : t.getSpores()) {
                 retval.append(
                     "<spore> " + s.getClass().getSimpleName() + " " + 
-                    getKey(s.getMushroomMaster(), map)
+                    getKey(s.getMushroomMaster(), map) + "\n"
                 );
             }
         }
+        //System.out.println("Actual:\n\n" + retval.toString());
         return retval.toString();
     }
     /**
@@ -104,7 +105,7 @@ public class SaveGame {
         Tekton currentTekton = null;
         for (String line : lines) {
             if (line.isEmpty()) continue;
-            ArrayList<String> lineSplit = new ArrayList<>(Arrays.asList(objectState.split(" ")));
+            ArrayList<String> lineSplit = new ArrayList<>(Arrays.asList(line.split(" ")));
             switch(lineSplit.get(0)) {
                 case "<gamestate>":
                 readGameState(lineSplit, prototype);
@@ -152,6 +153,7 @@ public class SaveGame {
         for (int i = 2; i < gameState.size(); i+=2) {
             Player p = gameState.get(i + 1).equals("i") ? new InsectMaster() : new MushroomMaster();
             prototype.objects.put(gameState.get(i), p);
+            game.addPlayer(p);
         }
     }
     private static Tekton readTekton(ArrayList<String> tektonState, Prototype prototype) {
@@ -179,6 +181,7 @@ public class SaveGame {
             t = new Tekton();
         }
         prototype.objects.put(tektonState.get(1), t);
+        prototype.getGame().getGameField().add(t);
         return t;
     }
     private static void readNeighbors(ArrayList<String> neighborsString, Prototype prototype, Tekton t) {
@@ -237,6 +240,7 @@ public class SaveGame {
     private static void readInsect(ArrayList<String> insectString, Prototype prototype, Tekton t) {
         Insect i = new Insect(t, Integer.parseInt(insectString.get(3)), 
             (InsectMaster)prototype.objects.get(insectString.get(2)));
+        t.getInsects().add(i);
         prototype.objects.put(insectString.get(1), i);
         if (insectString.size() > 4) {
             i.setCanCutMycelium(insectString.get(4).equals("1"));
@@ -251,9 +255,16 @@ public class SaveGame {
         Mycelium m = new Mycelium(
             (MushroomMaster)prototype.objects.get(myceliumString.get(2)), t, target
         );
+        
         t.getMyceliums().add(m);
         target.getMyceliums().add(m);
         prototype.objects.put(myceliumString.get(1), m);
+        if (myceliumString.size() > 4) {
+            m.setCut(myceliumString.get(4).equals("1"));
+        }
+        if (myceliumString.size() > 5) {
+            m.setTimeToLive(Integer.parseInt(myceliumString.get(5)));;
+        }
     }
     private static void readSpore(ArrayList<String> sporeString, Prototype prototype, Tekton t) {
         Spore s = null;
@@ -285,5 +296,6 @@ public class SaveGame {
                 s = new RegularSpore();
         }
         s.setMushroomMaster((MushroomMaster)prototype.objects.get(sporeString.get(2)));
+        t.getSpores().add(s);
     }
 }

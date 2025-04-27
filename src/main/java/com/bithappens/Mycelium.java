@@ -51,6 +51,11 @@ public class Mycelium {
     public int getTimeToLive() {
         return timeToLive;
     }
+    /**
+     * Setter for TTL
+     * @param ttl TTL
+     */
+    public void setTimeToLive(int ttl) { timeToLive = ttl; }
 
     /**
      * Gets the starting tecton of the mycelium connection.
