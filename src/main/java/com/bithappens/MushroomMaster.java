@@ -44,12 +44,12 @@ public class MushroomMaster extends Player{
      *
      * @param t the Tekton where the mushroom might grow
      */
-    // TODO: ezt a szekvenciát még befejzni
     public void initiateMushroomGrowth(Tekton t){
         System.out.println("MushroomMaster.initiateMushroomGrowth(Tekton t)");
         MushroomBody mushroom = t.growMushroom(this);
         if(mushroom != null){
             this.incrementScore();
+            this.addMushroom(mushroom);
         }
     }
     /**
@@ -80,10 +80,12 @@ public class MushroomMaster extends Player{
      */
     public void initiateSuperMushroomGrowth(MushroomBody m){
         System.out.println("MushroomMaster.initiateSuperMushroomGrowth(MushroomBody m)\nCan grow super mushroom body?");
-        /*if(Menu.userDecision()){
-            SuperMushroomBody smb = m.promoteToSuperMushroomBody();
-            m.getLocation().setMushroomBody(smb);
-        }*/
+        SuperMushroomBody smb = m.promoteToSuperMushroomBody();
+        if(smb != null){
+            mushrooms.remove(m);
+            mushrooms.add(smb);
+
+        }
     }
 
     /**
@@ -118,6 +120,17 @@ public class MushroomMaster extends Player{
     @Override
     public void selfReport(Game g){
         System.out.println("MushroomMaster.selfReport(Game g)");
+        List<Player> topMasters = g.getTopMushroomMasters();
+        if(topMasters.size() != 0){
+            if(topMasters.get(0).getScore() == this.getScore()){
+                topMasters.add(this);
+            }
+            else if(topMasters.get(0).getScore() < this.getScore()){
+                topMasters.clear();
+                topMasters.add(this);
+            }
+            g.setTopMushroomMasters(topMasters);
+        }
     }
 
 }
