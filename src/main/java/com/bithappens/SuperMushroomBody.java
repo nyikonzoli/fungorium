@@ -43,7 +43,7 @@ public class SuperMushroomBody extends  MushroomBody {
             }
         }
 
-        if(alive && neighboring && sporeCount >= 3){
+        if(alive && neighboring && sporeCount >= 3 && sporeLevel.size() >= 3){
             ArrayList<Spore> thrownSpores = new ArrayList<>();
             for (int i = 0; i < SPORE_SPREAD_COUNT; i++) {
                 Spore throwSpore = sporeLevel.get(0);

@@ -109,8 +109,11 @@ public class Mycelium {
      * @param decreaseTTLifNotConnected true if its not connected
      */
     public void onRoundStart(boolean decreaseTTLifNotConnected){
-        if(decreaseTTLifNotConnected){
+        if(decreaseTTLifNotConnected || isCut()){
             decreaseTTL();
+        }
+        if (timeToLive <= 0) {
+            this.disappear();
         }
     }
 
