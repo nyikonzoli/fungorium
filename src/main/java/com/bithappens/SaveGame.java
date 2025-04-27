@@ -246,9 +246,44 @@ public class SaveGame {
         }
     }
     private static void readMycelium(ArrayList<String> myceliumString, Prototype prototype, Tekton t) {
-        
+        Tekton target = (Tekton)prototype.objects.get(myceliumString.get(3));
+        if (target == null) return;
+        Mycelium m = new Mycelium(
+            (MushroomMaster)prototype.objects.get(myceliumString.get(2)), t, target
+        );
+        t.getMyceliums().add(m);
+        target.getMyceliums().add(m);
+        prototype.objects.put(myceliumString.get(1), m);
     }
     private static void readSpore(ArrayList<String> sporeString, Prototype prototype, Tekton t) {
-        
+        Spore s = null;
+        switch (sporeString.get(1)) {
+            case "CutBlockingSpore":
+                s = new CutBlockingSpore();
+                break;
+    
+            case "RegularSpore":
+                s = new RegularSpore();
+                break;
+    
+            case "ParalyzingSpore":
+                s = new ParalyzingSpore();
+                break;
+    
+            case "SlowingSpore":
+                s = new SlowingSpore();
+                break;
+    
+            case "SpeedingSpore":
+                s = new SpeedingSpore();
+                break;
+    
+            case "SplittingSpore":
+                s = new SplittingSpore();
+                break;
+            default:
+                s = new RegularSpore();
+        }
+        s.setMushroomMaster((MushroomMaster)prototype.objects.get(sporeString.get(2)));
     }
 }
