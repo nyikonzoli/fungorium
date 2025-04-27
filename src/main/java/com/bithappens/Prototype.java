@@ -364,10 +364,10 @@ public class Prototype {
 
         // Ellenorzes
         if (targetInsects + 1 == target.getInsects().size()) {
-            return "Siekres mozgas";
+            return "Move success";
         }
 
-        return "Sikertelen mozgas";
+        return "Move failure";
 
 
     }
@@ -381,12 +381,12 @@ public class Prototype {
         return "todo";
     }
     private String nextround() {
-        
-        return "todo";
+        game.nextRound();
+        return "Next round";
     }
     private String nextplayer() {
-
-        return "todo";
+        game.nextPlayer();
+        return "Next player";
     }
     private String split(ArrayList<String> command) {
         // két új tekton neve: <eredeti név>-1, <eredeti név>-2
