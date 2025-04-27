@@ -38,10 +38,6 @@ public class MushroomMaster extends Player{
         return "Mushroom Master";
     }
 
-    public List<MushroomBody> getMushrooms(){
-        return mushrooms;
-    }
-
 
     /**
      * Initiates the growth of a mushroom on the given Tekton.
@@ -74,7 +70,7 @@ public class MushroomMaster extends Player{
      */
     public void initiateSporeSpreading(MushroomBody m, Tekton t){
         System.out.println("MushroomMaster.initiateSporeSpreading(MushroomBody m, Tekton t)");
-        m.spreadSpore(t);
+        m.spreadSpore(t, this);
     }
 
     /**

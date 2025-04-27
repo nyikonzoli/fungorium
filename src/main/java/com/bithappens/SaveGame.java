@@ -32,17 +32,20 @@ public class SaveGame {
         String topimkey = "null";
         if (g.getTopInsectMasters().size() > 0) 
             topimkey = getKey(g.getTopInsectMasters().get(0), map);
-        String retval = "<gamestate> " + topmmkey + " " + topimkey + " " + 
-            getKey(g.getCurrentPlayer(), map) + " " + g.getRoundCount() + "\n";
+        //String retval = "<gamestate> " + topmmkey + " " + topimkey + " " + 
+        //    getKey(g.getCurrentPlayer(), map) + " " + g.getRoundCount() + "\n";
+        StringBuilder retval = new StringBuilder("<gamestate> " + topmmkey + " " + topimkey + " " + 
+            getKey(g.getCurrentPlayer(), map) + " " + g.getRoundCount() + "\n");
         for (Tekton t : g.getGameField()) {
-            retval += "<tekton> " + getKey(t, map) + " " + t.getClass().getSimpleName() + "\n";
+            retval.append("<tekton> " + getKey(t, map) + " " + t.getClass().getSimpleName() + "\n");
             if (!t.getNeighbours().isEmpty()) {
-                retval += "<neighbors>";
+                retval.append("<neighbors>");
                 for (Tekton n : t.getNeighbours()) {
-                    retval += " " + n.getClass().getSimpleName();
+                    retval.append(" " + n.getClass().getSimpleName());
                 }
-                retval += "\n";
+                retval.append("\n");
             }
+            // mushroom 
             if (t.getMushroomBody() != null) {
                 MushroomBody m = t.getMushroomBody();
                 MushroomMaster mm = null;
@@ -53,16 +56,38 @@ public class SaveGame {
                     }
                 }
                 int alive = m.getAlive() ? 1 : 0;
-                retval += "<mushroom> " + getKey(m, map) + " " + getKey(mm, map) + " " + alive + m.getSporeCount() + " " + m.getActions();
-                if (m instanceof SuperMushroomBody) { retval += " -s"; }
+                retval.append("<mushroom> " + getKey(m, map) + " " + getKey(mm, map) + " " + alive + m.getSporeCount() + " " + m.getActions());
+                if (m instanceof SuperMushroomBody) { retval.append(" -s"); }
                 for (Spore s :m.getSpores()) {
-                    retval += " " + s.getClass().getSimpleName();
+                    retval.append(" " + s.getClass().getSimpleName());
                 }
-                retval += "\n";
+                retval.append("\n");
+                
             }
-            // TODO: finish from insect line
+            // insects
+            for (Insect i : t.getInsects()) {
+                retval.append("<insect> " + getKey(i, map) + " " + getKey(i.getImaster(), map)
+                    + " " + i.getActionPoints() + " " + (i.getCanCutMycelium() ? "1 " : "0 ") 
+                    + (i.isStunned() ? "1" : "0") + "\n");
+            }
+            // myceliums
+            for (Mycelium m : t.getMyceliums()) {
+                Tekton target;
+                target = (m.getTektonStart().equals(t)) ? m.getTektonEnd() : m.getTektonStart();
+                retval.append(
+                    "<mycelium> " + getKey(m, map) + " " + getKey(m.getMaster(), map) + " "
+                    + getKey(target, map) + " " + (m.isCut() ? "1 " : "0 ") + m.getTimeToLive() + "\n"
+                );
+            }
+            // spores 
+            for (Spore s : t.getSpores()) {
+                retval.append(
+                    "<spore> " + s.getClass().getSimpleName() + " " + 
+                    getKey(s.getMushroomMaster(), map)
+                );
+            }
         }
-        return "todo";
+        return retval.toString();
     }
     /**
      * Loads a save file's content onto a Prototype object by updating the game objects stored in it's HashMap.
@@ -85,5 +110,26 @@ public class SaveGame {
         Set<String> lines2 = new HashSet<>(Arrays.asList(actual.split("\\r?\\n")));
 
         return lines1.equals(lines2);
+    }
+    private static void readGameState(String gameState, Prototype prototype) {
+
+    }
+    private static void readTekton(String tektonState, Prototype prototype) {
+        
+    }
+    private static void readNeighbors(String neighborsString, Prototype prototype) {
+        
+    }
+    private static void readMushroom(String mushroomString, Prototype prototype) {
+
+    }
+    private static void readInsect(String insectString, Prototype prototype) {
+
+    }
+    private static void readMycelium(String myceliumString, Prototype prototype) {
+        
+    }
+    private static void readSpore(String sporeString, Prototype prototype) {
+        
     }
 }
