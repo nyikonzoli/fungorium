@@ -28,16 +28,16 @@ public class SaveGame {
         Game g = prototype.getGame();
 
         HashMap<String, Object> map = prototype.objects;
-        String topmmkey = "null";
-        if (g.getTopMushroomMasters().size() > 0) 
-            topmmkey = getKey(g.getTopMushroomMasters().get(0), map);
-        String topimkey = "null";
-        if (g.getTopInsectMasters().size() > 0) 
-            topimkey = getKey(g.getTopInsectMasters().get(0), map);
+        
         //String retval = "<gamestate> " + topmmkey + " " + topimkey + " " + 
         //    getKey(g.getCurrentPlayer(), map) + " " + g.getRoundCount() + "\n";
-        StringBuilder retval = new StringBuilder("<gamestate> " + topmmkey + " " + topimkey + " " + 
-            getKey(g.getCurrentPlayer(), map) + " " + g.getRoundCount() + "\n");
+        StringBuilder retval = new StringBuilder("<gamestate> " + g.getRoundCount());
+        for (Player p : g.getPlayers()) {
+            retval.append(" " + getKey(p, map) + " " + 
+                (p instanceof MushroomMaster ? "m" : "i"));
+        }
+        retval.append("\n");
+        retval.append("<current> " + getKey(g.getCurrentPlayer(), map) + "\n");
         for (Tekton t : g.getGameField()) {
             retval.append("<tekton> " + getKey(t, map) + " " + t.getClass().getSimpleName() + "\n");
             if (!t.getNeighbours().isEmpty()) {
@@ -101,6 +101,37 @@ public class SaveGame {
         // ha #ERROR a fájlban, corrupted a save
         // ha fájlban neve null vagy "-" akkor null
         ArrayList<String> lines = new ArrayList<>(Arrays.asList(objectState.split("\\r?\\n|\\r")));
+        Tekton currentTekton = null;
+        for (String line : lines) {
+            if (line.isEmpty()) continue;
+            ArrayList<String> lineSplit = new ArrayList<>(Arrays.asList(objectState.split(" ")));
+            switch(lineSplit.get(0)) {
+                case "<gamestate>":
+                readGameState(lineSplit, prototype);
+                break;
+                case "<current>":
+                prototype.getGame().setCurrentPlayer((Player)prototype.objects.get(lineSplit.get(1)));
+                break;
+                case "<tekton>":
+                readTekton(lineSplit, prototype);
+                break;
+                case "<neighbors>":
+                readNeighbors(lineSplit, prototype, currentTekton);
+                break;
+                case "<mushroom>":
+                readMushroom(lineSplit, prototype, currentTekton);
+                break;
+                case "<insect>":
+                readInsect(lineSplit, prototype, currentTekton);
+                break;
+                case "<mycelium>":
+                readMycelium(lineSplit, prototype, currentTekton);
+                break;
+                case "<spore>":
+                readSpore(lineSplit, prototype, currentTekton);
+                break;
+            }
+        }
     }
     /**
      * Compares the content of the two strings extracted from savefiles.
@@ -114,25 +145,28 @@ public class SaveGame {
 
         return lines1.equals(lines2);
     }
-    private static void readGameState(String gameState, Prototype prototype) {
-
-    }
-    private static void readTekton(String tektonState, Prototype prototype) {
+    private static void readGameState(ArrayList<String> gameState, Prototype prototype) {
+        Game game = new Game();
+        prototype.setGame(game);
+        
         
     }
-    private static void readNeighbors(String neighborsString, Prototype prototype) {
+    private static void readTekton(ArrayList<String> tektonState, Prototype prototype) {
         
     }
-    private static void readMushroom(String mushroomString, Prototype prototype) {
-
-    }
-    private static void readInsect(String insectString, Prototype prototype) {
-
-    }
-    private static void readMycelium(String myceliumString, Prototype prototype) {
+    private static void readNeighbors(ArrayList<String> neighborsString, Prototype prototype, Tekton t) {
         
     }
-    private static void readSpore(String sporeString, Prototype prototype) {
+    private static void readMushroom(ArrayList<String> mushroomString, Prototype prototype, Tekton t) {
+
+    }
+    private static void readInsect(ArrayList<String> insectString, Prototype prototype, Tekton t) {
+
+    }
+    private static void readMycelium(ArrayList<String> myceliumString, Prototype prototype, Tekton t) {
+        
+    }
+    private static void readSpore(ArrayList<String> sporeString, Prototype prototype, Tekton t) {
         
     }
 }

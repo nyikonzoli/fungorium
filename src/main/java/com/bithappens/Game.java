@@ -36,6 +36,13 @@ public class Game {
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
+    /**
+     * Sets the current player
+     * @param p Current player
+     */
+    public void setCurrentPlayer(Player p){
+        currentPlayer = p;
+    }
 
     /**
      * Getter for topMushroomMasters.

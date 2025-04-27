@@ -22,6 +22,7 @@ public class Menu {
             System.out.println(output + "\n");
         }
         while (!"exit".equals(line));
+        prototype.handleInput("save autosave.txt");
         sc.close();
         System.out.println("\n");
         

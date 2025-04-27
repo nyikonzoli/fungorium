@@ -12,6 +12,8 @@ public class Prototype {
     private Game game;
     public Game getGame() { return game; }
     public void setGame(Game game) { this.game = game; }
+    private int mycCount = 0;
+    private int mushroomCount = 0;
     
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.
@@ -254,9 +256,10 @@ public class Prototype {
 
             // Ellenőrizni, hogy sikerült-e
             if (target.getMushroomBody() == null) {
-                return "Nem sikerult a novesztes";
+                return "Grow failure";
             }
             else{
+                objects.put("mu" + (++mushroomCount), target.getMushroomBody());
                 return "Sikeres novesztes";
             }
         }
@@ -270,7 +273,7 @@ public class Prototype {
                 return "Nem sikerult a fejlesztes";
             }
             else{
-                return "Sikeres fejlesztes";
+                return "Grow success";
             }
         }
 
@@ -293,13 +296,16 @@ public class Prototype {
         }
 
         currentMaster.initiateMyceliumGrowth(source, target);
-
-        // Ellenorzes
-        if (target.canReachTektonViaMycelium(source)) {
-            return "Sikeres novesztes";
+        
+        // Ellenorzes - bugos lehet, ha mar egy masik uton el tudja erni myc-en keresztul
+        for (Mycelium m : source.getMyceliums()) {
+            if (m.getTektonEnd().equals(target) || m.getTektonStart().equals(target)) {
+                objects.put("m" + (++mycCount), m);
+                return "Grow success: m" + mycCount;
+            }
         }
 
-        return "Sikertelen novesztes";
+        return "Grow failure";
 
     }
     private String spreadsp(ArrayList<String> command) {
