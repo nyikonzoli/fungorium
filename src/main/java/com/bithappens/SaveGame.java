@@ -111,4 +111,25 @@ public class SaveGame {
 
         return lines1.equals(lines2);
     }
+    private static void readGameState(String gameState, Prototype prototype) {
+
+    }
+    private static void readTekton(String tektonState, Prototype prototype) {
+        
+    }
+    private static void readNeighbors(String neighborsString, Prototype prototype) {
+        
+    }
+    private static void readMushroom(String mushroomString, Prototype prototype) {
+
+    }
+    private static void readInsect(String insectString, Prototype prototype) {
+
+    }
+    private static void readMycelium(String myceliumString, Prototype prototype) {
+        
+    }
+    private static void readSpore(String sporeString, Prototype prototype) {
+        
+    }
 }
