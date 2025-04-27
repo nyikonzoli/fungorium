@@ -1,6 +1,8 @@
 package com.bithappens;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -131,19 +133,28 @@ public class Tekton {
             return true;
         }
 
-        ArrayList<Tekton> visited = new ArrayList<Tekton>();
-        Queue<Tekton> discoverable = new LinkedList<Tekton>();
+        Set<Tekton> visited = new HashSet<>();
+        Queue<Tekton> discoverable = new LinkedList<>();
         discoverable.offer(this);
 
         while (!discoverable.isEmpty()){
             Tekton currentTekton = discoverable.poll();
+            if (visited.contains(currentTekton)) 
+                continue;
             
+            visited.add(currentTekton);
+            if (currentTekton.mushroomBody != null && mm.getMushrooms().contains(currentTekton.mushroomBody) && currentTekton.mushroomBody.actions > 0){
+                currentTekton.mushroomBody.setActions(currentTekton.mushroomBody.getActions()-1);
+                return true;
+            }
+
+            for (Tekton tekton : currentTekton.getNeighbours()) {
+                if (!visited.contains(tekton))
+                    discoverable.offer(tekton);
+            }
         }
 
-
-
-
-        return true;
+        return false;
     }
 
     /**
