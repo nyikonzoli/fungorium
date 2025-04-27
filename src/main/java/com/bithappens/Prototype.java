@@ -22,6 +22,9 @@ public class Prototype {
         ArrayList<String> command = new ArrayList<>(Arrays.asList(inputLine.split(" ")));
         String retval = "Command not found";
         switch (command.get(0)) {
+            case "newgame":
+                retval = newgame(command);
+                break;
             case "load":
                 retval = load(command);
                 break;
@@ -74,6 +77,158 @@ public class Prototype {
         return retval;
     }
     
+
+    private String newgame(ArrayList<String> command) {
+        objects.clear();
+
+        Tekton t1 = new Tekton();
+        Tekton t2 = new Tekton();
+        Tekton t3 = new Tekton();
+        Tekton t4 = new Tekton();
+        Tekton t5 = new Tekton();
+        Tekton t6 = new Tekton();
+        HeterogeneousTekton tHetero = new HeterogeneousTekton();
+        InfertileTekton tI= new InfertileTekton();
+        DeadEndTekton tD = new DeadEndTekton();
+        HealingTekton tHealing = new HealingTekton();
+        AbsorbingTekton tA = new AbsorbingTekton();
+
+        MushroomMaster mmaster1 = new MushroomMaster();
+        MushroomMaster mmaster2 = new MushroomMaster();
+        InsectMaster imaster1 = new InsectMaster();
+        InsectMaster imaster2 = new InsectMaster();
+
+
+
+        ArrayList<Tekton> t1Neighbours = new ArrayList<>();
+        t1Neighbours.add(t2);
+        t1Neighbours.add(tHetero);
+        t1Neighbours.add(t3);
+        t1.addNeighbours(t1Neighbours);
+
+        ArrayList<Tekton> t2Neighbours = new ArrayList<>();
+        t2Neighbours.add(t1);
+        t2Neighbours.add(tHetero);
+        t2Neighbours.add(tA);
+        t2.addNeighbours(t2Neighbours);
+
+        ArrayList<Tekton> t3Neighbours = new ArrayList<>();
+        t3Neighbours.add(t1);
+        t3Neighbours.add(tHetero);
+        t3Neighbours.add(tHealing);
+        t3.addNeighbours(t3Neighbours);
+
+        ArrayList<Tekton> tHeteroNeighbours = new ArrayList<>();
+        tHeteroNeighbours.add(t1);
+        tHeteroNeighbours.add(t2);
+        tHeteroNeighbours.add(tA);
+        tHeteroNeighbours.add(t4);
+        tHeteroNeighbours.add(t6);
+        tHeteroNeighbours.add(tHealing);
+        tHeteroNeighbours.add(t3);
+        tHetero.addNeighbours(tHeteroNeighbours);
+
+        ArrayList<Tekton> tANeighbours = new ArrayList<>();
+        tANeighbours.add(t2);
+        tANeighbours.add(tHetero);
+        tANeighbours.add(t4);
+        tA.addNeighbours(tANeighbours);
+
+
+        ArrayList<Tekton> tHealingNeighbours = new ArrayList<>();
+        tHealingNeighbours.add(t3);
+        tHealingNeighbours.add(tHetero);
+        tHealingNeighbours.add(t6);
+        tHealingNeighbours.add(tI);
+        tHealingNeighbours.add(t5);
+        tHealing.addNeighbours(tHealingNeighbours);
+
+        ArrayList<Tekton> t4Neighbours = new ArrayList<>();
+        t4Neighbours.add(tHetero);
+        t4Neighbours.add(tA);
+        t4Neighbours.add(tD);
+        t4Neighbours.add(t6);
+        t4.addNeighbours(t4Neighbours);
+
+        ArrayList<Tekton> t5Neighbours = new ArrayList<>();
+        t5Neighbours.add(tHealing);
+        t5Neighbours.add(tI);
+        t5.addNeighbours(t5Neighbours);
+
+        ArrayList<Tekton> tINeighbours = new ArrayList<>();
+        tINeighbours.add(t5);
+        tINeighbours.add(tHealing);
+        tINeighbours.add(t6);
+        tI.addNeighbours(tINeighbours);
+
+        ArrayList<Tekton> t6Neighbours = new ArrayList<>();
+        t6Neighbours.add(tHealing);
+        t6Neighbours.add(tI);
+        t6Neighbours.add(tD);
+        t6Neighbours.add(t4);
+        t6Neighbours.add(tHetero);
+        t6.addNeighbours(t6Neighbours);
+
+        ArrayList<Tekton> tDNeighbours = new ArrayList<>();
+        tDNeighbours.add(t6);
+        tDNeighbours.add(t4);
+        tD.addNeighbours(tDNeighbours);
+
+        Insect insect1 = new Insect(t1, 10, imaster1);
+        t1.addInsect(insect1);
+        imaster1.addInsect(insect1);
+
+        MushroomBody mb1 = new MushroomBody(t1);
+        t1.setMushroomBody(mb1);
+        mmaster1.addMushroom(mb1);
+
+        Insect insect2 = new Insect(tD, 10, imaster2);
+        tD.addInsect(insect2);
+        imaster2.addInsect(insect2);
+
+        MushroomBody mb2 = new MushroomBody(tD);
+        tD.setMushroomBody(mb2);
+        mmaster2.addMushroom(mb2);
+
+        game.extendField(t1);
+        game.extendField(t2);
+        game.extendField(t3);
+        game.extendField(tHetero);
+        game.extendField(tA);
+        game.extendField(tHealing);
+        game.extendField(t4);
+        game.extendField(t5);
+        game.extendField(tI);
+        game.extendField(t6);
+        game.extendField(tD);
+        game.addPlayer(imaster1);
+        game.addPlayer(imaster2);
+        game.addPlayer(mmaster1);
+        game.addPlayer(mmaster2);
+
+        objects.put("t1", t1);
+        objects.put("t2", t2);
+        objects.put("t3", t3);
+        objects.put("tHetero", tHetero);
+        objects.put("tA", tA);
+        objects.put("tHealing", tHealing);
+        objects.put("t4", t4);
+        objects.put("t5", t5);
+        objects.put("tI", tI);
+        objects.put("t6", t6);
+        objects.put("tD", tD);
+        objects.put("imaster1", imaster1);
+        objects.put("imaster2", imaster2);
+        objects.put("mmaster1", mmaster1);
+        objects.put("mmaster2", mmaster2);
+        objects.put("mb1", mb1);
+        objects.put("mb2", mb2);
+        objects.put("insect1", insect1);
+        objects.put("insect2", insect2);
+        
+
+        return "New Game Started";
+    }
     private String load(ArrayList<String> command) {
         return "todo";
     }
