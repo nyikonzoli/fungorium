@@ -11,3 +11,5 @@ A Maven fájrendszere kicsit bloated, de csak jobban vannak nestelve a mappák m
 ## Tesztek
 
 **Figyelem, ez csak tervezet!** Minden tesztesethez a `/src/test/resources` mappában kell egy teszteset nevű mappa, benne `start.txt`, `expected.txt`, `commands.txt`, melyek a kiinduló állapotot, az elvárt végállapotot és a bemeneti parancsokat tartalmazzák.
+
+A teszteknél az elejére-végére save, load parancs NEM KELL! Azt a tesztelő osztály automatikusan csinálja már.

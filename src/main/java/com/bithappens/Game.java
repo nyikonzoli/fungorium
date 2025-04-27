@@ -9,12 +9,14 @@ public class Game {
     int finishGame = 10;
 
     private List<Player> players;
+
     private List<Player> topMushroomMasters;
     private List<Player> topInsectMasters;
     
     private Player currentPlayer;
     private List<Tekton> gameField;
     private int roundCount;
+    
 
     /**
      * Constructs a new Game instance.
@@ -34,6 +36,36 @@ public class Game {
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
+
+    /**
+     * Getter for topMushroomMasters.
+     * @return topMushroomMasters
+     */
+    public List<Player> getTopMushroomMasters() {
+        return topMushroomMasters;
+    }
+    /**
+     * Getter for players.
+     * @return players
+     */
+    public List<Player> getPlayers() {
+        return players;
+    }
+    /**
+     * Getter for roundCount.
+     * @return roundCount
+     */
+    public int getRoundCount() {
+        return roundCount;
+    }
+    /**
+     * Getter for topInsectMasters.
+     * @return topInsectMasters
+     */
+    public List<Player> getTopInsectMasters() {
+        return topMushroomMasters;
+    }
+
 
     /**
      * Starts the game, setting up the initial game state.

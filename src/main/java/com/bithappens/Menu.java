@@ -24,7 +24,7 @@ public class Menu {
         while (!"exit".equals(line));
         sc.close();
         System.out.println("\n");
-
+        
     }
 
 
