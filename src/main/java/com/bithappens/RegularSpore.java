@@ -19,5 +19,6 @@ public class RegularSpore extends Spore {
     public void applyEffect(Insect i){
         //System.out.println("RegularSpore.applyEffect(Insect i)");
         // Nem csinál semmit, csak returnol
+        i.decrementActionPoint(1);
     }
 }
