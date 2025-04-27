@@ -1,0 +1,12 @@
+<gamestate> 0 mm1 m
+<current> mm1
+<tekton> tn Tekton
+<neighbors> ti
+<mushroom> mu1 mm1 1 2 1
+<mycelium> m1 mm1 ti 0 99
+<tekton> ti InfertileTekton
+<neighbors>  tn
+<mycelium> m1 mm1 tn 0 99
+<spore> RegularSpore mm1
+<spore> CutBlockingSpore mm1
+<spore> ParalyzingSpore mm1

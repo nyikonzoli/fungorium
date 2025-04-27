@@ -1,0 +1,6 @@
+eatsp i1
+move i1 t2
+eatsp i1
+move i1 t1
+nextround
+eatin mm1 i1

@@ -1,0 +1,2 @@
+growmu mm1 ti
+split ti

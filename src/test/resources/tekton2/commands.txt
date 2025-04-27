@@ -1,0 +1,6 @@
+growmy mm1 th tn2
+growmy mm1 th td
+growmy mm1 tn2 td
+growmy mm1 td tn2
+growmy mm2 tn1 th
+growmy mm2 tn1 tn2

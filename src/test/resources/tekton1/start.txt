@@ -1,0 +1,18 @@
+<gamestate> 0 im1 i mm1 m
+<current> im1
+<tekton> t1 Tekton
+<neighbors> t2 t3
+<mushroom> mu1 mm1 1 2 1 
+<insect> i1 im1 3 1 0
+<mycelium> m1 mm1 t2 0 1
+<mycelium> m2 mm1 t3 0 1
+<tekton> t2 AbsorbingTekton
+<neighbors>  t1
+<mycelium> m1 mm1 t1 0 1
+<tekton> t3 HealingTekton
+<neighbors>  t1 t4
+<mycelium> m2 mm1 t1 0 1
+<mycelium> m3 mm1 t4 0 1
+<tekton> t4 Tekton
+<neighbors>  t3
+<mycelium> m3 mm1 t3 0 1

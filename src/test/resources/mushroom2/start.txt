@@ -1,0 +1,15 @@
+<gamestate> 0 mm1 m
+<current> mm1
+<tekton> t1 Tekton
+<neighbors> t2 t3
+<mushroom> mu1 mm1 1 2 1 
+<mycelium> m1 mm1 t3 0 99
+<mycelium> m2 mm1 t4 0 99
+<tekton> t2 Tekton
+<neighbors>  t1
+<mushroom> mu2 mm1 1 99 1 
+<mycelium> m1 mm1 t2 0 99
+<tekton> t3 Tekton
+<neighbors>  t1
+<mushroom> mu3 mm1 1 99 1 
+<mycelium> m2 mm1 t2 0 99

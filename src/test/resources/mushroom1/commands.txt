@@ -1,0 +1,6 @@
+growmy mm1 t2 t1
+spreadsp mu1 t1
+spreadsp mu1 t1
+spreadsp mu2 t1
+spreadsp mu3 t1
+growmu mm1 t1

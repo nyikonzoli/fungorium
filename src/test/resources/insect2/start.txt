@@ -1,0 +1,11 @@
+<gamestate> 0 im1 i mm1 m
+<current> im1
+<tekton> t1 Tekton
+<neighbors> t2
+<insect> i1 im1 2 1 0
+<mycelium> m1 mm1 t2 0 99
+<spore> SpeedingSpore mm1
+<tekton> t2 Tekton
+<neighbors> t1 
+<mycelium> m1 mm1 t1 0 99
+<spore> ParalyzingSpore mm1
