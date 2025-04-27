@@ -12,7 +12,12 @@ public class Mycelium {
 
     private MushroomMaster grower;
     private int timeToLive;
+
+
     private Tekton tektonStart, tektonEnd;
+    private boolean hasBeenCut = false;
+
+    
 
     /**
      * Default constructor for Mycelium.
@@ -32,9 +37,19 @@ public class Mycelium {
         tektonEnd = end;
         timeToLive = INITITAL_TTL;
     }
-
+    /**
+     * Getter for the owner of the Mycelium.
+     * @return Owner MushroomMaster
+     */
     public MushroomMaster getMaster(){
         return grower;
+    }
+    /**
+     * Getter for the TTL value of the Mycelium.
+     * @return TTL value
+     */
+    public int getTimeToLive() {
+        return timeToLive;
     }
 
     /**
@@ -54,8 +69,21 @@ public class Mycelium {
     public Tekton getTektonEnd(){
         return tektonEnd;
     }
-    
-    
+    /**
+     * Getter for boolean determining whether the Mycelium has been cut.
+     * @return True if the Mycelium has been cut
+     */
+    public boolean isCut() {
+        return hasBeenCut;
+    }
+    /**
+     * Setter for boolean determining whether the Mycelium has been cut.
+     * @param hasBeenCut True if the Mycelium has been cut
+     */
+    public void setCut(boolean hasBeenCut) {
+        this.hasBeenCut = hasBeenCut;
+    }
+
     /**
      * Starts the process of destroying this Mycelium instance
      */

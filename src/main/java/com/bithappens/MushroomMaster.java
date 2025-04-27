@@ -70,7 +70,7 @@ public class MushroomMaster extends Player{
      */
     public void initiateSporeSpreading(MushroomBody m, Tekton t){
         System.out.println("MushroomMaster.initiateSporeSpreading(MushroomBody m, Tekton t)");
-        m.spreadSpore(t);
+        m.spreadSpore(t, this);
     }
 
     /**
