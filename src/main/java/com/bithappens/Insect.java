@@ -128,7 +128,7 @@ public class Insect {
         //System.out.println("Insect.moveTo(Tekton newLocation)");
         boolean canReach = location.canReachTektonViaMycelium(newLocation);
 
-        if(canReach){
+        if(canReach && actionPoints > 0){
             location.removeInsect(this);
             newLocation.addInsect(this);
             setLocation(newLocation);

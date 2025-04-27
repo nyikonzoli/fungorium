@@ -4,4 +4,3 @@ eatsp i1
 move i1 t1
 nextplayer
 eatin mm1 i1
-nextplayer

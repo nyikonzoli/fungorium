@@ -158,8 +158,10 @@ public class Mycelium {
      */
     public void eatInsect(Insect i, Tekton t){
         if(i.isStunned()){
+            if (t.getMushroomBody() != null) return;
+            MushroomBody mb = new MushroomBody(t);
+            t.setMushroomBody(mb);
             t.removeInsect(i);
-            MushroomBody mb = t.growMushroom(grower);
             grower.incrementScore();
             grower.addMushroom(mb);
         }

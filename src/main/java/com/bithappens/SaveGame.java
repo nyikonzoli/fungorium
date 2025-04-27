@@ -58,7 +58,7 @@ public class SaveGame {
                     }
                 }
                 int alive = m.getAlive() ? 1 : 0;
-                retval.append("<mushroom> " + getKey(m, map) + " " + getKey(mm, map) + " " + alive + m.getSporeCount() + " " + m.getActions());
+                retval.append("<mushroom> " + getKey(m, map) + " " + getKey(mm, map) + " " + alive + " " + m.getSporeCount() + " " + m.getActions());
                 if (m instanceof SuperMushroomBody) { retval.append(" -s"); }
                 for (Spore s :m.getSpores()) {
                     retval.append(" " + s.getClass().getSimpleName());
@@ -201,6 +201,7 @@ public class SaveGame {
             m = new MushroomBody(t);
         }
         prototype.objects.put(mushroomString.get(1), m);
+        t.setMushroomBody(m);
         MushroomMaster mm = (MushroomMaster)prototype.objects.get(mushroomString.get(2));
         mm.getMushrooms().add(m);
         m.setAlive(mushroomString.get(3).equals("1"));

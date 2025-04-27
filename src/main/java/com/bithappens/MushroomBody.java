@@ -25,7 +25,7 @@ public class MushroomBody {
      * Constructs a MushroomBody instance.
      */
     public MushroomBody() {
-        System.out.println("MushroomBody.MushroomBody()");
+        //System.out.println("MushroomBody.MushroomBody()");
         sporeLevel = new ArrayList<>();
     }
 

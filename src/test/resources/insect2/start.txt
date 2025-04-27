@@ -2,6 +2,7 @@
 <current> im1
 <tekton> t1 Tekton
 <neighbors> t2
+<mushroom> mu2 mm1 1 1 1 
 <insect> i1 im1 2 1 0
 <mycelium> m1 mm1 t2 0 99
 <spore> SpeedingSpore mm1

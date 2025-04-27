@@ -83,7 +83,7 @@ public class Prototype {
 
     private String newgame(ArrayList<String> command) {
         objects.clear();
-
+        game = new Game();
         Tekton t1 = new Tekton();
         Tekton t2 = new Tekton();
         Tekton t3 = new Tekton();
@@ -341,13 +341,15 @@ public class Prototype {
         for(Mycelium m : allMyceliums){
             if(m.getMaster().equals(currentMaster) && (m.getTektonEnd().equals(eatTekton) || m.getTektonStart().equals(eatTekton))){
                 m.eatInsect(eatInsect, eatTekton);
+                if (insectNumber - 1 == eatTekton.getInsects().size()) {
+                    objects.put("mu" + (++mushroomCount), eatTekton.getMushroomBody());
+                    return "Eat success";
+                }
             }
         }
 
         // Ellenorzes
-        if (insectNumber - 1 == eatTekton.getInsects().size()) {
-            return "Eat success";
-        }
+        
         return "Eat failure";
 
     }
