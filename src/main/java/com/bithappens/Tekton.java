@@ -128,33 +128,41 @@ public class Tekton {
         // kiegészítés: Ha már a kiinduló (ez a tekton) 
         // System.out.println("deductNetworkAction(MushroomMaster mm)\nWas successful?");
         // return Menu.userDecision(); 
-        if (mushroomBody != null && mm.getMushrooms().contains(mushroomBody) && mushroomBody.actions > 0){
-            mushroomBody.setActions(mushroomBody.getActions()-1);
-            return true;
+        if (mushroomBody != null && mm.getMushrooms().contains(mushroomBody) && mushroomBody.actions > 0) {
+                mushroomBody.setActions(mushroomBody.getActions() - 1);
+                return true;
         }
-
+    
         Set<Tekton> visited = new HashSet<>();
         Queue<Tekton> discoverable = new LinkedList<>();
         discoverable.offer(this);
-
-        while (!discoverable.isEmpty()){
-            Tekton currentTekton = discoverable.poll();
-            if (visited.contains(currentTekton)) 
+    
+        while (!discoverable.isEmpty()) {
+            Tekton current = discoverable.poll();
+            if (visited.contains(current)) {
                 continue;
-            
-            visited.add(currentTekton);
-            if (currentTekton.mushroomBody != null && mm.getMushrooms().contains(currentTekton.mushroomBody) && currentTekton.mushroomBody.actions > 0){
-                currentTekton.mushroomBody.setActions(currentTekton.mushroomBody.getActions()-1);
+            }
+            visited.add(current);
+    
+            if (current.mushroomBody != null && 
+                mm.getMushrooms().contains(current.mushroomBody) && 
+                current.mushroomBody.actions > 0) {
+                current.mushroomBody.setActions(current.mushroomBody.getActions() - 1);
                 return true;
             }
-
-            for (Tekton tekton : currentTekton.getNeighbours()) {
-                if (!visited.contains(tekton))
-                    discoverable.offer(tekton);
+    
+            for (Mycelium mycelium : current.getMyceliums()) {
+                Tekton neighbor = (mycelium.getTektonStart() == current) ? 
+                                 mycelium.getTektonEnd() : 
+                                 mycelium.getTektonStart();
+                
+                if (!visited.contains(neighbor)) {
+                    discoverable.offer(neighbor);
+                }
             }
         }
-
-        return false;
+    
+        return false;    
     }
 
     /**
@@ -345,5 +353,9 @@ public class Tekton {
      */
     public boolean hasInsect(){
         return !insects.isEmpty();
+    }
+
+    public void decreaseTTL() {
+
     }
 }
