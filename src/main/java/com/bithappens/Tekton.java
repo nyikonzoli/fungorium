@@ -356,6 +356,9 @@ public class Tekton {
     }
 
     public void decreaseTTL() {
-
+        for (Mycelium myc : myceliums) {
+            if (!myc.isConnectedToMushroom())
+                myc.decreaseTTL();
+        }
     }
 }
