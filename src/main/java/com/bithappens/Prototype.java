@@ -247,7 +247,7 @@ public class Prototype {
         Tekton target = (Tekton)objects.get(command.get(2));
 
         if(!currentMaster.equals(commandMaster)){
-            return "Nem ennek a jatekosnak a kore";
+            return "Wrong player";
         }
 
         // Ha újat akar növeszteni
@@ -259,8 +259,9 @@ public class Prototype {
                 return "Grow failure";
             }
             else{
-                objects.put("mu" + (++mushroomCount), target.getMushroomBody());
-                return "Sikeres novesztes";
+                String mushroomName = "mu" + (++mushroomCount);
+                objects.put(mushroomName, target.getMushroomBody());
+                return "Grow success: " + mushroomName;
             }
         }
         // Szuper gomba növesztés
@@ -270,14 +271,14 @@ public class Prototype {
 
             // Ellenőrzés
             if (target.getMushroomBody() == null || !(target.getMushroomBody() instanceof SuperMushroomBody)) {
-                return "Nem sikerult a fejlesztes";
+                return "Grow failure";
             }
             else{
-                return "Grow success";
+                return "SuperMushroom grow success";
             }
         }
 
-        return "Ervenytelen bemenet";
+        return "Invalid input";
     }
 
     private String growmy(ArrayList<String> command) {
@@ -288,7 +289,7 @@ public class Prototype {
         Tekton target = (Tekton)objects.get(command.get(3));
 
         if(!currentMaster.equals(commandMaster)){
-            return "Nem ennek a jatekosnak a kore";
+            return "Wrong player";
         }
 
         if (!source.isNeighbour(target)) {
@@ -320,9 +321,9 @@ public class Prototype {
 
         // Ellenőrzés
         if (sporeBeforeThrow + 3 == target.getSpores().size()) {
-            return "Sikeres spora szoras";
+            return "Spread success";
         }
-        return "Sikertelen szoras";
+        return "Spread failure";
     }
     private String eatin(ArrayList<String> command) {
         Player currentMaster = game.getCurrentPlayer();
@@ -333,7 +334,7 @@ public class Prototype {
         int insectNumber = eatTekton.getInsects().size();
 
         if(!currentMaster.equals(commandMaster)){
-            return "Nem ennek a jatekosnak a kore";
+            return "Wrong player";
         }
 
         for(Mycelium m : allMyceliums){
@@ -344,9 +345,9 @@ public class Prototype {
 
         // Ellenorzes
         if (insectNumber - 1 == eatTekton.getInsects().size()) {
-            return "Sikeres eves";
+            return "Eat success";
         }
-        return "Sikertelen eves";
+        return "Eat failure";
 
     }
     private String move(ArrayList<String> command) {
@@ -358,7 +359,7 @@ public class Prototype {
         int targetInsects = target.getInsects().size();
 
         if(!im.equals(currentPlayer)){
-            return "Nem ennek a rovarasznak a kore";
+            return "Wrong player";
         }
         insect.moveTo(target);
 
