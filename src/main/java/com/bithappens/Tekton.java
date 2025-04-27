@@ -167,7 +167,7 @@ public class Tekton {
         ArrayList<Tekton> B_neighbours = new ArrayList<>();
 
         for(Tekton t : neighbours){
-
+            //TODO: implement
         }
 
 
@@ -266,6 +266,7 @@ public class Tekton {
      */
     public void onRoundStart(){
         System.out.println("Tekton.onRoundStart()");
+        //TODO: implement
     }
     /**
      * Grows a mushroom, and adds it to the tecton, and to the mushroom master, who initiated the growth

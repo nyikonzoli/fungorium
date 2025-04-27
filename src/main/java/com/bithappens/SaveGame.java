@@ -1,5 +1,6 @@
 package com.bithappens;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ public class SaveGame {
      */
     public static String objectStateToString(Prototype prototype) {
         Game g = prototype.getGame();
+
         HashMap<String, Object> map = prototype.objects;
         String topmmkey = "null";
         if (g.getTopMushroomMasters().size() > 0) 
@@ -98,6 +100,7 @@ public class SaveGame {
         // TODO: ne feledd, prototypeba game külön tárolandó
         // ha #ERROR a fájlban, corrupted a save
         // ha fájlban neve null vagy "-" akkor null
+        ArrayList<String> lines = new ArrayList<>(Arrays.asList(objectState.split("\\r?\\n|\\r")));
     }
     /**
      * Compares the content of the two strings extracted from savefiles.
@@ -106,8 +109,8 @@ public class SaveGame {
      * @return Whether the two strings contains the same lines, regardless of their order.
      */
     public static boolean compareSaveFileText(String expected, String actual) {
-        Set<String> lines1 = new HashSet<>(Arrays.asList(expected.split("\\r?\\n")));
-        Set<String> lines2 = new HashSet<>(Arrays.asList(actual.split("\\r?\\n")));
+        Set<String> lines1 = new HashSet<>(Arrays.asList(expected.split("\\r?\\n|\\r")));
+        Set<String> lines2 = new HashSet<>(Arrays.asList(actual.split("\\r?\\n|\\r")));
 
         return lines1.equals(lines2);
     }
