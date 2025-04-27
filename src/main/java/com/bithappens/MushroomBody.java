@@ -26,6 +26,7 @@ public class MushroomBody {
      */
     public MushroomBody() {
         System.out.println("MushroomBody.MushroomBody()");
+        sporeLevel = new ArrayList<>();
     }
 
     public MushroomBody(Tekton l){
@@ -33,6 +34,7 @@ public class MushroomBody {
         alive = true;
         sporeCount = 15;
         actions = 3;
+        sporeLevel = new ArrayList<>();
     }
 
 

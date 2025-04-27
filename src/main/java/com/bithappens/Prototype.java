@@ -325,7 +325,7 @@ public class Prototype {
         return "Sikertelen szoras";
     }
     private String eatin(ArrayList<String> command) {
-        MushroomMaster currentMaster = (MushroomMaster)game.getCurrentPlayer();
+        Player currentMaster = game.getCurrentPlayer();
         MushroomMaster commandMaster = (MushroomMaster)objects.get(command.get(1));
         Insect eatInsect = (Insect)objects.get(command.get(2));
         Tekton eatTekton = eatInsect.getLocation();
@@ -381,10 +381,11 @@ public class Prototype {
         return "todo";
     }
     private String nextround() {
-        //System.out.println("nextround called");
+        
         return "todo";
     }
     private String nextplayer() {
+
         return "todo";
     }
     private String split(ArrayList<String> command) {

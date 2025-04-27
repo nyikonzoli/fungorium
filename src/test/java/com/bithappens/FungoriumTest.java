@@ -64,9 +64,9 @@ public class FungoriumTest {
         String debugOutput = debugOutputBuilder.toString();
         try {
             Files.write(Paths.get("src/test/resources/" + testCase.name + "/actual.txt"), 
-                Collections.singletonList(actualContent), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+                Collections.singletonList(actualContent), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
                 Files.write(Paths.get("src/test/resources/" + testCase.name + "/debug-output.txt"), 
-                Collections.singletonList(debugOutput), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+                Collections.singletonList(debugOutput), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             System.out.println("File creation unsuccessful");
         }

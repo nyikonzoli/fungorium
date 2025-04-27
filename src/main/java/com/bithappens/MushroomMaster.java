@@ -80,10 +80,10 @@ public class MushroomMaster extends Player{
      */
     public void initiateSuperMushroomGrowth(MushroomBody m){
         System.out.println("MushroomMaster.initiateSuperMushroomGrowth(MushroomBody m)\nCan grow super mushroom body?");
-        if(Menu.userDecision()){
+        /*if(Menu.userDecision()){
             SuperMushroomBody smb = m.promoteToSuperMushroomBody();
             m.getLocation().setMushroomBody(smb);
-        }
+        }*/
     }
 
     /**
