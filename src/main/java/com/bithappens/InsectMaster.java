@@ -62,6 +62,7 @@ public class InsectMaster extends Player {
     public void initiateSporeEating(Tekton t, Insect chosenInsect){
         System.out.println("InsectMaster.initiateSporeEating(Tekton t)");
         chosenInsect.eatSpore();
+        //TODO: Tekton param. nem kell: ezt átírni a Prototype.eatsp-ben is
     }
 
     /**

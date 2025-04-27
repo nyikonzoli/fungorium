@@ -293,7 +293,7 @@ public class Prototype {
         }
 
         if (!source.isNeighbour(target)) {
-            return "Nem szomszedos a ket tekton";
+            return "Tekton neighbor not found";
         }
 
         currentMaster.initiateMyceliumGrowth(source, target);
@@ -353,6 +353,7 @@ public class Prototype {
     private String move(ArrayList<String> command) {
         // <rovar> <tekton>
         Insect insect = (Insect)objects.get(command.get(1));
+        if (insect == null) return "Insect not found";
         Tekton target = (Tekton)objects.get(command.get(2));
         InsectMaster im = insect.getImaster();
         InsectMaster currentPlayer = (InsectMaster)game.getCurrentPlayer();
@@ -376,7 +377,29 @@ public class Prototype {
         // TODO: valami okos megoldást kitalálni splittingspore esetére,
         // hogy rendesen <név>-1 <név>-2 formában jelenjenek meg splitelt rovarok a 
         // hashmapben
-        return "todo";
+        String iName = command.get(1);
+        Insect insect = (Insect)objects.get(iName);
+        if (insect == null) return "Insect not found";
+        InsectMaster im = insect.getImaster();
+        InsectMaster currentPlayer = (InsectMaster)game.getCurrentPlayer();
+        if(!im.equals(currentPlayer)){
+            return "Wrong player";
+        }
+        int initialSporeCount = insect.getLocation().getSpores().size();
+        int initialImasterInsectCount = im.getAllInsects().size();
+        im.initiateSporeEating(insect.getLocation(), insect);
+        if (initialSporeCount >= insect.getLocation().getSpores().size()) {
+            return "Eat failure";
+        }
+        // if Insect split
+        if (initialImasterInsectCount < im.getAllInsects().size()) {
+            objects.remove(iName);
+            objects.put(iName + "-1", insect);
+            objects.put(iName + "-2", im.getAllInsects().getLast());
+            return "Eat success, Insect split: " + iName + "-1 " + iName + "-2";
+        }
+        
+        return "Eat success";
     }
     private String cut(ArrayList<String> command) {
         return "todo";
@@ -391,6 +414,7 @@ public class Prototype {
     }
     private String split(ArrayList<String> command) {
         // két új tekton neve: <eredeti név>-1, <eredeti név>-2
+        
         return "todo";
     }
     private String print() {
