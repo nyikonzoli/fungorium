@@ -98,7 +98,6 @@ public class SaveGame {
      * @param prototype The Prototype to be updated.
      */
     public static void loadSaveToPrototype(String objectState, Prototype prototype) {
-        // TODO: ne feledd, prototypeba game külön tárolandó
         // ha #ERROR a fájlban, corrupted a save
         // ha fájlban neve null vagy "-" akkor null
         ArrayList<String> lines = new ArrayList<>(Arrays.asList(objectState.split("\\r?\\n|\\r")));

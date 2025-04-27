@@ -1,0 +1,5 @@
+move i1 t2
+cut i1 m2
+eatsp i1
+eatsp i1
+cut i1 m1

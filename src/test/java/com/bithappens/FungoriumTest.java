@@ -56,15 +56,19 @@ public class FungoriumTest {
         Prototype p = new Prototype();
         SaveGame.loadSaveToPrototype(testCase.startContent, p);
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(testCase.commandsContent.split("\\r?\\n")));
+        StringBuilder debugOutputBuilder = new StringBuilder();
         for (String s : commands) {
-            p.handleInput(s);
+            debugOutputBuilder.append(p.handleInput(s) + "\n");
         }
         String actualContent = SaveGame.objectStateToString(p);
+        String debugOutput = debugOutputBuilder.toString();
         try {
             Files.write(Paths.get("src/test/resources/" + testCase.name + "/actual.txt"), 
                 Collections.singletonList(actualContent), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+                Files.write(Paths.get("src/test/resources/" + testCase.name + "/debug-output.txt"), 
+                Collections.singletonList(debugOutput), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         } catch (IOException e) {
-            
+            System.out.println("File creation unsuccessful");
         }
         assertTrue(SaveGame.compareSaveFileText(testCase.expectedContent, actualContent));
     }

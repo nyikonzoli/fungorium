@@ -39,3 +39,4 @@ out/
 /bin/
 
 /src/test/resources/*/actual.txt
+/src/test/resources/*/debug-output.txt
