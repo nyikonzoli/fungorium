@@ -3,6 +3,7 @@ package com.bithappens;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 // prototipus jatekallapot tarolasa hashmapben, palyaepites
 public class Prototype {
@@ -402,7 +403,21 @@ public class Prototype {
         return "Eat success";
     }
     private String cut(ArrayList<String> command) {
-        return "todo";
+
+        Insect cutInsect = (Insect)objects.get(command.get(1));
+        Mycelium cutMyc = (Mycelium)objects.get(command.get(2));
+        ArrayList<Mycelium> tektonMyceliums = cutInsect.getLocation().getMyceliums();
+
+        InsectMaster im = cutInsect.getImaster();
+        im.initiateMyceliumCutting(cutMyc, cutInsect);
+
+        // Check
+        for(Mycelium m : tektonMyceliums){
+            if (m.equals(cutMyc)) {
+                return "Cut failure";
+            }
+        }
+        return "Cut success";
     }
     private String nextround() {
         game.nextRound();
@@ -414,8 +429,18 @@ public class Prototype {
     }
     private String split(ArrayList<String> command) {
         // két új tekton neve: <eredeti név>-1, <eredeti név>-2
-        
-        return "todo";
+
+        Tekton spliTekton = (Tekton)objects.get(command.get(1));
+        List<Tekton> mapTektons = game.getGameField();
+        spliTekton.split();
+
+        // Check
+        for(Tekton t : mapTektons){
+            if(t.equals(spliTekton)){
+                return "Split failure";
+            }
+        }
+        return "Split success: " + command.get(1) + "-1, " + command.get(1) + "-2";
     }
     private String print() {
         return "todo";
