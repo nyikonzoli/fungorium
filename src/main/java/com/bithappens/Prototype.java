@@ -220,7 +220,12 @@ public class Prototype {
         objects.put("imaster2", imaster2);
         objects.put("mmaster1", mmaster1);
         objects.put("mmaster2", mmaster2);
+        objects.put("mb1", mb1);
+        objects.put("mb2", mb2);
+        objects.put("insect1", insect1);
+        objects.put("insect2", insect2);
         
+
         return "New Game Started";
     }
     private String load(ArrayList<String> command) {
