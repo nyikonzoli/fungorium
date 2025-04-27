@@ -7,10 +7,11 @@ import java.util.HashMap;
 // prototipus jatekallapot tarolasa hashmapben, palyaepites
 public class Prototype {
     HashMap<String, Object> objects = new HashMap<>();
-    // Game is stored differently, there can only be 1 Game instance per Prototype
+    // Game is stored differently, there can only be 1 Game instance per Prototype (the game instance
+    // also has no explicit name)
     private Game game;
     public Game getGame() { return game; }
-
+    public void setGame(Game game) { this.game = game; }
     
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.

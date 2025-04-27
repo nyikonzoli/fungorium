@@ -107,7 +107,6 @@ public class Mycelium {
         if(decreaseTTLifNotConnected){
             decreaseTTL();
         }
-
     }
 
 

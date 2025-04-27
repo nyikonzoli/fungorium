@@ -7,6 +7,7 @@ import java.util.HashMap;
  * OBSOLETE  |
  * -----------
  */
+/*
 public class Skeleton {
     HashMap<String, Object> objects;
 
@@ -281,3 +282,4 @@ public class Skeleton {
 
     }
 }
+*/
