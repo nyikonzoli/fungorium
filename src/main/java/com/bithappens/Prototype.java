@@ -388,7 +388,7 @@ public class Prototype {
         int initialSporeCount = insect.getLocation().getSpores().size();
         int initialImasterInsectCount = im.getAllInsects().size();
         im.initiateSporeEating(insect.getLocation(), insect);
-        if (initialSporeCount >= insect.getLocation().getSpores().size()) {
+        if (initialSporeCount <= insect.getLocation().getSpores().size()) {
             return "Eat failure";
         }
         // if Insect split
@@ -414,7 +414,7 @@ public class Prototype {
     }
     private String split(ArrayList<String> command) {
         // két új tekton neve: <eredeti név>-1, <eredeti név>-2
-        
+
         return "todo";
     }
     private String print() {
