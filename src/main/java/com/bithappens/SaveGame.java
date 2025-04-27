@@ -62,7 +62,7 @@ public class SaveGame {
             }
             // TODO: finish from insect line
         }
-        return "todo";
+        return retval;
     }
     /**
      * Loads a save file's content onto a Prototype object by updating the game objects stored in it's HashMap.
