@@ -156,7 +156,7 @@ public class Insect {
     public void cutMycelium(Mycelium mycelium){
         //System.out.println("Insect.cutMycelium(Mycelium mycelium)\nCan cut mycelium?");
         if(canCutMycelium){
-            mycelium.setCut(true);;
+            mycelium.setCut(true);
             decrementActionPoint(1);
         }
     }
