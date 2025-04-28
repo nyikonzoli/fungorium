@@ -149,7 +149,7 @@ public class MushroomBody {
      * @param t the target Tekton for spore spreading
      */
     public void spreadSpore(Tekton t, MushroomMaster mmaster){
-        System.out.println("MushroomBody.spreadSpore(Tekton t)");
+        //System.out.println("MushroomBody.spreadSpore(Tekton t)");
         boolean neighboring = getLocation().isNeighbour(t);
         if(alive && neighboring && sporeCount >= 3 && sporeLevel.size() >= 3){
             ArrayList<Spore> thrownSpores = new ArrayList<>();
@@ -185,7 +185,7 @@ public class MushroomBody {
      * Marks this MushroomBody as dead.
      */
     public void die(){
-        System.out.println("MushroomBody.die()");
+        //System.out.println("MushroomBody.die()");
         alive = false;
     }
 

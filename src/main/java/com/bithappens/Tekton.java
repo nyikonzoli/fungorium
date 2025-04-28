@@ -175,7 +175,8 @@ public class Tekton {
             return null;
         }
 
-        for (Mycelium mycelium : myceliums) {
+        while (myceliums.size() > 0) {
+            Mycelium mycelium = myceliums.get(0);
             mycelium.disappear();
         }
 
