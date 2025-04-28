@@ -1,5 +1,10 @@
 package com.bithappens;
 
+import java.io.IO;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -232,9 +237,23 @@ public class Prototype {
         return "New Game Started";
     }
     private String load(ArrayList<String> command) {
-        return "todo";
+        Path path = Path.of(command.get(1));
+        try {
+            SaveGame.loadSaveToPrototype(Files.readString(path), this);
+        } catch (IOException e) {
+            return "Load failure: " + e.getMessage();
+        }
+        
+        return "Load success";
     }
     private String save(ArrayList<String> command) {
+        Path path = Path.of(command.get(1));
+        // If file doesn't exist, it's created. If it does, it's overwritten.
+        try {
+            Files.writeString(path, SaveGame.objectStateToString(this), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            return "Save failure: " + e.getMessage();
+        }
         return "todo";
     }
     private String list(ArrayList<String> command) {
@@ -284,7 +303,7 @@ public class Prototype {
                 return "Grow failure";
             }
             else{
-                objects.replace(superMushroomKey, growSuperMushroomBody);
+                objects.replace(superMushroomKey, target.getMushroomBody());
                 return "SuperMushroom grow success";
             }
         }
