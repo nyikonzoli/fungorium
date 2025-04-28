@@ -293,8 +293,12 @@ public class Tekton {
      */
     public MushroomBody growMushroom(MushroomMaster master){ 
         if(canGrowMushroom(master) && deductNetworkAction(master)){
-            MushroomBody newMushroom = new MushroomBody();
+            MushroomBody newMushroom = new MushroomBody(this);
             mushroomBody = newMushroom;
+
+            for (int i = 0; i < MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH; i++) {
+                removeSpore(spores.getLast());
+            }
             return newMushroom;
         }
         return null;
