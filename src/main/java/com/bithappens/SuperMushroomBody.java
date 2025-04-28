@@ -15,12 +15,10 @@ public class SuperMushroomBody extends  MushroomBody {
      */
     public SuperMushroomBody() {
         super();
-        System.out.println("SuperMushroomBody.SuperMushroomBody()");
     }
 
     public SuperMushroomBody(Tekton l){
         super(l);
-        System.out.println("SuperMushroomBody.SuperMushroomBody(Tekton l)");
     }
 
     /**
@@ -30,7 +28,6 @@ public class SuperMushroomBody extends  MushroomBody {
      */
     @Override
     public void  spreadSpore(Tekton t, MushroomMaster mmaster){
-        System.out.println("SuperMushroombody.spreadSpore(Tekton t)");
         boolean neighboring = getLocation().isNeighbour(t);
         // Check the neighbours of neighbours
 

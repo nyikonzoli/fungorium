@@ -12,7 +12,7 @@ public class InsectMaster extends Player {
      * Constructs a new InsectMaster instance.
      */
     public InsectMaster(){
-        System.out.println("InsectMaster.InsectMaster()");
+
     }
 
 
@@ -31,7 +31,6 @@ public class InsectMaster extends Player {
      * @return The Insect controlled by the InsectMaster.
      */
     public Insect getInsect(int index){
-        System.out.println("InsectMaster.getInsect()");
         return insects.get(index);
     }
 
@@ -53,7 +52,6 @@ public class InsectMaster extends Player {
      * @param newInsect The new Insect to be controlled by the InsectMaster.
      */
     public void setInsects(ArrayList<Insect> i){
-        System.out.println("InsectMaster.setInsect(Insect newInsect)");
         insects = i;
     }
     /**
@@ -61,7 +59,6 @@ public class InsectMaster extends Player {
      * @param t The Tekton where the Insect will try to eat a Spore
      */
     public void initiateSporeEating(Tekton t, Insect chosenInsect){
-        System.out.println("InsectMaster.initiateSporeEating(Tekton t)");
         chosenInsect.eatSpore();
         //TODO: Tekton param. nem kell: ezt átírni a Prototype.eatsp-ben is
     }
@@ -72,7 +69,6 @@ public class InsectMaster extends Player {
      * @param t The Tekton where the insect will move to.
      */
     public void initiateMovement(Tekton t, Insect chosenInsect){
-        System.out.println("InsectMaster.initiateMovement(Tekton t)");
         chosenInsect.moveTo(t);
     }
     /**
@@ -80,7 +76,6 @@ public class InsectMaster extends Player {
      * @param m Mycelium to be removed
      */
     public void initiateMyceliumCutting(Mycelium m, Insect chosenInsect){
-        System.out.println("InsectMaster.initiateMyceliumCutting(Mycelium m)");
         chosenInsect.cutMycelium(m);
     }
 
@@ -89,7 +84,6 @@ public class InsectMaster extends Player {
      */
     @Override
     public void onRoundStart(){
-        System.out.println("InsectMaster.onRoundStart()");
         for(int i = 0; i < insects.size(); i++){
             insects.get(i).setActionPoints(5);
         }
@@ -102,7 +96,6 @@ public class InsectMaster extends Player {
      */
     @Override
     public void selfReport(Game g){
-        System.out.println("InsectMaster.selfReport()");
         List<Player> topMasters = g.getTopInsectMasters();
         if(topMasters.size() != 0){
             if(topMasters.get(0).getScore() == this.getScore()){

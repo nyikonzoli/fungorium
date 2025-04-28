@@ -8,7 +8,7 @@ public class SplittingSpore extends Spore {
      * Constructs a new SlowingSpore.
      */
     public SplittingSpore() {
-        System.out.println("SplittingSpore.SplittingSpore()");
+
     }
 
     /**

@@ -7,7 +7,6 @@ public class SpeedingSpore extends Spore {
      * Constructs a new SpeedingSpore.
      */
     public SpeedingSpore() {
-        System.out.println("SpeedingSpore.SpeedingSpore()");
     }
 
     /**
@@ -17,7 +16,6 @@ public class SpeedingSpore extends Spore {
      */
     @Override
     public void applyEffect(Insect i){
-        System.out.println("SpeedingSpore.applyEffect(Insect i)");
         i.addActionPoint(1);
     }
 }

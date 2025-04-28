@@ -24,7 +24,6 @@ public abstract class Player {
      * @return The current score of the player.
      */
     public int getScore(){
-        System.out.println("Player.getScore()");
         return score;
     }
 
@@ -55,7 +54,6 @@ public abstract class Player {
      * Increments the Player's score by 1
      */
     public void incrementScore(){
-        System.out.println("Player.incrementScore()");
         score++;
     }
 }

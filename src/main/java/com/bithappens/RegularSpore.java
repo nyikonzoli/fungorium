@@ -8,7 +8,7 @@ public class RegularSpore extends Spore {
      * Constructs a new RegularSpore.
      */
     public RegularSpore() {
-        System.out.println("RegularSpore.RegularSpore()");
+
     }
 
     /**
@@ -17,7 +17,6 @@ public class RegularSpore extends Spore {
      */
     @Override
     public void applyEffect(Insect i){
-        //System.out.println("RegularSpore.applyEffect(Insect i)");
         // Nem csinál semmit, csak returnol
         i.decrementActionPoint(1);
     }

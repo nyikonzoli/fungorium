@@ -46,7 +46,6 @@ public class Tekton {
      * @param m The MushroomBody to associate with this tectonic plate.
      */
     public void setMushroomBody(MushroomBody m){
-        System.out.println("Tekton.setMushroomBody(MushroomBody m)");
         mushroomBody = m;
     }
 
@@ -171,7 +170,6 @@ public class Tekton {
      * @return The 2 new tecton
      */
     public ArrayList<Tekton> split(){
-        System.out.println("Tekton.split()");
         if(hasInsect()){
             return null;
         }

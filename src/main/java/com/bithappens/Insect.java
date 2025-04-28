@@ -17,7 +17,7 @@ public class Insect {
      * Constructs a new {@code Insect} instance.
      */
     public Insect(){
-        System.out.println("Insect.Insect()");
+        
     }
 
     public Insect(Tekton t, int a, InsectMaster i){
@@ -40,7 +40,6 @@ public class Insect {
      * @return The Tekton where the insect is located.
      */
     public Tekton getLocation(){
-        System.out.println("Insect.getLocation()");
         return location;
     }
 
@@ -59,7 +58,6 @@ public class Insect {
      * @return The current number of action points.
      */
     public int getActionPoints(){
-        System.out.println("Insect.getActionPoints()");
         return actionPoints;
     }
 
@@ -69,7 +67,6 @@ public class Insect {
      * @param points The new action points value.
      */
     public void setActionPoints(int points){
-        System.out.println("Insect.setActionPoints(int points)");
         actionPoints = points;
     }
 
@@ -79,7 +76,6 @@ public class Insect {
      * @return true if the insect can cut mycelium, false otherwise.
      */
     public boolean getCanCutMycelium(){
-        System.out.println("Insect.getCanCutMycelium()");
         return canCutMycelium;
     }
 
@@ -89,7 +85,6 @@ public class Insect {
      * @param value true to allow the insect to cut mycelium, false to prevent it.
      */
     public void setCanCutMycelium(boolean value){
-        System.out.println("Insect.setCanCutMycelium(boolean value)");
         canCutMycelium = value;
     }
 
@@ -125,7 +120,6 @@ public class Insect {
      * @param newLocation The tecton, where the insect moves
      */
     public boolean moveTo(Tekton newLocation){
-        //System.out.println("Insect.moveTo(Tekton newLocation)");
         boolean canReach = location.canReachTektonViaMycelium(newLocation);
 
         if(canReach && actionPoints > 0){
@@ -142,7 +136,6 @@ public class Insect {
     // EatSpore-nak mégsem kell paraméterként az insectMaster, ha azt eltároljuk a rovarban is
 
     public void eatSpore(){
-        //System.out.println("Insect.eatSpore()");
         Spore s = location.popSpore();
         if (s != null) {
             s.applyEffect(this);
@@ -154,7 +147,6 @@ public class Insect {
      * @param mycelium Mycelium to be removed
      */
     public void cutMycelium(Mycelium mycelium){
-        //System.out.println("Insect.cutMycelium(Mycelium mycelium)\nCan cut mycelium?");
         if(canCutMycelium){
             mycelium.setCut(true);;
             decrementActionPoint(1);
