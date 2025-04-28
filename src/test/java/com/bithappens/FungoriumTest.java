@@ -53,6 +53,8 @@ public class FungoriumTest {
     @MethodSource("testCasesProvider")
     void testCases(TestCaseData testCase) {
         Prototype p = new Prototype();
+        p.objects.clear();
+        p.setGame(null);
         SaveGame.loadSaveToPrototype(testCase.startContent, p);
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(testCase.commandsContent.split("\\r?\\n")));
         StringBuilder debugOutputBuilder = new StringBuilder();
