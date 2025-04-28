@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SaveGame {
-    private static String getKey(Object object, HashMap<String, Object> map) {
+    public static String getKey(Object object, HashMap<String, Object> map) {
         // if duplicate key name, unforseen outcome
         for (String key : map.keySet()) {
             if (map.get(key).equals(object)) {

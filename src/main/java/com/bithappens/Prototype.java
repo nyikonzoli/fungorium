@@ -16,7 +16,6 @@ public class Prototype {
     private Game game;
     public Game getGame() { return game; }
     public void setGame(Game game) { this.game = game; }
-    private int mycCount = 0;
     
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.
@@ -37,7 +36,7 @@ public class Prototype {
                 retval = save(command);
                 break;
             case "exit":
-                retval = save(command); //ha kilépésnél ha a user elfelejtené is elmentsuk a jatekot
+                retval = save(new ArrayList<String>(Arrays.asList("save", "autosave.txt"))); //ha kilépésnél ha a user elfelejtené is elmentsuk a jatekot
                 break;
             case "list":
                 retval = list(command);
@@ -252,9 +251,47 @@ public class Prototype {
         } catch (IOException e) {
             return "Save failure: " + e.getMessage();
         }
-        return "todo";
+        return "Save success: " + command.get(1);
     }
     private String list(ArrayList<String> command) {
+        switch (command.get(1)) {
+            case "-mu":
+                // gombatestek: <azonosító> <tulajdonos> <tekton> <szupergomba?>
+                StringBuilder b = new StringBuilder();
+                for (String s : Arrays.asList(SaveGame.objectStateToString(this).split("\\r?\\n|\\r"))) {
+                    if (s.startsWith("<mushroom>")) {
+                        b.append(s + "\n");
+                    }
+                }
+                return "Gombatest: <name> <owner> <alive?> <sporecount> <actions> [-s] [spore1 type] [spore2 type] ...\n" + b.toString();
+            case "-my":
+                // fonalak: <azonosító> <tulajdonos> <tekton1> <tekton2>
+                System.out.println("Fonal: " );
+                break;
+            case "-in":
+                // rovarok: <azonosító> <tulajdonos> <tekton>
+                System.out.println("Rovar: " );
+                break;
+            case "-sp":
+                // spórák: <tulajdonos> <tekton> <típus>
+                System.out.println("Spóra: " );
+                break;
+            case "-te":
+                // tektonok: <típus> <szomszéd1> <szomszéd2> …
+                System.out.println("Tekton: " );
+                break;
+            case "-im":
+                // egy adott tulajhoz tartozó rovarok (tulajdonos mező nélkül)
+                System.out.println("Rovar tulaj nélkül: " );
+                break;
+            case "-mm":
+                // egy adott tulajhoz tartozó gombatestek, fonalak és spórák (tulajdonos mező nélkül)
+                System.out.println("Gomba/fonal/spóra tulaj nélkül: " );
+                break;
+            default:
+                System.out.println("Ismeretlen parancs: " );
+                break;
+        }
         return "todo";
     }
     private String growmu(ArrayList<String> command) {
@@ -415,7 +452,6 @@ public class Prototype {
 
     }
     private String eatsp(ArrayList<String> command) {
-        // TODO: valami okos megoldást kitalálni splittingspore esetére,
         // hogy rendesen <név>-1 <név>-2 formában jelenjenek meg splitelt rovarok a 
         // hashmapben
         String iName = command.get(1);

@@ -40,3 +40,5 @@ out/
 
 /src/test/resources/*/actual.txt
 /src/test/resources/*/debug-output.txt
+
+autosave.txt
