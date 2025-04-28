@@ -242,7 +242,6 @@ public class Prototype {
         return "todo";
     }
     private String growmu(ArrayList<String> command) {
-
         MushroomMaster currentMaster = (MushroomMaster)game.getCurrentPlayer();
         MushroomMaster commandMaster = (MushroomMaster)objects.get(command.get(1));
         Tekton target = (Tekton)objects.get(command.get(2));
@@ -268,13 +267,19 @@ public class Prototype {
         // Szuper gomba növesztés
         else if (command.size() == 4 && "-s".equals(command.get(3))) {
             MushroomBody growSuperMushroomBody = target.getMushroomBody();
+            String superMushroomKey = "mb1";
+            for (String key : objects.keySet()) {
+                if (objects.get(key).equals(growSuperMushroomBody)) {
+                    superMushroomKey = key;
+                }
+            }
             currentMaster.initiateSuperMushroomGrowth(growSuperMushroomBody);
             // Ellenőrzés
             if (target.getMushroomBody() == null || !(target.getMushroomBody() instanceof SuperMushroomBody)) {
                 return "Grow failure";
             }
             else{
-                objects.replace("mu1", growSuperMushroomBody);
+                objects.replace(superMushroomKey, growSuperMushroomBody);
                 return "SuperMushroom grow success";
             }
         }
