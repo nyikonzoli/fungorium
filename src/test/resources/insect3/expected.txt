@@ -2,8 +2,8 @@
 <current> im1
 <tekton> t1 Tekton
 <neighbors> t2
-<insect> i1-1 im1 3 1 0
-<insect> i1-2 im1 3 1 0
+<insect> i1-1 im1 5 1 0
+<insect> i1-2 im1 5 1 0
 <tekton> t2 Tekton
-<neighbors> t1 
+<neighbors> t1
 <mushroom> mu1 mm1 1 1 1
