@@ -23,7 +23,6 @@ public class Tekton {
     /// KONSTRUKTOROK
 
     public Tekton(){
-        System.out.println("Tekton.Tekton()");
         neighbours = new ArrayList<>();
         spores = new ArrayList<>();
         myceliums = new ArrayList<>();
@@ -99,7 +98,7 @@ public class Tekton {
         this.spores = spores;
     }
 
-        /**
+    /**
      * The myceliums on this tectonic plate
      * @return A list of myceleums
      */
@@ -164,6 +163,8 @@ public class Tekton {
     
         return false;    
     }
+
+    
 
     /**
      * Breaks the tecton into two, if it has no insectsand cuts all myceliums
@@ -305,6 +306,15 @@ public class Tekton {
         }
         return null;
     }
+
+    /**
+     * tells if the Tekton can connect to other tektons via myc (only important in DeadEnd)
+     * @return true 
+     */
+    protected boolean canConnect() {
+        return true;
+    }
+
     /**
      * Grows a mycelium connection between two tectonic plates
      * @param master The owner of the new mycelium connection
@@ -312,23 +322,26 @@ public class Tekton {
      * @return Newly created Mycelium object
      */
     public Mycelium growMycelium(MushroomMaster master, Tekton target){
-        System.out.println("Tekton.growMycelium(MushroomMaster master, Tekton target)\nIs there already Mycelium with different owner on the Tekton?");
-
         Mycelium myc2 = null;
-        if (isNeighbour(target) && deductNetworkAction(master)) {
-            myc2 = new Mycelium(master, this, target);
-            this.addMycelium(myc2);
-            target.addMycelium(myc2);
+        if(this.canConnect() && target.canConnect()){
+            if (isNeighbour(target) && deductNetworkAction(master)) {
+                if (this.canReachTektonViaMycelium(target)){ //ha mar van koztuk myc, akkor nem kotjuk ujra ossze
+                    return myc2;
+                } 
+                myc2 = new Mycelium(master, this, target);
+                this.addMycelium(myc2);
+                target.addMycelium(myc2);
+            }
         }
-        return myc2; 
+        return myc2;
     }
+
     /**
      * Decides if two tectonic plates are neighbors
      * @param t Target Tekton
      * @return Boolean that is true when the two tectonic plates are neighbors
      */
     public boolean isNeighbour(Tekton t){
-        System.out.println("Tekton.isNeighbor(Tekton t)");
         return neighbours.contains(t);
     }
     /**

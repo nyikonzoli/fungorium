@@ -1,4 +1,7 @@
 package com.bithappens;
+
+import java.util.ArrayList;
+
 /**
  – This class extends Tekton and overrides the growMycelium(MushroomMaster, Tekton) method to implement the functionality
  * for heterogeneous mycelium growth.
@@ -8,7 +11,10 @@ public class HeterogeneousTekton extends Tekton {
      * Constructs a new HeterogeneousTekton instance.
      */
     public HeterogeneousTekton() {
-        System.out.println("HeterogeneousTekton.HeterogeneousTekton()");
+        neighbours = new ArrayList<>();
+        spores = new ArrayList<>();
+        myceliums = new ArrayList<>();
+        insects = new ArrayList<>();
     }
     /**
      * Grows a mycelium connection between two tectonic plates
@@ -18,7 +24,6 @@ public class HeterogeneousTekton extends Tekton {
      */
     @Override
     public Mycelium growMycelium(MushroomMaster master, Tekton target){
-        System.out.println("HeterogeneousTekton.growMycelium(MushroomMaster master, Tekton target)");
         Mycelium myc2 = null;
         if (isNeighbour(target) && deductNetworkAction(master)) {
             myc2 = new Mycelium(master, this, target);
