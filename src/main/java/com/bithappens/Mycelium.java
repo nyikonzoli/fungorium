@@ -104,16 +104,21 @@ public class Mycelium {
         timeToLive--;
     }
 
+    private boolean visitLock = false;
     /**
-     * Decreases ttl if the myceleum is not connected to a Mushroom
-     * @param decreaseTTLifNotConnected true if its not connected
+     * Decreases ttl if the Myceleum is not connected to a Mushroom or is cut
      */
-    public void onRoundStart(boolean decreaseTTLifNotConnected){
-        if(decreaseTTLifNotConnected || isCut()){
-            decreaseTTL();
-        }
-        if (timeToLive <= 0) {
-            this.disappear();
+    public void onRoundStart(){
+        // if no Tekton called onRoundStart on this instance
+        if (!visitLock) {
+            // if one or both tektons decide to lower it (and one isn't healingtekton) then lower by only one
+            // if one is healing and one is absorbing, the healing is the king
+            int finalTTLchange = (tektonStart.changeTTL(this) + tektonEnd.changeTTL(this)) < 0 ? -1 : 0;
+            if (hasBeenCut) finalTTLchange--;
+            timeToLive += finalTTLchange;
+            if (timeToLive <= 0) disappear();
+        } else {
+            visitLock = !visitLock;
         }
     }
 
@@ -132,8 +137,8 @@ public class Mycelium {
             if (visited.contains(currentTekton))
                 continue;
             visited.add(currentTekton);
-
-            if (currentTekton.getMushroomBody() != null) {     
+            // needs to have the same owner too
+            if (currentTekton.getMushroomBody() != null && grower.getMushrooms().contains(currentTekton.getMushroomBody())) {     
                 return true;                 
             }
 

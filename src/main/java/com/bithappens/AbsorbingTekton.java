@@ -6,16 +6,15 @@ public class AbsorbingTekton extends Tekton {
     /**
      * Constructs an AbsorbingTekton instance.
      */
-    public AbsorbingTekton() {
-        System.out.println("AbsorbingTekton.AbsorbingTekton()");
-    }
+    public AbsorbingTekton() {}
 
     /**
-     * Defines the behavior at the start of a new round.
-     * This method overrides the onRoundStart method from Tekton.
+     * Used to be decreaseTTL. Now only returns the appropriate integer to add to TTL on this Tekton.
+     * @param mycelium The Mycelium in question
+     * @return The amount to be added to all Myceliums on this Tekton
      */
     @Override
-    public void onRoundStart(){
-        System.out.println("AbsorbingTekton.onRoundStart()");
+    public int changeTTL(Mycelium mycelium) {
+        return -1;
     }
 }

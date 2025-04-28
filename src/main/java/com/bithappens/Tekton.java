@@ -278,15 +278,19 @@ public class Tekton {
      * @param m Mycelium to be removed
      */
     public void removeMycelium(Mycelium m){
-        System.out.println("Tekton.removeMycelium(Mycelium m)");
+        //System.out.println("Tekton.removeMycelium(Mycelium m)");
         myceliums.remove(m);
     }
     /**
      * Sets the tekton up for a new round
      */
     public void onRoundStart(){
-        System.out.println("Tekton.onRoundStart()");
-        //TODO: implement
+        // for in case of concurrent modification
+        ArrayList<Mycelium> temp = new ArrayList<>(myceliums);
+        while (!temp.isEmpty()) {
+            Mycelium m = temp.removeLast();
+            m.onRoundStart();
+        }
     }
     /**
      * Grows a mushroom, and adds it to the tecton, and to the mushroom master, who initiated the growth
@@ -356,11 +360,15 @@ public class Tekton {
     public boolean hasInsect(){
         return !insects.isEmpty();
     }
-
-    public void decreaseTTL() {
-        for (Mycelium myc : myceliums) {
-            if (!myc.isConnectedToMushroom())
-                myc.decreaseTTL();
+    /**
+     * Used to be decreaseTTL. Now only returns the appropriate integer to add to TTL on this Tekton.
+     * @param mycelium The Mycelium in question
+     * @return The amount to be added to all Myceliums on this Tekton
+     */
+    public int changeTTL(Mycelium mycelium) {
+        if (!mycelium.isConnectedToMushroom()) {
+            return -1;
         }
+        return 0;
     }
 }
