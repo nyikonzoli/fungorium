@@ -120,6 +120,7 @@ public class InsectMaster extends Player {
         Tekton splitLocation = i.getLocation();
         InsectMaster splitMaster = i.getImaster();
         Insect splitInsect = new Insect(splitLocation, splitMaster);
+        splitLocation.addInsect(splitInsect);
         addInsect(splitInsect);
     }
 }

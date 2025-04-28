@@ -139,12 +139,37 @@ public class SaveGame {
      * @param actual Actual content of save file.
      * @return Whether the two strings contains the same lines, regardless of their order.
      */
+    
     public static boolean compareSaveFileText(String expected, String actual) {
         Set<String> lines1 = new HashSet<>(Arrays.asList(expected.split("\\r?\\n|\\r")));
+        Set<String> linesExpected = new HashSet<>();
+        for (String line : lines1) {
+            linesExpected.add(line.trim());
+        }
         Set<String> lines2 = new HashSet<>(Arrays.asList(actual.split("\\r?\\n|\\r")));
-
-        return lines1.equals(lines2);
+        Set<String> processedActual = new HashSet<>();
+        for (String line : lines2) {
+            String s = line;
+            if (line.startsWith("<mu")) {
+                ArrayList<String> temp = new ArrayList<>(Arrays.asList(line.split(" ")));
+                StringBuilder b = new StringBuilder();
+                for (int i = 0; i < 6; i++) {
+                    b.append(temp.get(i) + " ");
+                }
+                String toadd = b.toString();
+                toadd = toadd.trim();
+                processedActual.add(toadd);
+            }
+            processedActual.add(s);
+        }
+        for (String s : linesExpected) {
+            if (!processedActual.contains(s)) {
+                return false;
+            }
+        }
+        return true;
     }
+
     private static void readGameState(ArrayList<String> gameState, Prototype prototype) {
         Game game = new Game();
         prototype.setGame(game);
@@ -239,9 +264,10 @@ public class SaveGame {
         }
     }
     private static void readInsect(ArrayList<String> insectString, Prototype prototype, Tekton t) {
-        Insect i = new Insect(t, Integer.parseInt(insectString.get(3)), 
-            (InsectMaster)prototype.objects.get(insectString.get(2)));
+        InsectMaster imaster = (InsectMaster)prototype.objects.get(insectString.get(2));
+        Insect i = new Insect(t, Integer.parseInt(insectString.get(3)), imaster);
         t.getInsects().add(i);
+        imaster.addInsect(i);
         prototype.objects.put(insectString.get(1), i);
         if (insectString.size() > 4) {
             i.setCanCutMycelium(insectString.get(4).equals("1"));

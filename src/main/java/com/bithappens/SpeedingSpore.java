@@ -18,6 +18,6 @@ public class SpeedingSpore extends Spore {
     @Override
     public void applyEffect(Insect i){
         System.out.println("SpeedingSpore.applyEffect(Insect i)");
-        i.addActionPoint(2);
+        i.addActionPoint(1);
     }
 }
