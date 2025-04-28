@@ -269,12 +269,12 @@ public class Prototype {
         else if (command.size() == 4 && "-s".equals(command.get(3))) {
             MushroomBody growSuperMushroomBody = target.getMushroomBody();
             currentMaster.initiateSuperMushroomGrowth(growSuperMushroomBody);
-
             // Ellenőrzés
             if (target.getMushroomBody() == null || !(target.getMushroomBody() instanceof SuperMushroomBody)) {
                 return "Grow failure";
             }
             else{
+                objects.replace("mu1", growSuperMushroomBody);
                 return "SuperMushroom grow success";
             }
         }
