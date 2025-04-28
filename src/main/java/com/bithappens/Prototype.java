@@ -16,6 +16,11 @@ public class Prototype {
     private Game game;
     public Game getGame() { return game; }
     public void setGame(Game game) { this.game = game; }
+
+    public Prototype(){
+        ArrayList<String> command = new ArrayList<>();
+        newgame(command);
+    }
     
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.
@@ -254,10 +259,10 @@ public class Prototype {
         return "Save success: " + command.get(1);
     }
     private String list(ArrayList<String> command) {
+        StringBuilder b = new StringBuilder();
         switch (command.get(1)) {
             case "-mu":
                 // gombatestek: <azonosító> <tulajdonos> <tekton> <szupergomba?>
-                StringBuilder b = new StringBuilder();
                 for (String s : Arrays.asList(SaveGame.objectStateToString(this).split("\\r?\\n|\\r"))) {
                     if (s.startsWith("<mushroom>")) {
                         b.append(s + "\n");
@@ -266,33 +271,50 @@ public class Prototype {
                 return "Gombatest: <name> <owner> <alive?> <sporecount> <actions> [-s] [spore1 type] [spore2 type] ...\n" + b.toString();
             case "-my":
                 // fonalak: <azonosító> <tulajdonos> <tekton1> <tekton2>
-                System.out.println("Fonal: " );
-                break;
+                for (String s : Arrays.asList(SaveGame.objectStateToString(this).split("\\r?\\n|\\r"))) {
+                    if (s.startsWith("<mycelium>")) {
+                        b.append(s + "\n");
+                    }
+                }
+                return "Fonál: <name> <owner> <target tekton> [cut?] [time to live]\n" + b.toString();
             case "-in":
-                // rovarok: <azonosító> <tulajdonos> <tekton>
-                System.out.println("Rovar: " );
-                break;
+                for (String s : Arrays.asList(SaveGame.objectStateToString(this).split("\\r?\\n|\\r"))) {
+                    if (s.startsWith("<insect>")) {
+                        b.append(s + "\n");
+                    }
+                }
+                return "Rovar:  <name> <owner> <action points> [can cut?] [stunned?]\n" + b.toString();
             case "-sp":
-                // spórák: <tulajdonos> <tekton> <típus>
-                System.out.println("Spóra: " );
-                break;
+                for (String s : Arrays.asList(SaveGame.objectStateToString(this).split("\\r?\\n|\\r"))) {
+                    if (s.startsWith("<spore>")) {
+                        b.append(s + "\n");
+                    }
+                }
+                return "Spóra: <spore type> <owner>\n" + b.toString();
             case "-te":
-                // tektonok: <típus> <szomszéd1> <szomszéd2> …
-                System.out.println("Tekton: " );
-                break;
+                for (String s : Arrays.asList(SaveGame.objectStateToString(this).split("\\r?\\n|\\r"))) {
+                    if (s.startsWith("<tekton>")) {
+                        b.append(s + "\n");
+                    }
+                }
+                return "Tekton: <name> <type>\n" + b.toString();
             case "-im":
-                // egy adott tulajhoz tartozó rovarok (tulajdonos mező nélkül)
-                System.out.println("Rovar tulaj nélkül: " );
-                break;
+                for (String s : Arrays.asList(SaveGame.objectStateToString(this).split("\\r?\\n|\\r"))) {
+                    if (s.startsWith("<insectmaster>")) {
+                        b.append(s + "\n");
+                    }
+                }
+                return "insectmaster: \n" + b.toString();
             case "-mm":
-                // egy adott tulajhoz tartozó gombatestek, fonalak és spórák (tulajdonos mező nélkül)
-                System.out.println("Gomba/fonal/spóra tulaj nélkül: " );
-                break;
+                for (String s : Arrays.asList(SaveGame.objectStateToString(this).split("\\r?\\n|\\r"))) {
+                    if (s.startsWith("<mushroommaster>")) {
+                        b.append(s + "\n");
+                    }
+                }
+                return "mushroommaster: \n" + b.toString();
             default:
-                System.out.println("Ismeretlen parancs: " );
-                break;
+                return "Command unknown";
         }
-        return "todo";
     }
     private String growmu(ArrayList<String> command) {
         MushroomMaster currentMaster = (MushroomMaster)game.getCurrentPlayer();

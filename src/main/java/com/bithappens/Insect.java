@@ -163,5 +163,4 @@ public class Insect {
     public void addActionPoint(int plus){
         actionPoints += plus;
     }
-    
 }
