@@ -47,6 +47,7 @@ public class MushroomMaster extends Player{
     public void initiateMushroomGrowth(Tekton t){
         //System.out.println("MushroomMaster.initiateMushroomGrowth(Tekton t)");
         MushroomBody mushroom = t.growMushroom(this);
+
         if(mushroom != null){
             this.incrementScore();
             this.addMushroom(mushroom);
