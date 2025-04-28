@@ -3,7 +3,7 @@
 <tekton> t1 Tekton
 <neighbors> t2 t3
 <mushroom> mu1 mm1 1 2 1 
-<insect> i1 im1 3 1 0
+<insect> i1 im1 5 1 0
 <tekton> t2 AbsorbingTekton
 <neighbors> t1
 <tekton> t3 HealingTekton
