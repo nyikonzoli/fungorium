@@ -100,6 +100,8 @@ public class SaveGame {
     public static void loadSaveToPrototype(String objectState, Prototype prototype) {
         // ha #ERROR a fájlban, corrupted a save
         // ha fájlban neve null vagy "-" akkor null
+        prototype.setGame(null);
+        prototype.objects.clear();
         ArrayList<String> lines = new ArrayList<>(Arrays.asList(objectState.split("\\r?\\n|\\r")));
         Tekton currentTekton = null;
         for (String line : lines) {
