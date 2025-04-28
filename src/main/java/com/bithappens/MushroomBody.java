@@ -107,6 +107,10 @@ public class MushroomBody {
      */
     public void produceSpore(){
 
+        if(!alive){
+            return;
+        }
+
         Random randomSpore = new Random();
         int randomSporeType = randomSpore.nextInt(6);
 
@@ -172,6 +176,10 @@ public class MushroomBody {
      * @return a new instance of SuperMushroomBody
      */
     public SuperMushroomBody promoteToSuperMushroomBody(){
+
+        if(!alive){
+            return null;
+        }
 
         Tekton l = location;
         die();
