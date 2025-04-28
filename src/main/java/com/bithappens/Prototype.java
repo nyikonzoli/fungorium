@@ -278,7 +278,7 @@ public class Prototype {
                 return "Grow failure";
             }
             else{
-                objects.replace(superMushroomKey, growSuperMushroomBody);
+                objects.replace(superMushroomKey, target.getMushroomBody());
                 return "SuperMushroom grow success";
             }
         }

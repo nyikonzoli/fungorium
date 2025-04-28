@@ -153,7 +153,9 @@ public class SaveGame {
             if (line.startsWith("<mu")) {
                 ArrayList<String> temp = new ArrayList<>(Arrays.asList(line.split(" ")));
                 StringBuilder b = new StringBuilder();
-                for (int i = 0; i < 6; i++) {
+                // in case of supermushroom
+                int limit = (temp.size() > 6 && temp.get(6).equals("-s")) ? 7 : 6;
+                for (int i = 0; i < limit; i++) {
                     b.append(temp.get(i) + " ");
                 }
                 String toadd = b.toString();
