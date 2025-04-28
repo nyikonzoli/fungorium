@@ -182,15 +182,31 @@ public class Tekton {
         Tekton tektonA = new Tekton();
         Tekton tektonB = new Tekton();
 
-        ArrayList<Tekton> A_neighbours = new ArrayList<>();
-        ArrayList<Tekton> B_neighbours = new ArrayList<>();
+        int mid = neighbours.size() / 2;
+        int sporeMid = spores.size() / 2;
 
-        for(Tekton t : neighbours){
-            //TODO: implement
-        }
+        //elso fele ide masodik fele oda
+        ArrayList<Tekton> aNneighbours = new ArrayList<>(neighbours.subList(0, mid));
+        aNneighbours.add(tektonB);
+        ArrayList<Tekton> bNeighbours = new ArrayList<>(neighbours.subList(mid, neighbours.size()));
+        bNeighbours.add(tektonA);
 
+        
+        //elso fele ide masik oda
+        ArrayList<Spore> aSpores = new ArrayList<>(spores.subList(0, sporeMid));
+        ArrayList<Spore> bSpores = new ArrayList<>(spores.subList(sporeMid, spores.size()));
 
-        return null;
+        tektonA.setNeighbours(aNneighbours);
+        tektonB.setNeighbours(bNeighbours);
+
+        tektonA.setSpores(aSpores);
+        tektonB.setSpores(bSpores);
+
+        ArrayList<Tekton> newTektons = new ArrayList<>();
+        newTektons.add(tektonA);
+        newTektons.add(tektonB);
+
+        return newTektons;
     }
 
 
