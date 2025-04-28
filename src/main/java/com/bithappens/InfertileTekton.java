@@ -1,4 +1,7 @@
 package com.bithappens;
+
+import java.util.ArrayList;
+
 /**
  * Represents a specific type of Tekton that is infertile and does not produce mushrooms.
  */
@@ -7,7 +10,10 @@ public class InfertileTekton extends Tekton {
      * Constructs a new InfertileTekton instance.
      */
     public InfertileTekton() {
-        System.out.println("InfertileTekton.InfertileTekton()");
+        neighbours = new ArrayList<>();
+        spores = new ArrayList<>();
+        myceliums = new ArrayList<>();
+        insects = new ArrayList<>();
     }
 
      /**
@@ -19,7 +25,8 @@ public class InfertileTekton extends Tekton {
      */
     @Override
     public MushroomBody growMushroom(MushroomMaster g){
-        System.out.println("InfertileTekton.growMushroom(MushroomMaster g)");
+        
+        
         return null;
     }
 }

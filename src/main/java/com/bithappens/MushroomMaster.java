@@ -47,6 +47,7 @@ public class MushroomMaster extends Player{
     public void initiateMushroomGrowth(Tekton t){
         //System.out.println("MushroomMaster.initiateMushroomGrowth(Tekton t)");
         MushroomBody mushroom = t.growMushroom(this);
+
         if(mushroom != null){
             this.incrementScore();
             this.addMushroom(mushroom);
@@ -58,7 +59,6 @@ public class MushroomMaster extends Player{
      * @param end   Target Tekton
      */
     public void initiateMyceliumGrowth(Tekton start, Tekton end) {
-        //System.out.println("MushroomMaster.initiateMyceliumGrowth(Tekton start, Tekton end)");
         start.growMycelium(this, end);
     }
 
@@ -69,7 +69,6 @@ public class MushroomMaster extends Player{
      * @param t the target Tekton
      */
     public void initiateSporeSpreading(MushroomBody m, Tekton t){
-        //System.out.println("MushroomMaster.initiateSporeSpreading(MushroomBody m, Tekton t)");
         m.spreadSpore(t, this);
     }
 
@@ -79,7 +78,6 @@ public class MushroomMaster extends Player{
      * @param m the MushroomBody to be promoted
      */
     public void initiateSuperMushroomGrowth(MushroomBody m){
-        //System.out.println("MushroomMaster.initiateSuperMushroomGrowth(MushroomBody m)\nCan grow super mushroom body?");
         SuperMushroomBody smb = m.promoteToSuperMushroomBody();
 
         if(smb != null){
@@ -96,7 +94,6 @@ public class MushroomMaster extends Player{
      * @param m the MushroomBody to add
      */
     public void addMushroom(MushroomBody m){
-        //System.out.println("MushroomMaster.addMushroom(MushroomBody m)");
         mushrooms.add(m);
     }
 
@@ -106,7 +103,6 @@ public class MushroomMaster extends Player{
      */
     @Override
     public void onRoundStart(){
-        //System.out.println("MushroomMaster.onRoundStart()");
 
         for(MushroomBody body : mushrooms){
             body.produceSpore();
@@ -121,7 +117,6 @@ public class MushroomMaster extends Player{
      */
     @Override
     public void selfReport(Game g){
-        //System.out.println("MushroomMaster.selfReport(Game g)");
         List<Player> topMasters = g.getTopMushroomMasters();
         if(topMasters.size() != 0){
             if(topMasters.get(0).getScore() == this.getScore()){

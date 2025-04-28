@@ -8,7 +8,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 // prototipus jatekallapot tarolasa hashmapben, palyaepites
 public class Prototype {
@@ -19,7 +18,6 @@ public class Prototype {
     public Game getGame() { return game; }
     public void setGame(Game game) { this.game = game; }
     private int mycCount = 0;
-    private int mushroomCount = 0;
     
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.
@@ -278,7 +276,13 @@ public class Prototype {
                 return "Grow failure";
             }
             else{
-                String mushroomName = "mu" + (++mushroomCount);
+                int mushroomCount = 0;
+                for (int i = 0; i < game.getPlayers().size(); i++) {
+                    if(game.getPlayers().get(i) instanceof MushroomMaster){
+                        mushroomCount += ((MushroomMaster)game.getPlayers().get(i)).getMushrooms().size();
+                    }
+                }
+                String mushroomName = "mu" + mushroomCount;
                 objects.put(mushroomName, target.getMushroomBody());
                 return "Grow success: " + mushroomName;
             }
@@ -326,8 +330,13 @@ public class Prototype {
         // Ellenorzes - kicsit felokositva
         for (Mycelium m : source.getMyceliums()) {
             if (m.getTektonEnd().equals(target) || m.getTektonStart().equals(target)) {
-                objects.put("m" + (++mycCount), m);
-                return "Grow success: m" + mycCount;
+                int myceliumCount = 0;
+                for (int i = 0; i < game.getGameField().size(); i++) {
+                    myceliumCount += game.getGameField().get(i).getMyceliums().size();
+                }
+                myceliumCount /= 2;
+                objects.put("m" + (myceliumCount), m);
+                return "Grow success: m" + myceliumCount;
             }
         }
 
@@ -341,8 +350,11 @@ public class Prototype {
         Tekton target = (Tekton)objects.get(command.get(2));
         MushroomMaster mmaster = (MushroomMaster)game.getCurrentPlayer();
         int sporeBeforeThrow = target.getSpores().size();
+        System.out.println("asdadasdasdasdasdasdasdasdasd");
+        System.out.println(sporeBeforeThrow);
 
         mmaster.initiateSporeSpreading(mushroom, target);
+        System.out.println(target.getSpores().size());
 
         // Ellenőrzés
         if (sporeBeforeThrow + 3 == target.getSpores().size()) {
@@ -366,7 +378,13 @@ public class Prototype {
             if(m.getMaster().equals(currentMaster) && (m.getTektonEnd().equals(eatTekton) || m.getTektonStart().equals(eatTekton))){
                 m.eatInsect(eatInsect, eatTekton);
                 if (insectNumber - 1 == eatTekton.getInsects().size()) {
-                    objects.put("mu" + (++mushroomCount), eatTekton.getMushroomBody());
+                    int mushroomCount = 0;
+                    for (int i = 0; i < game.getPlayers().size(); i++) {
+                        if(game.getPlayers().get(i) instanceof MushroomMaster){
+                            mushroomCount += ((MushroomMaster)game.getPlayers().get(i)).getMushrooms().size();
+                        }
+                    }
+                    objects.put("mu" + (mushroomCount), eatTekton.getMushroomBody());
                     return "Eat success";
                 }
             }
@@ -456,15 +474,19 @@ public class Prototype {
     private String split(ArrayList<String> command) {
         // két új tekton neve: <eredeti név>-1, <eredeti név>-2
 
-        Tekton spliTekton = (Tekton)objects.get(command.get(1));
-        List<Tekton> mapTektons = game.getGameField();
-        spliTekton.split();
-
-        // Check
-        for(Tekton t : mapTektons){
-            if(t.equals(spliTekton)){
-                return "Split failure";
-            }
+        Tekton splitTekton = (Tekton)objects.get(command.get(1));
+        String splitTektonName = command.get(1);
+        ArrayList<Tekton> twoNewTektons = splitTekton.split();
+        
+        game.extendField(twoNewTektons.get(0));
+        game.extendField(twoNewTektons.get(1));   
+        
+        objects.put(splitTektonName + "-1", twoNewTektons.get(0));
+        objects.put(splitTektonName + "-2", twoNewTektons.get(1));
+        
+        boolean removeSuccesful = game.getGameField().remove(splitTekton);
+        if (!removeSuccesful) {
+            return "Split failure";
         }
         return "Split success: " + command.get(1) + "-1, " + command.get(1) + "-2";
     }

@@ -7,7 +7,7 @@ public class ParalyzingSpore extends Spore {
      * Constructs a new ParalyzingSpore.
      */
     public ParalyzingSpore() {
-        System.out.println("ParalyzingSpore.ParalyzingSpore()");
+
     }
 
     /**
@@ -18,7 +18,6 @@ public class ParalyzingSpore extends Spore {
      */
     @Override
     public void applyEffect(Insect i){
-        //System.out.println("ParalyzingSpore.applyEffect(Insect i)");
         i.setActionPoints(0);
         i.setStunned(true);
     }

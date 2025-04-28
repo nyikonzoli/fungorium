@@ -3,10 +3,10 @@
 <tekton> tn Tekton
 <neighbors> ti
 <mushroom> mu1 mm1 1 2 1
-<tekton> ti-1 InfertileTekton
-<neighbors>  tn ti-2
+<tekton> ti-1 Tekton
+<neighbors> ti-2
 <spore> RegularSpore mm1
+<tekton> ti-2 Tekton
+<neighbors> tn ti-1
 <spore> CutBlockingSpore mm1
-<tekton> ti-2 InfertileTekton
-<neighbors>  ti-1
 <spore> ParalyzingSpore mm1

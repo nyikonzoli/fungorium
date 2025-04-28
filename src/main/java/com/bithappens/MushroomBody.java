@@ -46,7 +46,6 @@ public class MushroomBody {
      * @return the Tekton where this MushroomBody is located
      */
     public Tekton getLocation(){
-        //System.out.println("MushroomBody.getLocation()");
         return location;
     }
 
@@ -66,7 +65,6 @@ public class MushroomBody {
      */
     public void setActions(int a){
         actions = a;
-        //System.out.println("MushroomBody.setActions(int a)");
     }
 
     /**
@@ -75,7 +73,6 @@ public class MushroomBody {
      * @return the number of actions
      */
     public int getActions(){
-        //System.out.println("MushroomBody.getActions()");
         return actions;
     }
 
@@ -149,9 +146,10 @@ public class MushroomBody {
      * @param t the target Tekton for spore spreading
      */
     public void spreadSpore(Tekton t, MushroomMaster mmaster){
-        //System.out.println("MushroomBody.spreadSpore(Tekton t)");
         boolean neighboring = getLocation().isNeighbour(t);
+
         if(alive && neighboring && sporeCount >= 3 && sporeLevel.size() >= 3){
+            
             ArrayList<Spore> thrownSpores = new ArrayList<>();
             for (int i = 0; i < SPORE_SPREAD_COUNT; i++) {
                 Spore throwSpore = sporeLevel.get(0);
@@ -185,7 +183,6 @@ public class MushroomBody {
      * Marks this MushroomBody as dead.
      */
     public void die(){
-        //System.out.println("MushroomBody.die()");
         alive = false;
     }
 

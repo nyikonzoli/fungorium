@@ -232,11 +232,5 @@ public class Game {
         return gameField;
     }
 
-    /**
-     * Compares players to the currently winning players
-     * @param p Player to compare to the currently winning players
-     */
-    public void selfReport(Player p){
-        int test = p.getScore();
-    }
+    
 }

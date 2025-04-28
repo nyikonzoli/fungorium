@@ -8,7 +8,7 @@ public class CutBlockingSpore extends Spore {
      * Constructs a new CutBlockingSpore instance.
      */
     public CutBlockingSpore() {
-        System.out.println("CutBlockingSpore.CutBlockingSpore()");
+
     }
 
     /**
@@ -18,7 +18,6 @@ public class CutBlockingSpore extends Spore {
      */
     @Override
     public void applyEffect(Insect i) {
-        //System.out.println("CutBlockingSpore.applyEffect(Insect i)");
         i.setCanCutMycelium(false);
         i.decrementActionPoint(1);
     }

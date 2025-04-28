@@ -46,7 +46,6 @@ public class Tekton {
      * @param m The MushroomBody to associate with this tectonic plate.
      */
     public void setMushroomBody(MushroomBody m){
-        System.out.println("Tekton.setMushroomBody(MushroomBody m)");
         mushroomBody = m;
     }
 
@@ -171,7 +170,6 @@ public class Tekton {
      * @return The 2 new tecton
      */
     public ArrayList<Tekton> split(){
-        System.out.println("Tekton.split()");
         if(hasInsect()){
             return null;
         }
@@ -184,15 +182,31 @@ public class Tekton {
         Tekton tektonA = new Tekton();
         Tekton tektonB = new Tekton();
 
-        ArrayList<Tekton> A_neighbours = new ArrayList<>();
-        ArrayList<Tekton> B_neighbours = new ArrayList<>();
+        int mid = neighbours.size() / 2;
+        int sporeMid = spores.size() / 2;
 
-        for(Tekton t : neighbours){
-            //TODO: implement
-        }
+        //elso fele ide masodik fele oda
+        ArrayList<Tekton> aNneighbours = new ArrayList<>(neighbours.subList(0, mid));
+        aNneighbours.add(tektonB);
+        ArrayList<Tekton> bNeighbours = new ArrayList<>(neighbours.subList(mid, neighbours.size()));
+        bNeighbours.add(tektonA);
 
+        
+        //elso fele ide masik oda
+        ArrayList<Spore> aSpores = new ArrayList<>(spores.subList(0, sporeMid));
+        ArrayList<Spore> bSpores = new ArrayList<>(spores.subList(sporeMid, spores.size()));
 
-        return null;
+        tektonA.setNeighbours(aNneighbours);
+        tektonB.setNeighbours(bNeighbours);
+
+        tektonA.setSpores(aSpores);
+        tektonB.setSpores(bSpores);
+
+        ArrayList<Tekton> newTektons = new ArrayList<>();
+        newTektons.add(tektonA);
+        newTektons.add(tektonB);
+
+        return newTektons;
     }
 
 
@@ -293,8 +307,12 @@ public class Tekton {
      */
     public MushroomBody growMushroom(MushroomMaster master){ 
         if(canGrowMushroom(master) && deductNetworkAction(master)){
-            MushroomBody newMushroom = new MushroomBody();
+            MushroomBody newMushroom = new MushroomBody(this);
             mushroomBody = newMushroom;
+
+            for (int i = 0; i < MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH; i++) {
+                removeSpore(spores.getLast());
+            }
             return newMushroom;
         }
         return null;

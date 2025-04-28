@@ -8,7 +8,7 @@ public class SlowingSpore extends Spore {
      * Constructs a new SlowingSpore.
      */
     public SlowingSpore() {
-        System.out.println("SlowingSpore.SlowingSpore()");
+
     }
 
     /**
@@ -18,7 +18,6 @@ public class SlowingSpore extends Spore {
      */
     @Override
     public void applyEffect(Insect i){
-        //System.out.println("SlowingSpore.applyEffect(Insect i)");
         i.decrementActionPoint(2);
     }
 }
