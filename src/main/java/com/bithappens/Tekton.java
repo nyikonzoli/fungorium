@@ -296,7 +296,7 @@ public class Tekton {
         // for in case of concurrent modification
         ArrayList<Mycelium> temp = new ArrayList<>(myceliums);
         while (!temp.isEmpty()) {
-            Mycelium m = temp.removeLast();
+            Mycelium m = temp.remove(temp.size() - 1);
             m.onRoundStart();
         }
     }
@@ -311,7 +311,7 @@ public class Tekton {
             mushroomBody = newMushroom;
 
             for (int i = 0; i < MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH; i++) {
-                removeSpore(spores.getLast());
+                removeSpore(spores.get(spores.size() - 1));
             }
             return newMushroom;
         }
