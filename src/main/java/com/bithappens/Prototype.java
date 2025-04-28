@@ -1,6 +1,5 @@
 package com.bithappens;
 
-import java.io.IO;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +16,6 @@ public class Prototype {
     private Game game;
     public Game getGame() { return game; }
     public void setGame(Game game) { this.game = game; }
-    private int mycCount = 0;
     
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.
