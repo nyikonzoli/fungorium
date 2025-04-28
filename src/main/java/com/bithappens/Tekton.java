@@ -209,7 +209,6 @@ public class Tekton {
      * @param tektons The tectons, which are next to the tecton
      */
     public void addNeighbours(ArrayList<Tekton> tektons){
-        System.out.println("addNeighbours(ArrayList<Tekton> tektons)");
         neighbours.addAll(tektons);
     }
 
@@ -219,7 +218,6 @@ public class Tekton {
      */
     public void addInsect(Insect i){
         insects.add(i);
-        System.out.println("Tekton.addInsect(Insect i)");
     }
 
     /**
@@ -228,7 +226,6 @@ public class Tekton {
      */
     public void removeInsect(Insect i){
         insects.remove(i);
-        System.out.println("Tekton.removeInsect(Insect i)");
     }
 
     /**
@@ -244,7 +241,6 @@ public class Tekton {
      * @param s The list of spores to add.
      */
     public void addSpores(ArrayList<Spore> spores){
-        System.out.println("Tekton.addSpores(List<Spore> spores)");
         this.spores.addAll(spores);
     }
     /**
@@ -252,7 +248,6 @@ public class Tekton {
      * @return The Spore that was removed
      */
     public Spore popSpore(){
-        System.out.println("Tekton.popSpore()");
         return spores.remove(spores.size() - 1);
     }
 
@@ -270,7 +265,6 @@ public class Tekton {
      * @return Boolean indicating whether the operation was successful 
      */
     public boolean addMycelium(Mycelium m){
-        System.out.println("Tekton.addMycelium(Mycelium m)");
         return myceliums.add(m);
     }
 
@@ -279,7 +273,6 @@ public class Tekton {
      * @param m Mycelium to be removed
      */
     public void removeMycelium(Mycelium m){
-        //System.out.println("Tekton.removeMycelium(Mycelium m)");
         myceliums.remove(m);
     }
     /**
@@ -315,6 +308,28 @@ public class Tekton {
         return true;
     }
 
+    /**  
+     * gets the owner of the myceliums if there is mycelium
+     * @return - null is there is no myc, Master of the myceleum if there is
+     */
+    protected MushroomMaster getMyceliumOwner(){
+        if(myceliums.isEmpty()){
+            return null;
+        } else{
+            return myceliums.get(0).getMaster();
+        }
+
+    }
+
+    /**  
+     * checks if the owner can grow myc on the Tekton
+     * @param owner - the master who wants to grow myc
+     * @return - true if the Tekton has no myc, or the myc belongs to the same MushroomMaster
+     */
+    protected boolean canAcceptMycFromMushroomMaster(MushroomMaster owner) {
+        return this.getMyceliumOwner() == null || this.getMyceliumOwner().equals(owner);
+    }
+
     /**
      * Grows a mycelium connection between two tectonic plates
      * @param master The owner of the new mycelium connection
@@ -323,15 +338,16 @@ public class Tekton {
      */
     public Mycelium growMycelium(MushroomMaster master, Tekton target){
         Mycelium myc2 = null;
-        if(this.canConnect() && target.canConnect()){
-            if (isNeighbour(target) && deductNetworkAction(master)) {
-                if (this.canReachTektonViaMycelium(target)){ //ha mar van koztuk myc, akkor nem kotjuk ujra ossze
-                    return myc2;
-                } 
-                myc2 = new Mycelium(master, this, target);
-                this.addMycelium(myc2);
-                target.addMycelium(myc2);
-            }
+
+        //ezt a feltetelt nem kommentalom, trivialis
+        if(this.canConnect() && target.canConnect() && isNeighbour(target) && deductNetworkAction(master) && this.canAcceptMycFromMushroomMaster(master) && target.canAcceptMycFromMushroomMaster(master)){
+            if (this.canReachTektonViaMycelium(target)){    //ha mar van koztuk myc, akkor nem kotjuk ujra ossze
+                return myc2;
+            } 
+            myc2 = new Mycelium(master, this, target);
+            this.addMycelium(myc2);
+            target.addMycelium(myc2);
+            
         }
         return myc2;
     }
@@ -350,7 +366,6 @@ public class Tekton {
      * @return Boolean, true, if they are connected
      */
     public boolean canReachTektonViaMycelium(Tekton t){
-        System.out.println("Tekton.canReachTektonViaMycelium(Tekton t)");
         for (Mycelium mycelium : myceliums) {
             if(mycelium.getTektonStart() == t || mycelium.getTektonEnd() == t) return true;
         }
@@ -362,7 +377,6 @@ public class Tekton {
      * @return Boolean that is true if the master can grow a mushroom body
      */
     public boolean canGrowMushroom(MushroomMaster master){
-        System.out.println("Tekton.canGrowMushroom(MushroomMaster master)");
         return spores.size() >= MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH;
     }
 

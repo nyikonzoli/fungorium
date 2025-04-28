@@ -1,6 +1,6 @@
 <gamestate> 0 mm1 m mm2 m
 <current> mm1
-<tekton> th Tekton
+<tekton> th HeterogeneousTekton
 <neighbors> td tn1 tn2
 <mushroom> mu1 mm1 1 2 3 
 <tekton> td DeadEndTekton
