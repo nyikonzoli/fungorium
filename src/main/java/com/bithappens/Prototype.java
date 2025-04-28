@@ -349,11 +349,8 @@ public class Prototype {
         Tekton target = (Tekton)objects.get(command.get(2));
         MushroomMaster mmaster = (MushroomMaster)game.getCurrentPlayer();
         int sporeBeforeThrow = target.getSpores().size();
-        System.out.println("asdadasdasdasdasdasdasdasdasd");
-        System.out.println(sporeBeforeThrow);
 
         mmaster.initiateSporeSpreading(mushroom, target);
-        System.out.println(target.getSpores().size());
 
         // Ellenőrzés
         if (sporeBeforeThrow + 3 == target.getSpores().size()) {
