@@ -490,6 +490,6 @@ public class Prototype {
         return "Split success: " + command.get(1) + "-1, " + command.get(1) + "-2";
     }
     private String print() {
-        return "todo";
+        return SaveGame.objectStateToString(this);
     }
 }
