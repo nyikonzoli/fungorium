@@ -415,11 +415,11 @@ public class Prototype {
 
         // Check
         for(Mycelium m : tektonMyceliums){
-            if (m.equals(cutMyc)) {
-                return "Cut failure";
+            if (m.equals(cutMyc) && m.isCut()) {
+                return "Cut success";
             }
         }
-        return "Cut success";
+        return "Cut failure";
     }
     private String nextround() {
         game.nextRound();
