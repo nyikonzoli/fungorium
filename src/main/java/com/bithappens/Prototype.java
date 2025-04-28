@@ -494,7 +494,7 @@ public class Prototype {
         if (initialImasterInsectCount < im.getAllInsects().size()) {
             objects.remove(iName);
             objects.put(iName + "-1", insect);
-            objects.put(iName + "-2", im.getAllInsects().getLast());
+            objects.put(iName + "-2", im.getAllInsects().get(im.getAllInsects().size() - 1));
             return "Eat success, Insect split: " + iName + "-1 " + iName + "-2";
         }
         
