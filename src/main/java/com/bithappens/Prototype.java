@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-// prototipus jatekallapot tarolasa hashmapben, palyaepites
+// Prototype to keep track of all object instances that can be referenced by one of the user's actions
 public class Prototype {
     HashMap<String, Object> objects = new HashMap<>();
     // Game is stored differently, there can only be 1 Game instance per Prototype (the game instance
-    // also has no explicit name)
+    // also has no explicit name and can't be referenced by the user in any of the commands' arguments)
     private Game game;
     public Game getGame() { return game; }
     public void setGame(Game game) { this.game = game; }
@@ -41,7 +41,8 @@ public class Prototype {
                 retval = save(command);
                 break;
             case "exit":
-                retval = save(new ArrayList<String>(Arrays.asList("save", "autosave.txt"))); //ha kilépésnél ha a user elfelejtené is elmentsuk a jatekot
+                // Creates an autosave file on exit command
+                retval = save(new ArrayList<String>(Arrays.asList("save", "autosave.txt"))); 
                 break;
             case "list":
                 retval = list(command);
@@ -79,14 +80,17 @@ public class Prototype {
             case "print":
                 retval = print();
                 break;
-            
             default:
                 break;
         }
         return retval;
     }
     
-
+    /**
+     * Handles the input of a "newgame" command. Creates a game field for 2+2 players to play on.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String newgame(ArrayList<String> command) {
         objects.clear();
         game = new Game();
@@ -238,6 +242,11 @@ public class Prototype {
 
         return "New Game Started";
     }
+    /**
+     * Handles the input of a "load" command. Loads a save file's content onto this Prototype instance.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String load(ArrayList<String> command) {
         Path path = Path.of(command.get(1));
         try {
@@ -248,6 +257,11 @@ public class Prototype {
         
         return "Load success";
     }
+    /**
+     * Handles the input of a "save" command. Saves the game into a player specified file.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String save(ArrayList<String> command) {
         Path path = Path.of(command.get(1));
         // If file doesn't exist, it's created. If it does, it's overwritten.
@@ -258,6 +272,11 @@ public class Prototype {
         }
         return "Save success: " + command.get(1);
     }
+    /**
+     * Handles the input of a "list" command. Lists the objet instances' names the player can reference.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String list(ArrayList<String> command) {
         StringBuilder b = new StringBuilder();
         switch (command.get(1)) {
@@ -316,6 +335,11 @@ public class Prototype {
                 return "Command unknown";
         }
     }
+    /**
+     * Handles the input of a "growmu" command.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String growmu(ArrayList<String> command) {
         MushroomMaster currentMaster = (MushroomMaster)game.getCurrentPlayer();
         MushroomMaster commandMaster = (MushroomMaster)objects.get(command.get(1));
@@ -329,7 +353,7 @@ public class Prototype {
         if (command.size() == 3) {
             currentMaster.initiateMushroomGrowth(target);
 
-            // Ellenőrizni, hogy sikerült-e
+            // Verifying the action has taken place
             if (target.getMushroomBody() == null) {
                 return "Grow failure";
             }
@@ -345,7 +369,7 @@ public class Prototype {
                 return "Grow success: " + mushroomName;
             }
         }
-        // Szuper gomba növesztés
+        // Grow SuperMushroom
         else if (command.size() == 4 && "-s".equals(command.get(3))) {
             MushroomBody growSuperMushroomBody = target.getMushroomBody();
             String superMushroomKey = "mb1";
@@ -355,7 +379,7 @@ public class Prototype {
                 }
             }
             currentMaster.initiateSuperMushroomGrowth(growSuperMushroomBody);
-            // Ellenőrzés
+            // Verifying the action has taken place
             if (target.getMushroomBody() == null || !(target.getMushroomBody() instanceof SuperMushroomBody)) {
                 return "Grow failure";
             }
@@ -367,7 +391,11 @@ public class Prototype {
 
         return "Invalid input";
     }
-
+    /**
+     * Handles the input of a "growmy" command.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String growmy(ArrayList<String> command) {
 
         MushroomMaster currentMaster = (MushroomMaster)game.getCurrentPlayer();
@@ -401,8 +429,12 @@ public class Prototype {
         return "Grow failure";
 
     }
+    /**
+     * Handles the input of a "spreadsp" command.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String spreadsp(ArrayList<String> command) {
-        
         // spreadsp <forrás gombatest> <tekton>
         MushroomBody mushroom = (MushroomBody)objects.get(command.get(1));
         Tekton target = (Tekton)objects.get(command.get(2));
@@ -417,6 +449,11 @@ public class Prototype {
         }
         return "Spread failure";
     }
+    /**
+     * Handles the input of an "eatin" command.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String eatin(ArrayList<String> command) {
         Player currentMaster = game.getCurrentPlayer();
         MushroomMaster commandMaster = (MushroomMaster)objects.get(command.get(1));
@@ -444,12 +481,13 @@ public class Prototype {
                 }
             }
         }
-
-        // Ellenorzes
-        
         return "Eat failure";
-
     }
+    /**
+     * Handles the input of a "move" command.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String move(ArrayList<String> command) {
         // <rovar> <tekton>
         Insect insect = (Insect)objects.get(command.get(1));
@@ -473,6 +511,11 @@ public class Prototype {
 
 
     }
+    /**
+     * Handles the input of an "eatsp" command.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String eatsp(ArrayList<String> command) {
         // hogy rendesen <név>-1 <név>-2 formában jelenjenek meg splitelt rovarok a 
         // hashmapben
@@ -500,6 +543,11 @@ public class Prototype {
         
         return "Eat success";
     }
+    /**
+     * Handles the input of a "cut" command.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String cut(ArrayList<String> command) {
 
         Insect cutInsect = (Insect)objects.get(command.get(1));
@@ -517,14 +565,27 @@ public class Prototype {
         }
         return "Cut failure";
     }
+    /**
+     * Handles the input of a "nextround" command.
+     * @return The output string of the command
+     */
     private String nextround() {
         game.nextRound();
         return "Next round";
     }
+    /**
+     * Handles the input of a "growmu" command.
+     * @return The output string of the command
+     */
     private String nextplayer() {
         game.nextPlayer();
         return "Next player";
     }
+    /**
+     * Handles the input of a "split" command.
+     * @param command ArrayList containing all the arguments in a command
+     * @return The output string of the command
+     */
     private String split(ArrayList<String> command) {
         // két új tekton neve: <eredeti név>-1, <eredeti név>-2
 
@@ -544,6 +605,10 @@ public class Prototype {
         }
         return "Split success: " + command.get(1) + "-1, " + command.get(1) + "-2";
     }
+    /**
+     * Handles the input of a "print" command.
+     * @return The output string of the command
+     */
     private String print() {
         return SaveGame.objectStateToString(this);
     }

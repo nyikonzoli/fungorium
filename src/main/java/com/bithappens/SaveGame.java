@@ -7,6 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SaveGame {
+    /**
+     * If the object is stored in the hash map catalog, returns it's key.
+     * @param object Object in the hash map 
+     * @param map The hash map where the object might be stored
+     * @return The key to the object in the hash map
+     */
     public static String getKey(Object object, HashMap<String, Object> map) {
         // if duplicate key name, unforseen outcome
         for (String key : map.keySet()) {
@@ -141,7 +147,6 @@ public class SaveGame {
      * @param actual Actual content of save file.
      * @return Whether the two strings contains the same lines, regardless of their order.
      */
-    
     public static boolean compareSaveFileText(String expected, String actual) {
         Set<String> lines1 = new HashSet<>(Arrays.asList(expected.split("\\r?\\n|\\r")));
         Set<String> linesExpected = new HashSet<>();
@@ -173,7 +178,11 @@ public class SaveGame {
         }
         return true;
     }
-
+    /**
+     * Reads the game state line in a save file and loads it onto a Prototype object.
+     * @param gameState ArrayList containing all the arguments in the input line
+     * @param prototype The Prototype instance keeping track of all object instances that can be referenced by the user
+     */
     private static void readGameState(ArrayList<String> gameState, Prototype prototype) {
         Game game = new Game();
         prototype.setGame(game);
@@ -184,6 +193,11 @@ public class SaveGame {
             game.addPlayer(p);
         }
     }
+    /** 
+     * Reads one of the tekton lines in a save file and loads it onto a Prototype object.
+     * @param tektonState ArrayList containing all the arguments in the input line
+     * @param prototype The Prototype instance keeping track of all object instances that can be referenced by the user
+     */
     private static Tekton readTekton(ArrayList<String> tektonState, Prototype prototype) {
         Tekton t = null;
         switch (tektonState.get(2)) {
@@ -212,6 +226,12 @@ public class SaveGame {
         prototype.getGame().getGameField().add(t);
         return t;
     }
+    /**
+     * Reads one of the neighbor lines in a save file and loads it onto a Prototype object.
+     * @param neighborsString ArrayList containing all the arguments in the input line
+     * @param prototype The Prototype instance keeping track of all object instances that can be referenced by the user
+     * @param t The Tekton instance currently being modified
+     */
     private static void readNeighbors(ArrayList<String> neighborsString, Prototype prototype, Tekton t) {
         for (int i = 1; i < neighborsString.size(); i++) {
             if (prototype.objects.containsKey(neighborsString.get(i))) {
@@ -222,6 +242,12 @@ public class SaveGame {
 
         }
     }
+    /**
+     * Reads one of the mushroom lines in a save file and loads it onto a Prototype object.
+     * @param mushroomString ArrayList containing all the arguments in the input line
+     * @param prototype The Prototype instance keeping track of all object instances that can be referenced by the user
+     * @param t The Tekton instance currently being modified
+     */
     private static void readMushroom(ArrayList<String> mushroomString, Prototype prototype, Tekton t) {
         MushroomBody m = null;
         if (mushroomString.size() > 6 && mushroomString.get(6).equals("-s")) {
@@ -267,6 +293,12 @@ public class SaveGame {
             }
         }
     }
+    /**
+     * Reads one of the insect lines in a save file and loads it onto a Prototype object.
+     * @param insectString ArrayList containing all the arguments in the input line
+     * @param prototype The Prototype instance keeping track of all object instances that can be referenced by the user
+     * @param t The Tekton instance currently being modified
+     */
     private static void readInsect(ArrayList<String> insectString, Prototype prototype, Tekton t) {
         InsectMaster imaster = (InsectMaster)prototype.objects.get(insectString.get(2));
         Insect i = new Insect(t, Integer.parseInt(insectString.get(3)), imaster);
@@ -280,6 +312,12 @@ public class SaveGame {
             i.setStunned(insectString.get(5).equals("1"));
         }
     }
+    /**
+     * Reads one of the mycelium lines in a save file and loads it onto a Prototype object.
+     * @param myceliumString ArrayList containing all the arguments in the input line
+     * @param prototype The Prototype instance keeping track of all object instances that can be referenced by the user
+     * @param t The Tekton instance currently being modified
+     */
     private static void readMycelium(ArrayList<String> myceliumString, Prototype prototype, Tekton t) {
         Tekton target = (Tekton)prototype.objects.get(myceliumString.get(3));
         if (target == null) return;
@@ -297,6 +335,12 @@ public class SaveGame {
             m.setTimeToLive(Integer.parseInt(myceliumString.get(5)));;
         }
     }
+    /**
+     * Reads one of the spore lines in a save file and loads it onto a Prototype object.
+     * @param sporeString ArrayList containing all the arguments in the input line
+     * @param prototype The Prototype instance keeping track of all object instances that can be referenced by the user
+     * @param t The Tekton instance currently being modified
+     */
     private static void readSpore(ArrayList<String> sporeString, Prototype prototype, Tekton t) {
         Spore s = null;
         switch (sporeString.get(1)) {
