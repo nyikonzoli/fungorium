@@ -27,7 +27,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
         Font buttonFont = new Font("Arial", Font.BOLD, 20);
 
         // ELEMENTS
-        setLayout(new FlowLayout(FlowLayout.LEADING, 50, 50));
+        setLayout(new FlowLayout(FlowLayout.LEADING, 40, 50));
 
         JPanel addPlayersPanel = new JPanel();
         addPlayersPanel.setLayout(new BoxLayout(addPlayersPanel, BoxLayout.Y_AXIS));
@@ -39,7 +39,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
         addPlayersPanel.add(numberOfPlayers);
 
         JButton newGame = new JButton("New Game");
-        newGame.setPreferredSize(new Dimension(150, 50));
+        newGame.setPreferredSize(new Dimension(140, 50));
         newGame.setFont(buttonFont);
 
         JPanel savePanel = new JPanel();
@@ -52,11 +52,11 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
         savePanel.add(saveTextField);
 
         JButton save = new JButton("Save");
-        save.setPreferredSize(new Dimension(100, 50));
+        save.setPreferredSize(new Dimension(90, 50));
         save.setFont(buttonFont);
 
         JButton load = new JButton("Load");
-        load.setPreferredSize(new Dimension(100, 50));
+        load.setPreferredSize(new Dimension(90, 50));
         load.setFont(buttonFont);
 
         players.setPreferredSize(new Dimension(150, 50));
@@ -68,6 +68,10 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
         currentPlayer.setFont(new Font("Arial", Font.BOLD, 20));
         currentPlayer.setForeground(Color.RED);
 
+        JButton nextPlayer = new JButton("Next Player");
+        nextPlayer.setPreferredSize(new Dimension(150, 50));
+        nextPlayer.setFont(buttonFont);
+
 
         this.add(addPlayersPanel);
         this.add(newGame);
@@ -77,6 +81,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
         this.add(players);
         this.add(currentPlayerText);
         this.add(currentPlayer);
+        this.add(nextPlayer);
 
     }
 
