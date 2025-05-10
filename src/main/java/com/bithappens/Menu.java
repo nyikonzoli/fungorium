@@ -14,6 +14,9 @@ public class Menu {
         sc = new Scanner(System.in);
         Prototype prototype = new Prototype();
         String line;
+
+        // FRAME
+        FungoriumFrame frame = new FungoriumFrame(prototype);
         
         do {
             line = sc.nextLine();

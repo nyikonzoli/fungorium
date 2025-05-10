@@ -214,10 +214,11 @@ public class Prototype {
         game.extendField(tI);
         game.extendField(t6);
         game.extendField(tD);
-        game.addPlayer(imaster1);
-        game.addPlayer(imaster2);
         game.addPlayer(mmaster1);
         game.addPlayer(mmaster2);
+        game.addPlayer(imaster1);
+        game.addPlayer(imaster2);
+        game.setCurrentPlayer(mmaster1);
 
         objects.put("t1", t1);
         objects.put("t2", t2);
