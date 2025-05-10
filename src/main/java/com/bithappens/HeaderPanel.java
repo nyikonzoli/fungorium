@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,61 +18,70 @@ import javax.swing.JTextField;
 
 public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListener {
 
-    JComboBox<String> players = new JComboBox<>();
-    JLabel currentPlayer = new JLabel();
+    private JComboBox<String> players = new JComboBox<>();
+    private JLabel currentPlayer = new JLabel();
+    private FungoriumFrame fungoriumFrame;
 
-    public HeaderPanel(){
-        this.setBounds(0, 0, 1800, 150);
+    public HeaderPanel(FungoriumFrame frame){
+        fungoriumFrame = frame;
+        //this.setBounds(0, 0, 1800, 150);
         this.setBackground(Color.GREEN);
 
-        Font buttonFont = new Font("Arial", Font.BOLD, 20);
-
+        Font buttonFont = new Font("Arial", Font.BOLD, 10);
+        Dimension elementDimension = new Dimension(90, 30);
         // ELEMENTS
-        setLayout(new FlowLayout(FlowLayout.LEADING, 40, 50));
+        setLayout(new FlowLayout(FlowLayout.LEADING, 20, 30));
+        //setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         JPanel addPlayersPanel = new JPanel();
         addPlayersPanel.setLayout(new BoxLayout(addPlayersPanel, BoxLayout.Y_AXIS));
         JLabel numberOfPlayersText = new JLabel("Number of Players: ");
-        numberOfPlayersText.setFont(new Font("Arial", Font.PLAIN, 20));
+        numberOfPlayersText.setFont(new Font("Arial", Font.PLAIN, 10));
         JTextField numberOfPlayers = new JTextField();
 
         addPlayersPanel.add(numberOfPlayersText);
         addPlayersPanel.add(numberOfPlayers);
 
         JButton newGame = new JButton("New Game");
-        newGame.setPreferredSize(new Dimension(140, 50));
+        newGame.setPreferredSize(elementDimension);
         newGame.setFont(buttonFont);
 
         JPanel savePanel = new JPanel();
         savePanel.setLayout(new BoxLayout(savePanel, BoxLayout.Y_AXIS));
         JLabel saveText = new JLabel("Name of the save file: ");
-        saveText.setFont(new Font("Arial", Font.PLAIN, 20));
+        saveText.setFont(new Font("Arial", Font.PLAIN, 10));
         JTextField saveTextField = new JTextField();
 
         savePanel.add(saveText);
         savePanel.add(saveTextField);
 
         JButton save = new JButton("Save");
-        save.setPreferredSize(new Dimension(90, 50));
+        save.setPreferredSize(elementDimension);
         save.setFont(buttonFont);
 
         JButton load = new JButton("Load");
-        load.setPreferredSize(new Dimension(90, 50));
+        load.setPreferredSize(elementDimension);
         load.setFont(buttonFont);
 
-        players.setPreferredSize(new Dimension(150, 50));
+        players.setPreferredSize(elementDimension);
 
         JLabel currentPlayerText = new JLabel("Current Player: ");
-        currentPlayerText.setFont(new Font("Arial", Font.BOLD, 20));
-        currentPlayerText.setPreferredSize(new Dimension(150, 50));
+        currentPlayerText.setFont(new Font("Arial", Font.BOLD, 10));
+        currentPlayerText.setPreferredSize(elementDimension);
 
-        currentPlayer.setFont(new Font("Arial", Font.BOLD, 20));
+        currentPlayer.setFont(new Font("Arial", Font.BOLD, 10));
         currentPlayer.setForeground(Color.RED);
-
+        /*
+         * Next Player button with action listener
+         */
         JButton nextPlayer = new JButton("Next Player");
-        nextPlayer.setPreferredSize(new Dimension(150, 50));
+        nextPlayer.setPreferredSize(elementDimension);
+        nextPlayer.setMargin(new Insets(0, 0, 0, 0));
         nextPlayer.setFont(buttonFont);
+        nextPlayer.addActionListener(e -> {
+            fungoriumFrame.resetAll();
 
+        });
 
         this.add(addPlayersPanel);
         this.add(newGame);
