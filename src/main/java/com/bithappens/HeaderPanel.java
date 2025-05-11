@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -25,6 +27,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
     private JComboBox<String> players = new JComboBox<>();
     private JLabel currentPlayer = new JLabel();
     private FungoriumFrame fungoriumFrame;
+    ImageIcon backgroundImage;
 
     public HeaderPanel(FungoriumFrame frame){
         fungoriumFrame = frame;
@@ -36,6 +39,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         // ELEMENTS
         setLayout(new FlowLayout(FlowLayout.LEADING, 20, 30));
         //setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        backgroundImage = new ImageIcon("src/main/resources/header-icon-full.png");
 
         JPanel addPlayersPanel = new JPanel();
         addPlayersPanel.setLayout(new BoxLayout(addPlayersPanel, BoxLayout.Y_AXIS));
@@ -156,5 +160,11 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         players.setSelectedItem(null);
         currentPlayer.repaint();
         currentPlayer.revalidate();
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        // háttérkép kirajzolása bal felső sarokba
+        g.drawImage(backgroundImage.getImage(), 0, 0, this);
     }
 }
