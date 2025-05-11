@@ -17,5 +17,13 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         // TODO Auto-generated method stub
         //throw new UnsupportedOperationException("Unimplemented method 'reset'");
     }
-
+    public void selectObject(MushroomBody mushroomBody) {
+        // TODO
+    }
+    public void selectObject(Insect insect) {
+        // TODO
+    }
+    public void selectObject(Mycelium mycelium) {
+        // TODO
+    }
 }

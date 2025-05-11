@@ -24,17 +24,16 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         revalidate();
         repaint();
     }
-    public void setTekton(Tekton tekton) {
-
+    public void selectTekton(Tekton tekton) {
         reset();
-
         selectedTekton = tekton;
         Player currentPlayer = fungoriumFrame.getPrototype().getGame().getCurrentPlayer();
-        for (Mycelium mycelium :tekton.myceliums) {
+        for (Mycelium mycelium : tekton.myceliums) {
             if (currentPlayer.equals(mycelium.getMaster())) {
                 JButton mycButton = new JButton();
                 mycButton.setName(fungoriumFrame.getPrototype().getKey(mycelium));
                 mycButton.addActionListener(e -> {
+                    actionSelectorPanel.selectObject(mycelium);
                     System.out.println("Mycelium selected");
                 });
                 this.add(mycButton);
@@ -44,6 +43,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
             JButton mushroomButton = new JButton();
             mushroomButton.setText(fungoriumFrame.getPrototype().getKey(tekton.getMushroomBody()));
             mushroomButton.addActionListener(e -> {
+                actionSelectorPanel.selectObject(tekton.getMushroomBody());
                 System.out.println("Mushroom selected");
             });
             this.add(mushroomButton);
@@ -53,6 +53,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
                 JButton insectButton = new JButton();
                 insectButton.setText(fungoriumFrame.getPrototype().getKey(insect));
                 insectButton.addActionListener(e -> {
+                    actionSelectorPanel.selectObject(insect);
                     System.out.println("Insect selected");
                 });
                 this.add(insectButton);

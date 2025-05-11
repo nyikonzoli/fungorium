@@ -50,7 +50,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         newGame.setPreferredSize(elementDimension);
         newGame.setFont(buttonFont);
         newGame.addActionListener(e -> {
-            // todo: implement
+            // TODO: implement
             fungoriumFrame.setPlayerColors();
         });
 
@@ -66,12 +66,15 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         JButton save = new JButton("Save");
         save.setPreferredSize(elementDimension);
         save.setFont(buttonFont);
+        save.addActionListener(e -> {
+            // TODO: implement
+        });
 
         JButton load = new JButton("Load");
         load.setPreferredSize(elementDimension);
         load.setFont(buttonFont);
         load.addActionListener(e -> {
-            // todo: implement
+            // TODO: implement
             fungoriumFrame.setPlayerColors();
         });
 

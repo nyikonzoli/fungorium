@@ -68,8 +68,8 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
             button.setText(tektonHTMLGenerator(tekton));
             button.addActionListener(e -> {
                 System.out.println("gomb teszt klikk");
-                objectSelectorPanel.setTekton(tekton);
-                tektonViewPanel.setTekton(tekton);
+                objectSelectorPanel.selectTekton(tekton);
+                tektonViewPanel.selectTekton(tekton);
             });
             button.setMargin(new Insets(1, 1, 1, 1));
             button.setHorizontalAlignment(SwingConstants.LEFT);

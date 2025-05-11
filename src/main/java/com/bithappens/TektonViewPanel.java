@@ -20,7 +20,7 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
         revalidate();
         repaint();
     }
-    public void setTekton(Tekton tekton) {
+    public void selectTekton(Tekton tekton) {
         reset();
         selectedTekton = tekton;
         /*

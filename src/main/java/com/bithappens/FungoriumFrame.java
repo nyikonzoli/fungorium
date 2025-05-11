@@ -98,7 +98,6 @@ public class FungoriumFrame extends JFrame {
 
         
     }
-    // TODO: fontos beallitani uj jatek betoltesenel
     public void setPlayerColors() {
         ArrayList<Color> predefinedColors = new ArrayList<>(List.of(          
             Color.RED,
