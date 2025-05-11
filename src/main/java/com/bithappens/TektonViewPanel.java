@@ -24,7 +24,7 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
         reset();
         selectedTekton = tekton;
         /*
-         * Todo: kirajzolás megalósít
+         * TODO: kirajzolás megalósít
          */
     }
 }

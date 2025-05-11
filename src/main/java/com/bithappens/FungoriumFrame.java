@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
@@ -25,6 +26,9 @@ public class FungoriumFrame extends JFrame {
         this.setResizable(true);
         this.getContentPane().setBackground(new Color(0x312E2B));
         this.setLayout(new GridBagLayout());
+        ImageIcon windowIcon = new ImageIcon("src/main/resources/window-icon.png");
+        this.setIconImage(windowIcon.getImage());
+        this.setTitle("Fungorium");
         GridBagConstraints gbc = new GridBagConstraints();
         playerColorMap = new HashMap<>();
         setPlayerColors();
