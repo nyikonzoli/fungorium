@@ -17,10 +17,15 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
     }
     @Override
     public void reset() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reset'");
+        removeAll();
+        selectedTekton = null;
+        revalidate();
+        repaint();
     }
     public void setTekton(Tekton tekton) {
+
+        reset();
+
         selectedTekton = tekton;
         Player currentPlayer = fungoriumFrame.getPrototype().getGame().getCurrentPlayer();
         for (Mycelium mycelium :tekton.myceliums) {

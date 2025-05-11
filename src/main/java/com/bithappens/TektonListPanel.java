@@ -46,16 +46,19 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
             gridPanel.add(newTektonButton);
         }
         */
-        resetButtons();     
+        reset();     
         this.add(scrollPane);  
  
     }
     @Override
     public void reset() {
-
+        resetButtons();
+        gridPanel.revalidate();
+        gridPanel.repaint();
     }
 
     private void resetButtons() {
+        gridPanel.removeAll();
         List<Tekton> tektons = fungoriumFrame.getPrototype().getGame().getGameField();
         for (Tekton tekton : tektons) {
             JButton button = new JButton();
@@ -66,6 +69,12 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
             });
             gridPanel.add(button);
         }
+        /*
+        gridPanel.repaint();
+        gridPanel.revalidate();
+        scrollPane.repaint();
+        scrollPane.revalidate();
+        */
     }
 
     /*

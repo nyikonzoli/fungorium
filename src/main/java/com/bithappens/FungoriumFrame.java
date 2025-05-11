@@ -41,11 +41,6 @@ public class FungoriumFrame extends JFrame {
             PlayerNames.add(allPlayer.getTypeName());
         }
 
-        String currentPlayerString = prototype.getGame().getCurrentPlayer().getTypeName();
-
-        headerPanel.fillPlayerList(PlayerNames);
-        headerPanel.setCurrentPlayer(currentPlayerString);
-
         /*
          * Add to this GridBagLayout frame
          */
@@ -89,6 +84,11 @@ public class FungoriumFrame extends JFrame {
         this.add(actionSelectorPanel, gbc);
 
         this.setVisible(true);
+        panels.add(headerPanel);
+        panels.add(tektonListPanel);
+        panels.add(objectSelectorPanel);
+        panels.add(tektonViewPanel);
+        panels.add(actionSelectorPanel);
     }
 
     public Prototype getPrototype(){
@@ -96,6 +96,8 @@ public class FungoriumFrame extends JFrame {
     }
 
     public void resetAll() {
-
+        for (IFungoriumPanel panel : panels) {
+            panel.reset();
+        }
     }
 }

@@ -79,9 +79,14 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
         nextPlayer.setMargin(new Insets(0, 0, 0, 0));
         nextPlayer.setFont(buttonFont);
         nextPlayer.addActionListener(e -> {
+            System.out.println("Next round pressed");
+            fungoriumFrame.getPrototype().getGame().nextPlayer();
+            System.out.println(fungoriumFrame.getPrototype().getKey(fungoriumFrame.getPrototype().getGame().getCurrentPlayer()));
             fungoriumFrame.resetAll();
-
         });
+
+        fillPlayerList();
+        setCurrentPlayer();
 
         this.add(addPlayersPanel);
         this.add(newGame);
@@ -95,19 +100,23 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
 
     }
 
-    public void fillPlayerList(ArrayList<String> playerNames){
-
-        for(String name : playerNames){
-            players.addItem(name);
+    private void fillPlayerList(){
+        for (Player p : fungoriumFrame.getPrototype().getGame().getPlayers()) {
+            players.addItem(fungoriumFrame.getPrototype().getKey(p));
         }
     }
 
-    public void setCurrentPlayer(String name){
-        currentPlayer.setText(name);
+    public void setCurrentPlayer(){
+        Player p = fungoriumFrame.getPrototype().getGame().getCurrentPlayer();
+        currentPlayer.setText(fungoriumFrame.getPrototype().getKey(p));
+        System.out.println(currentPlayer.getText());
     }
     @Override
     public void reset() {
-
+        fillPlayerList();
+        setCurrentPlayer();
+        currentPlayer.repaint();
+        currentPlayer.revalidate();
     }
 
     @Override
