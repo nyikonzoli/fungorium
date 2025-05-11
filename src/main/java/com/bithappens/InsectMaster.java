@@ -14,7 +14,14 @@ public class InsectMaster extends Player {
     public InsectMaster(){
 
     }
-
+    @Override
+    public List<Object> getOwnedObjects() {
+        ArrayList<Object> retlist = new ArrayList<>();
+        for (Insect i : insects) {
+            retlist.add(i);
+        }
+        return retlist;
+    }
 
     /**
      * Gets the name of the Player type

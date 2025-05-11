@@ -54,7 +54,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
     public void reset() {
 
     }
-    
+
     private void resetButtons() {
         List<Tekton> tektons = fungoriumFrame.getPrototype().getGame().getGameField();
         for (Tekton tekton : tektons) {
@@ -62,6 +62,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
             button.setText(fungoriumFrame.getPrototype().getKey(tekton));
             button.addActionListener(e -> {
                 System.out.println("gomb teszt klikk");
+                objectSelectorPanel.setTekton(tekton);
             });
             gridPanel.add(button);
         }

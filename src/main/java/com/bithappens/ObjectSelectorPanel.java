@@ -2,11 +2,13 @@ package com.bithappens;
 
 import java.awt.Color;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
     private ActionSelectorPanel actionSelectorPanel;
     private FungoriumFrame fungoriumFrame;
+    private Tekton selectedTekton;
     public ObjectSelectorPanel(FungoriumFrame frame, ActionSelectorPanel actionSelectorPanel) {
         fungoriumFrame = frame;
         this.actionSelectorPanel = actionSelectorPanel;
@@ -18,5 +20,36 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'reset'");
     }
-
+    public void setTekton(Tekton tekton) {
+        selectedTekton = tekton;
+        Player currentPlayer = fungoriumFrame.getPrototype().getGame().getCurrentPlayer();
+        for (Mycelium mycelium :tekton.myceliums) {
+            if (currentPlayer.equals(mycelium.getMaster())) {
+                JButton mycButton = new JButton();
+                mycButton.setName(fungoriumFrame.getPrototype().getKey(mycelium));
+                mycButton.addActionListener(e -> {
+                    System.out.println("Mycelium selected");
+                });
+                this.add(mycButton);
+            }
+        }
+        if (tekton.getMushroomBody() != null && currentPlayer.getOwnedObjects().contains(tekton.getMushroomBody())) {
+            JButton mushroomButton = new JButton();
+            mushroomButton.setText(fungoriumFrame.getPrototype().getKey(tekton.getMushroomBody()));
+            mushroomButton.addActionListener(e -> {
+                System.out.println("Mushroom selected");
+            });
+            this.add(mushroomButton);
+        }
+        for (Insect insect : tekton.getInsects()) {
+            if (currentPlayer.equals(insect.getImaster())) {
+                JButton insectButton = new JButton();
+                insectButton.setText(fungoriumFrame.getPrototype().getKey(insect));
+                insectButton.addActionListener(e -> {
+                    System.out.println("Insect selected");
+                });
+                this.add(insectButton);
+            }
+        }
+    }
 }

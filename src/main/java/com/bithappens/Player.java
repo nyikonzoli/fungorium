@@ -1,4 +1,7 @@
 package com.bithappens;
+
+import java.util.List;
+
 /**
  * Represents a player in the game.
  */
@@ -56,4 +59,8 @@ public abstract class Player {
     public void incrementScore(){
         score++;
     }
+
+    public List<Object> getOwnedObjects() {
+        return null;
+    }  
 }

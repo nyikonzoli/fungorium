@@ -130,5 +130,13 @@ public class MushroomMaster extends Player{
         }
     }
 
+    @Override
+    public List<Object> getOwnedObjects() {
+        ArrayList<Object> retlist = new ArrayList<>();
+        for (MushroomBody m : mushrooms) {
+            retlist.add(m);
+        }
+        return retlist;
+    }
 }
 
