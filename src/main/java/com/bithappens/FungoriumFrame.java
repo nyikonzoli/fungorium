@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 
 public class FungoriumFrame extends JFrame {
-    Prototype prototype;
+    private Prototype prototype;
     ArrayList<IFungoriumPanel> panels = new ArrayList<>();
     public FungoriumFrame(Prototype p) {
         prototype = p;
@@ -90,6 +90,11 @@ public class FungoriumFrame extends JFrame {
 
         this.setVisible(true);
     }
+
+    public Prototype getPrototype(){
+        return prototype;
+    }
+
     public void resetAll() {
 
     }

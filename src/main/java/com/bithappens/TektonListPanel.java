@@ -1,21 +1,26 @@
 package com.bithappens;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class TektonListPanel extends JPanel implements IFungoriumPanel {
+public class TektonListPanel extends JPanel implements IFungoriumPanel, ActionListener {
     private TektonViewPanel tektonViewPanel;
     private ObjectSelectorPanel objectSelectorPanel;
     private FungoriumFrame fungoriumFrame;
     private JScrollPane scrollPane;
     private JPanel gridPanel;
+    private ArrayList<JButton> tektonButtons = new ArrayList<>(); 
+
     public TektonListPanel(FungoriumFrame frame, TektonViewPanel tektonViewPanel, ObjectSelectorPanel objectSelectorPanel) {
         fungoriumFrame = frame;
         this.tektonViewPanel = tektonViewPanel;
@@ -28,15 +33,31 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel {
         scrollPane = new JScrollPane(gridPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(200, 600));
+
+
         //debug backgorund
         setBackground(Color.CYAN);
-        for (int i = 0; i < 90; i++) {
-            gridPanel.add(new JButton("Teszt: " + i));
+        List<Tekton> tektons = frame.getPrototype().getGame().getGameField();
+
+        for (Tekton currentTekton : tektons) {
+            JButton newTektonButton = new JButton(currentTekton.getClass().getName());
+            newTektonButton.addActionListener(this);
+            tektonButtons.add(newTektonButton);
+            gridPanel.add(newTektonButton);
         }
         this.add(scrollPane);        
     }
     @Override
     public void reset() {
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for(JButton currentTektonButton : tektonButtons){
+            if(e.getSource() == currentTektonButton){
+                System.out.println(currentTektonButton.getText());
+            }
+        }
     }
 }
