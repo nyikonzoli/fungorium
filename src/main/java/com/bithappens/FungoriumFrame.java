@@ -5,23 +5,29 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
 
 public class FungoriumFrame extends JFrame {
     private Prototype prototype;
+    private HashMap<Player, Color> playerColorMap;
     ArrayList<IFungoriumPanel> panels = new ArrayList<>();
+
     public FungoriumFrame(Prototype p) {
         prototype = p;
-
+        
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(new Dimension(1800, 1000));
+        this.setSize(new Dimension(1200, 600));
         this.setResizable(true);
         this.getContentPane().setBackground(new Color(0x312E2B));
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        playerColorMap = new HashMap<>();
+        setPlayerColors();
         /*
          * Create Panels and add them to panels list
          */
@@ -31,7 +37,7 @@ public class FungoriumFrame extends JFrame {
         ObjectSelectorPanel objectSelectorPanel = new ObjectSelectorPanel(this, actionSelectorPanel);
         TektonListPanel tektonListPanel = new TektonListPanel(this, tektonViewPanel, objectSelectorPanel);
 
-
+        /*
         List<Player> allPlayers = new ArrayList<>();
         allPlayers = prototype.getGame().getPlayers();
         ArrayList<String> PlayerNames = new ArrayList<>();
@@ -40,7 +46,7 @@ public class FungoriumFrame extends JFrame {
         for (Player allPlayer : allPlayers) {
             PlayerNames.add(allPlayer.getTypeName());
         }
-
+        */
         /*
          * Add to this GridBagLayout frame
          */
@@ -89,8 +95,36 @@ public class FungoriumFrame extends JFrame {
         panels.add(objectSelectorPanel);
         panels.add(tektonViewPanel);
         panels.add(actionSelectorPanel);
-    }
 
+        
+    }
+    // TODO: fontos beallitani uj jatek betoltesenel
+    public void setPlayerColors() {
+        ArrayList<Color> predefinedColors = new ArrayList<>(List.of(          
+            Color.RED,
+            Color.BLUE,
+            Color.GREEN,
+            Color.ORANGE,
+            Color.MAGENTA,
+            Color.CYAN,
+            Color.YELLOW,
+            new Color(128, 0, 128),   // lila
+            new Color(255, 105, 180), // pink
+            new Color(139, 69, 19)    // barna
+        ));
+        Random random = new Random();
+        for (int i = 0; i < prototype.getGame().getPlayers().size(); i++) {
+            Player p = prototype.getGame().getPlayers().get(i);
+            if (i < predefinedColors.size()) {
+                playerColorMap.put(p, predefinedColors.get(i));
+            } else {
+                playerColorMap.put(p, new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+            }
+        }
+    }
+    public Color getPlayerColor(Player p) {
+        return playerColorMap.get(p);
+    }
     public Prototype getPrototype(){
         return prototype;
     }

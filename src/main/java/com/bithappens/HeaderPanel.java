@@ -1,6 +1,7 @@
 package com.bithappens;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -9,14 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListener {
+public class HeaderPanel extends JPanel implements IFungoriumPanel {
 
     private JComboBox<String> players = new JComboBox<>();
     private JLabel currentPlayer = new JLabel();
@@ -25,8 +29,8 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
     public HeaderPanel(FungoriumFrame frame){
         fungoriumFrame = frame;
         //this.setBounds(0, 0, 1800, 150);
-        this.setBackground(Color.GREEN);
-
+        this.setBackground(Color.white);
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         Font buttonFont = new Font("Arial", Font.BOLD, 10);
         Dimension elementDimension = new Dimension(90, 30);
         // ELEMENTS
@@ -45,6 +49,10 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
         JButton newGame = new JButton("New Game");
         newGame.setPreferredSize(elementDimension);
         newGame.setFont(buttonFont);
+        newGame.addActionListener(e -> {
+            // todo: implement
+            fungoriumFrame.setPlayerColors();
+        });
 
         JPanel savePanel = new JPanel();
         savePanel.setLayout(new BoxLayout(savePanel, BoxLayout.Y_AXIS));
@@ -62,6 +70,10 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
         JButton load = new JButton("Load");
         load.setPreferredSize(elementDimension);
         load.setFont(buttonFont);
+        load.addActionListener(e -> {
+            // todo: implement
+            fungoriumFrame.setPlayerColors();
+        });
 
         players.setPreferredSize(elementDimension);
 
@@ -87,7 +99,29 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
 
         fillPlayerList();
         setCurrentPlayer();
+        // different names with different colors
+        
+        players.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
+                if (value != null) {
+                    String playerKey = value.toString();
+                    // megkeressük a Player példányt a key alapján
+                    for (Player p : fungoriumFrame.getPrototype().getGame().getPlayers()) {
+                        if (fungoriumFrame.getPrototype().getKey(p).equals(playerKey)) {
+                            label.setForeground(fungoriumFrame.getPlayerColor(p));
+                            break;
+                        }
+                    }
+                }
+
+                return label;
+            }
+        });
+        players.setSelectedItem(null);
+        
         this.add(addPlayersPanel);
         this.add(newGame);
         this.add(savePanel);
@@ -101,6 +135,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
     }
 
     private void fillPlayerList(){
+        players.removeAllItems();
         for (Player p : fungoriumFrame.getPrototype().getGame().getPlayers()) {
             players.addItem(fungoriumFrame.getPrototype().getKey(p));
         }
@@ -109,18 +144,14 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel, ActionListen
     public void setCurrentPlayer(){
         Player p = fungoriumFrame.getPrototype().getGame().getCurrentPlayer();
         currentPlayer.setText(fungoriumFrame.getPrototype().getKey(p));
-        System.out.println(currentPlayer.getText());
+        currentPlayer.setForeground(fungoriumFrame.getPlayerColor(p));
     }
     @Override
     public void reset() {
         fillPlayerList();
         setCurrentPlayer();
+        players.setSelectedItem(null);
         currentPlayer.repaint();
         currentPlayer.revalidate();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 }
