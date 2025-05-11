@@ -22,6 +22,19 @@ public class Prototype {
         newgame(command); 
     }
     
+    public String getKey(Object object) {
+        // if duplicate key name, unforseen outcome
+        for (String key : objects.keySet()) {
+            if (objects.get(key).equals(object)) {
+                return key;
+            }
+        }
+        if (object == null) {
+            return "-";
+        }
+        return "#ERROR";
+    }
+
     /**
      * Completes the action specified in it's parameter. Needs to be called for every new line on input.
      * @param inputLine One line of input to be interpreted as a command and executed.

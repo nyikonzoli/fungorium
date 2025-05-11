@@ -13,13 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class TektonListPanel extends JPanel implements IFungoriumPanel, ActionListener {
+public class TektonListPanel extends JPanel implements IFungoriumPanel /*, ActionListener*/ {
     private TektonViewPanel tektonViewPanel;
     private ObjectSelectorPanel objectSelectorPanel;
     private FungoriumFrame fungoriumFrame;
     private JScrollPane scrollPane;
     private JPanel gridPanel;
-    private ArrayList<JButton> tektonButtons = new ArrayList<>(); 
+    //private ArrayList<JButton> tektonButtons = new ArrayList<>(); 
 
     public TektonListPanel(FungoriumFrame frame, TektonViewPanel tektonViewPanel, ObjectSelectorPanel objectSelectorPanel) {
         fungoriumFrame = frame;
@@ -37,21 +37,37 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel, ActionLi
 
         //debug backgorund
         setBackground(Color.CYAN);
-        List<Tekton> tektons = frame.getPrototype().getGame().getGameField();
-
+        //List<Tekton> tektons = frame.getPrototype().getGame().getGameField();
+        /*
         for (Tekton currentTekton : tektons) {
             JButton newTektonButton = new JButton(currentTekton.getClass().getName());
             newTektonButton.addActionListener(this);
             tektonButtons.add(newTektonButton);
             gridPanel.add(newTektonButton);
         }
-        this.add(scrollPane);        
+        */
+        resetButtons();     
+        this.add(scrollPane);  
+ 
     }
     @Override
     public void reset() {
 
     }
+    
+    private void resetButtons() {
+        List<Tekton> tektons = fungoriumFrame.getPrototype().getGame().getGameField();
+        for (Tekton tekton : tektons) {
+            JButton button = new JButton();
+            button.setText(fungoriumFrame.getPrototype().getKey(tekton));
+            button.addActionListener(e -> {
+                System.out.println("gomb teszt klikk");
+            });
+            gridPanel.add(button);
+        }
+    }
 
+    /*
     @Override
     public void actionPerformed(ActionEvent e) {
         for(JButton currentTektonButton : tektonButtons){
@@ -60,4 +76,5 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel, ActionLi
             }
         }
     }
+    */
 }
