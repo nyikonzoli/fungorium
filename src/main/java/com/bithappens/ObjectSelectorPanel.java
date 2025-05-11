@@ -1,6 +1,7 @@
 package com.bithappens;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
     public ObjectSelectorPanel(FungoriumFrame frame, ActionSelectorPanel actionSelectorPanel) {
         fungoriumFrame = frame;
         this.actionSelectorPanel = actionSelectorPanel;
+        this.setMinimumSize(new Dimension(100, 80));
         //debug backgorund
         setBackground(Color.MAGENTA);
     }
