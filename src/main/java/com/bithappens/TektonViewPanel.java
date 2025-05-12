@@ -1,6 +1,7 @@
 package com.bithappens;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
@@ -26,5 +27,7 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
         /*
          * TODO: kirajzolás megalósít
          */
+        Dimension panelDimension = this.getSize();
+        
     }
 }

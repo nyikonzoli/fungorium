@@ -65,7 +65,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         List<Tekton> tektons = fungoriumFrame.getPrototype().getGame().getGameField();
         for (Tekton tekton : tektons) {
             JButton button = new JButton();
-            button.setText(tektonHTMLGenerator(tekton));
+            button.setText(TektonListPanel.tektonHTMLGenerator(fungoriumFrame, tekton));
             button.addActionListener(e -> {
                 System.out.println("gomb teszt klikk");
                 objectSelectorPanel.selectTekton(tekton);
@@ -89,12 +89,12 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         scrollPane.revalidate();
         */
     }
-    private String getFontColor(Color c) {
+    private static String getFontColor(Color c) {
         return "<font color='rgb(" + c.getRed() + "," + c.getGreen() + "," + c.getBlue() +")'>";
     }
 
-    public String tektonHTMLGenerator(Tekton t) {
-        Prototype p = fungoriumFrame.getPrototype();
+    public static String tektonHTMLGenerator(FungoriumFrame frame, Tekton t) {
+        Prototype p = frame.getPrototype();
         StringBuilder sb = new StringBuilder();
         sb.append("<html><font color='black'>" + p.getKey(t) + "</font><br>");
         if(t.getMushroomBody() != null) {
@@ -107,7 +107,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
                 }
             }
             if (owner != null) {
-                sb.append(getFontColor(fungoriumFrame.getPlayerColor(owner)));
+                sb.append(getFontColor(frame.getPlayerColor(owner)));
             }
             if (mb instanceof SuperMushroomBody) {
                 sb.append("S");
@@ -120,7 +120,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
             sb.append("<font color='black'>Insects: </font>");
         }
         for (Insect i : t.getInsects()) {
-            sb.append(getFontColor(fungoriumFrame.getPlayerColor(i.getImaster())) + p.getKey(i));
+            sb.append(getFontColor(frame.getPlayerColor(i.getImaster())) + p.getKey(i));
             if (i.isStunned()) {
                 sb.append("[p]");
             }
@@ -145,7 +145,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
                     count++;
                 }
             }
-            sb.append(getFontColor(fungoriumFrame.getPlayerColor(mm)) + count);
+            sb.append(getFontColor(frame.getPlayerColor(mm)) + count);
             sb.append(" </font>");
         }
         sb.append("</html>");

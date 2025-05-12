@@ -130,6 +130,7 @@ public class Game {
     public void end(){
         System.out.println("Final Mushroom Master Winner: "  + topMushroomMasters.get(0).getScore() + " pts)");
         System.out.println("Final Insect Master Winner: "  + topInsectMasters.get(0).getScore() + " pts)");
+        // TODO: sum better way
     }
     /**
      * updates top players and ends the game, when its over

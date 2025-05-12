@@ -27,20 +27,30 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
     private JComboBox<String> players = new JComboBox<>();
     private JLabel currentPlayer = new JLabel();
     private FungoriumFrame fungoriumFrame;
-    ImageIcon backgroundImage;
-
+    private ImageIcon backgroundImage;
+    /**
+     * Constructor of HeaderPanel that sets up the panel
+     * @param frame FungoriumFrame that contains the header panel
+     */
     public HeaderPanel(FungoriumFrame frame){
+        /*
+         * SET UP PANEL
+         */
         fungoriumFrame = frame;
         //this.setBounds(0, 0, 1800, 150);
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        // Buttons' font to use
         Font buttonFont = new Font("Arial", Font.BOLD, 10);
+        // Components' preferred dimensions
         Dimension elementDimension = new Dimension(90, 30);
-        // ELEMENTS
+        // Panel layout
         setLayout(new FlowLayout(FlowLayout.LEADING, 20, 30));
         //setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         backgroundImage = new ImageIcon("src/main/resources/header-icon-full.png");
-
+        /*
+         * SELECT NUMBER OF PLAYERS PANEL
+         */
         JPanel addPlayersPanel = new JPanel();
         addPlayersPanel.setLayout(new BoxLayout(addPlayersPanel, BoxLayout.Y_AXIS));
         JLabel numberOfPlayersText = new JLabel("Number of Players: ");
@@ -49,7 +59,9 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
 
         addPlayersPanel.add(numberOfPlayersText);
         addPlayersPanel.add(numberOfPlayers);
-
+        /*
+         * NEW GAME BUTTON
+         */
         JButton newGame = new JButton("New Game");
         newGame.setPreferredSize(elementDimension);
         newGame.setFont(buttonFont);
@@ -57,7 +69,9 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
             // TODO: implement
             fungoriumFrame.setPlayerColors();
         });
-
+        /*
+         * SAVE GAME PANEL
+         */
         JPanel savePanel = new JPanel();
         savePanel.setLayout(new BoxLayout(savePanel, BoxLayout.Y_AXIS));
         JLabel saveText = new JLabel("Name of the save file: ");
@@ -73,7 +87,9 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         save.addActionListener(e -> {
             // TODO: implement
         });
-
+        /*
+         * LOAD GAME PANEL
+         */
         JButton load = new JButton("Load");
         load.setPreferredSize(elementDimension);
         load.setFont(buttonFont);
@@ -81,9 +97,16 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
             // TODO: implement
             fungoriumFrame.setPlayerColors();
         });
-
+        /*
+         * PLAYER LIST 
+         */
         players.setPreferredSize(elementDimension);
-
+        fillPlayerList();
+        setCurrentPlayer();
+        players.setSelectedItem(null);
+        /*
+         * CURRENT PLAYER 
+         */
         JLabel currentPlayerText = new JLabel("Current Player: ");
         currentPlayerText.setFont(new Font("Arial", Font.BOLD, 10));
         currentPlayerText.setPreferredSize(elementDimension);
@@ -91,7 +114,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         currentPlayer.setFont(new Font("Arial", Font.BOLD, 10));
         currentPlayer.setForeground(Color.RED);
         /*
-         * Next Player button with action listener
+         * NEXT PLAYER BUTTON
          */
         JButton nextPlayer = new JButton("Next Player");
         nextPlayer.setPreferredSize(elementDimension);
@@ -104,10 +127,9 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
             fungoriumFrame.resetAll();
         });
 
-        fillPlayerList();
-        setCurrentPlayer();
-        // different names with different colors
-        
+        /*
+         * PLAYER LIST RENDERER SO IT SHOWS COLORS
+         */
         players.setRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -127,8 +149,10 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
                 return label;
             }
         });
-        players.setSelectedItem(null);
         
+        /*
+         * ADD COMPONENTS TO PANEL
+         */
         this.add(addPlayersPanel);
         this.add(newGame);
         this.add(savePanel);
@@ -140,14 +164,18 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         this.add(nextPlayer);
 
     }
-
+    /**
+     * Fills the players' combobox with the player names
+     */
     private void fillPlayerList(){
         players.removeAllItems();
         for (Player p : fungoriumFrame.getPrototype().getGame().getPlayers()) {
             players.addItem(fungoriumFrame.getPrototype().getKey(p));
         }
     }
-
+    /**
+     * Syncs the current player with the actual current player 
+     */
     public void setCurrentPlayer(){
         Player p = fungoriumFrame.getPrototype().getGame().getCurrentPlayer();
         currentPlayer.setText(fungoriumFrame.getPrototype().getKey(p));
@@ -164,7 +192,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // háttérkép kirajzolása bal felső sarokba
+        // Draw background image
         g.drawImage(backgroundImage.getImage(), 0, 0, this);
     }
 }
