@@ -15,7 +15,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         this.actionSelectorPanel = actionSelectorPanel;
         this.setMinimumSize(new Dimension(100, 80));
         //debug backgorund
-        setBackground(Color.MAGENTA);
+        //setBackground(Color.MAGENTA);
     }
     @Override
     public void reset() {

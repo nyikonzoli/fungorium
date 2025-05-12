@@ -10,7 +10,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         this.fungoriumFrame = frame;
 
         //debug color
-        setBackground(Color.RED);
+        //setBackground(Color.RED);
     }
     @Override
     public void reset() {

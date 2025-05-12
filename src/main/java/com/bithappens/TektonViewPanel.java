@@ -47,6 +47,8 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
         reset();
         selectedTekton = tekton;
         drawAll(tekton);
+        revalidate();
+        repaint();
     }
     // TODO: myceliumok megjelenítése
     /**

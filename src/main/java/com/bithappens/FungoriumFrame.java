@@ -22,7 +22,7 @@ public class FungoriumFrame extends JFrame {
         prototype = p;
         
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(new Dimension(1200, 600));
+        this.setSize(new Dimension(1280, 960));
         this.setResizable(true);
         this.getContentPane().setBackground(new Color(0x312E2B));
         this.setLayout(new GridBagLayout());
