@@ -21,7 +21,10 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
     private ArrayList<ColoredLine> lines = new ArrayList<>();
     // Tekton label size
     private Dimension labelDimension = new Dimension(80, 80);
-
+    /**
+     * Constoructor of TektonViewPanel, sets a FungoriumFrame as the container containing it
+     * @param frame FungoriumFrame containing the panel
+     */
     public TektonViewPanel(FungoriumFrame frame) {
         this.fungoriumFrame = frame;
 
@@ -36,15 +39,21 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
         revalidate();
         repaint();
     }
+    /**
+     * Selects a Tekton to base the panel's content on
+     * @param tekton Selected Tekton
+     */
     public void selectTekton(Tekton tekton) {
         reset();
         selectedTekton = tekton;
-        /*
-         * TODO: kirajzolás megalósít
-         */
-        
         drawAll(tekton);
     }
+    // TODO: myceliumok megjelenítése
+    /**
+     * Draws adds all labels representing Tektons to the panel. Adds all neighbor connections as lines
+     * to the lines list.
+     * @param t Center Tekton on the panel
+     */
     private void drawAll(Tekton t) {
         // Center tekton
         labelFactory(t, 0, 0);
@@ -87,12 +96,19 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
             }
             sb.append("</html>");
             visited.add(current);
+            // Neighbor of neighbor label
             int xStringLabel = (int)Math.round((radius + labelDimension.width * 1.5) * Math.cos(angle));
             int yStringLabel = (int)Math.round((radius + labelDimension.height * 1.5) * Math.sin(angle));
             lines.add(new ColoredLine(new Point(xStringLabel, yStringLabel), new Point(x, y), Color.gray));
             labelFactory(sb.toString(), xStringLabel, yStringLabel);
         }
     }
+    /**
+     * Adds a label with text to the specified world coordinates
+     * @param s Label text
+     * @param x World coordinate X
+     * @param y World coordinate Y
+     */
     private void labelFactory(String s, int x, int y) {
         Point p = calculateLabelPosition(x, y);
         JLabel label = new JLabel();
@@ -104,6 +120,12 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
         label.setBorder(BorderFactory.createLineBorder(Color.gray, 1, true));
         this.add(label);
     }
+    /**
+     * Adds a label with Tekton description in it to the specified world coordinates
+     * @param t Tekton to be described
+     * @param x World coordinate X
+     * @param y World coordinate Y
+     */
     private void labelFactory(Tekton t, int x, int y) {
         Point p = calculateLabelPosition(x, y);
         JLabel label = new JLabel();
@@ -127,6 +149,12 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
         int cY = getHeight() / 2 - (wY + labelDimension.height / 2);
         return new Point(cX, cY);
     }
+    /**
+     * Calculates panel position based on world coordinates
+     * @param wX World coordinate X
+     * @param wY World coordinate Y
+     * @return Point containing the screen coordinates (relative to the panels top left corner)
+     */
     private Point calculatePosition(int wX, int wY) {
         int cX = getWidth() / 2 + wX;
         int cY = getHeight() / 2 - wY;
@@ -145,7 +173,9 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
             g2D.drawLine(p1.x, p1.y, p2.x, p2.y);
         }
     }
-
+    /**
+     * Simple ColoredLine class used to draw lines in paintComponent method
+     */
     class ColoredLine {
         public Point point1;
         public Point point2;

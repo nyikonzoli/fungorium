@@ -27,31 +27,17 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         fungoriumFrame = frame;
         this.tektonViewPanel = tektonViewPanel;
         this.objectSelectorPanel = objectSelectorPanel;
-        // TESZT JELLEG INNENTŐL
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(Color.WHITE);
 
         gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(0, 2, 0, 0));
-        //gridPanel.setLayout(new BoxLayout(gridPanel, BoxLayout.Y_AXIS));
         scrollPane = new JScrollPane(gridPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(100, 600));
 
-
-        //debug backgorund
-        setBackground(Color.CYAN);
-        //List<Tekton> tektons = frame.getPrototype().getGame().getGameField();
-        /*
-        for (Tekton currentTekton : tektons) {
-            JButton newTektonButton = new JButton(currentTekton.getClass().getName());
-            newTektonButton.addActionListener(this);
-            tektonButtons.add(newTektonButton);
-            gridPanel.add(newTektonButton);
-        }
-        */
         reset();     
         this.add(scrollPane);  
- 
     }
     @Override
     public void reset() {
@@ -59,7 +45,9 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         gridPanel.revalidate();
         gridPanel.repaint();
     }
-
+    /** 
+     * Resets all buttons in the grid
+     */
     private void resetButtons() {
         gridPanel.removeAll();
         List<Tekton> tektons = fungoriumFrame.getPrototype().getGame().getGameField();
