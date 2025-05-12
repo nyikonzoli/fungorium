@@ -67,22 +67,42 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
         for (int i = 0; i < n; i++) {
             Tekton current = neighbors.get(i);
             double angle = 2 * Math.PI * i / n;
-            int x = (int)(radius * Math.cos(angle));
-            int y = (int)(radius * Math.sin(angle));
+            int x = (int)Math.round(radius * Math.cos(angle));
+            int y = (int)Math.round(radius * Math.sin(angle));
             labelFactory(current, x, y);
             lines.add(new ColoredLine(new Point(0, 0), new Point(x, y), Color.black));
-
+            // Neighbor to neighbor lines
+            StringBuilder sb = new StringBuilder("<html><font size='3' color='gray'>Neighbors:</font><br>");
             for (Tekton neigborOfNeighbor : current.getNeighbours()) {
                 if (neighbors.contains(neigborOfNeighbor) && !visited.contains(neigborOfNeighbor)) {
                     int idx = neighbors.indexOf(neigborOfNeighbor);
                     double angle2 = 2 * Math.PI * idx / n;
-                    int x2 = (int)(radius * Math.cos(angle2));
-                    int y2 = (int)(radius * Math.sin(angle2));
+                    int x2 = (int)Math.round(radius * Math.cos(angle2));
+                    int y2 = (int)Math.round(radius * Math.sin(angle2));
                     lines.add(new ColoredLine(new Point(x2, y2), new Point(x, y), Color.black));
+
+                } else if (!neighbors.contains(neigborOfNeighbor) && !neigborOfNeighbor.equals(t)) {
+                    sb.append("<font size='2' color='gray'>" + fungoriumFrame.getPrototype().getKey(neigborOfNeighbor) + " </font>");
                 }
             }
+            sb.append("</html>");
             visited.add(current);
+            int xStringLabel = (int)Math.round((radius + labelDimension.width * 1.5) * Math.cos(angle));
+            int yStringLabel = (int)Math.round((radius + labelDimension.height * 1.5) * Math.sin(angle));
+            lines.add(new ColoredLine(new Point(xStringLabel, yStringLabel), new Point(x, y), Color.gray));
+            labelFactory(sb.toString(), xStringLabel, yStringLabel);
         }
+    }
+    private void labelFactory(String s, int x, int y) {
+        Point p = calculateLabelPosition(x, y);
+        JLabel label = new JLabel();
+        label.setSize(labelDimension);
+        label.setBounds(p.x,p.y,labelDimension.width,labelDimension.height);
+        label.setText(s);
+        label.setOpaque(true);
+        label.setBackground(this.getBackground());
+        label.setBorder(BorderFactory.createLineBorder(Color.gray, 1, true));
+        this.add(label);
     }
     private void labelFactory(Tekton t, int x, int y) {
         Point p = calculateLabelPosition(x, y);
