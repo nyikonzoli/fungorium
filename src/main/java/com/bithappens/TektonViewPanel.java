@@ -45,17 +45,20 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
      */
     public void selectTekton(Tekton tekton) {
         selectedTekton = tekton;
-        redrawAll();
+        redraw();
     }
     /**
      * Draws adds all labels representing Tektons to the panel. Adds all neighbor connections as lines
      * to the lines list.
-     * @param t Center Tekton on the panel
      */
-    public void redrawAll() {
+    @Override
+    public void redraw() {
         removeAll();
         lines.clear();
         Tekton t = selectedTekton;
+        if (t == null) {
+            return;
+        }
         // Center tekton
         labelFactory(t, 0, 0);
         // Circle radius

@@ -11,7 +11,7 @@
 <mycelium> m2 mm1 th 0 20
 <tekton> tn1 Tekton
 <neighbors> th td tn2
-<mushroom> mu2 mm2 1 2 1
+<mushroom> mu2 mm2 1 2 2
 <mycelium> m3 mm2 th 0 20
 <tekton> tn2 Tekton
 <neighbors> th td tn1

@@ -138,4 +138,9 @@ public class FungoriumFrame extends JFrame {
             panel.reset();
         }
     }
+    public void redrawAll() {
+        for (IFungoriumPanel panel : panels) {
+            panel.redraw();
+        }
+    }
 }

@@ -56,6 +56,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
             button.setText(TektonListPanel.tektonHTMLGenerator(fungoriumFrame, tekton));
             button.addActionListener(e -> {
                 System.out.println("gomb teszt klikk");
+                objectSelectorPanel.reset();
                 objectSelectorPanel.selectTekton(tekton);
                 tektonViewPanel.selectTekton(tekton);
             });
@@ -153,4 +154,8 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         }
     }
     */
+    @Override
+    public void redraw() {
+        reset();
+    }
 }

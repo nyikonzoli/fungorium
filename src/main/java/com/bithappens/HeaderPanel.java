@@ -267,4 +267,8 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         // Draw background image
         g.drawImage(backgroundImage.getImage(), 0, 0, this);
     }
+    @Override
+    public void redraw() {
+        // can stay empty
+    }
 }

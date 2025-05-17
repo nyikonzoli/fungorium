@@ -58,6 +58,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 + p.getKey(mushroomBody.getLocation()) + " "
                 + p.getKey(targetSelectorComboBox.getSelectedItem())
             );
+            fungoriumFrame.redrawAll();
         });
         this.add(growMyButton);
         // TODO: rest; promote, spore spreading, count, dead?, actions
@@ -79,6 +80,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 + p.getKey(mycelium.getMaster()) + " "
                 + p.getKey(center)
             );
+            fungoriumFrame.redrawAll();
         });
         this.add(growMuButton);
         // grow mycelium button
@@ -91,6 +93,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 + p.getKey(center) + " "
                 + p.getKey(targetSelectorComboBox.getSelectedItem())
             );
+            fungoriumFrame.redrawAll();
         });
         this.add(growMyButton);
         // eat insect button - currently tries eating every insect
@@ -102,7 +105,9 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 + p.getKey(mycelium.getMaster()) + " "
                 + p.getKey(insectSelectorComboBox.getSelectedItem())
             );
+            fungoriumFrame.redrawAll();
         });
+        this.add(eatInsecButton);
         // cut label
         JLabel cutLabel = new JLabel();
         cutLabel.setText((mycelium.isCut() ? "Cut" : "Not cut"));
@@ -140,5 +145,9 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 }
             });
         this.add(comboBox);
+    }
+    @Override
+    public void redraw() {
+        // can be empty for now
     }
 }
