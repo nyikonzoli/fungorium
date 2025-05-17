@@ -81,7 +81,7 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
             int x = (int)Math.round(radius * Math.cos(angle));
             int y = (int)Math.round(radius * Math.sin(angle));
             labelFactory(current, x, y);
-            lines.add(new ColoredLine(new Point(0, 0), new Point(x, y), Color.black));
+            lines.add(new ColoredLine(new Point(0, 0), new Point(x, y), lineColorBetweenNeighbors(t, current)));
             // Neighbor to neighbor lines
             StringBuilder sb = new StringBuilder("<html><font size='3' color='gray'>Neighbors:</font><br>");
             for (Tekton neigborOfNeighbor : current.getNeighbours()) {
@@ -90,7 +90,7 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
                     double angle2 = 2 * Math.PI * idx / n;
                     int x2 = (int)Math.round(radius * Math.cos(angle2));
                     int y2 = (int)Math.round(radius * Math.sin(angle2));
-                    lines.add(new ColoredLine(new Point(x2, y2), new Point(x, y), Color.black));
+                    lines.add(new ColoredLine(new Point(x2, y2), new Point(x, y), lineColorBetweenNeighbors(current, neigborOfNeighbor)));
 
                 } else if (!neighbors.contains(neigborOfNeighbor) && !neigborOfNeighbor.equals(t)) {
                     sb.append("<font size='2' color='gray'>" + fungoriumFrame.getPrototype().getKey(neigborOfNeighbor) + " </font>");
@@ -104,6 +104,15 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
             lines.add(new ColoredLine(new Point(xStringLabel, yStringLabel), new Point(x, y), Color.gray));
             labelFactory(sb.toString(), xStringLabel, yStringLabel);
         }
+    }
+    private Color lineColorBetweenNeighbors(Tekton start, Tekton end) {
+        Mycelium m = null;
+        for (Mycelium myc : start.getMyceliums()) {
+            if (myc.getTektonEnd().equals(end) || myc.getTektonStart().equals(end)) {
+                m = myc;
+            }
+        }
+        return (m == null) ? Color.BLACK : fungoriumFrame.getPlayerColor(m.getMaster());
     }
     /**
      * Adds a label with text to the specified world coordinates

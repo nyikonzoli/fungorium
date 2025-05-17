@@ -31,7 +31,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         for (Mycelium mycelium : tekton.myceliums) {
             if (currentPlayer.equals(mycelium.getMaster())) {
                 JButton mycButton = new JButton();
-                mycButton.setName(fungoriumFrame.getPrototype().getKey(mycelium));
+                mycButton.setText(fungoriumFrame.getPrototype().getKey(mycelium));
                 mycButton.addActionListener(e -> {
                     actionSelectorPanel.selectObject(mycelium);
                     System.out.println("Mycelium selected");
@@ -59,5 +59,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
                 this.add(insectButton);
             }
         }
+        //repaint();
+        //revalidate();
     }
 }
