@@ -7,9 +7,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -19,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -26,6 +24,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
 
     private JComboBox<String> players = new JComboBox<>();
     private JLabel currentPlayer = new JLabel();
+    private JLabel roundCound = new JLabel();
     private FungoriumFrame fungoriumFrame;
     private ImageIcon backgroundImage;
     /**
@@ -56,6 +55,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         JLabel numberOfPlayersText = new JLabel("Number of Players: ");
         numberOfPlayersText.setFont(new Font("Arial", Font.PLAIN, 10));
         JTextField numberOfPlayers = new JTextField();
+        
 
         addPlayersPanel.add(numberOfPlayersText);
         addPlayersPanel.add(numberOfPlayers);
@@ -67,6 +67,14 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         newGame.setFont(buttonFont);
         newGame.addActionListener(e -> {
             // TODO: implement
+            String numberOfPlayerString = numberOfPlayers.getText();
+            
+            fungoriumFrame.getPrototype().handleInput("newgame");
+            
+
+
+
+
             fungoriumFrame.setPlayerColors();
         });
         /*
@@ -85,17 +93,54 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         save.setPreferredSize(elementDimension);
         save.setFont(buttonFont);
         save.addActionListener(e -> {
-            // TODO: implement
+            String saveFileName = saveTextField.getText();
+            saveTextField.setText("");
+            if (saveFileName != null && !saveFileName.isBlank()) {
+                String result = fungoriumFrame.getPrototype().handleInput("save " + saveFileName);
+                JOptionPane.showMessageDialog(null, result);
+                //fungoriumFrame.resetAll();
+                //TODO: panelek frissiteses az uj allapotra
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Mentés megszakítva vagy érvénytelen név.");
+            }
+
+
         });
         /*
          * LOAD GAME PANEL
          */
+        JPanel loadPanel = new JPanel();
+        loadPanel.setLayout(new BoxLayout(loadPanel, BoxLayout.Y_AXIS));
+        JLabel loadText = new JLabel("Name of the load file: ");
+        loadText.setFont(new Font("Arial", Font.PLAIN, 10));
+        JTextField loadTextField = new JTextField();
+
+        loadPanel.add(loadText);
+        loadPanel.add(loadTextField);
+
         JButton load = new JButton("Load");
         load.setPreferredSize(elementDimension);
         load.setFont(buttonFont);
         load.addActionListener(e -> {
-            // TODO: implement
+            String loadFileName = loadTextField.getText();
+            loadTextField.setText("");
+            if (loadFileName != null && !loadFileName.isBlank()) {
+                String result = fungoriumFrame.getPrototype().handleInput("load " + loadFileName);
+                JOptionPane.showMessageDialog(null, result);
+                //fungoriumFrame.resetAll();
+                //TODO: panelek frissiteses az uj allapotra
+
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Betöltés megszakítva vagy érvénytelen név.");
+            }
+
+
             fungoriumFrame.setPlayerColors();
+
+            
+
         });
         /*
          * PLAYER LIST 
@@ -108,6 +153,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
          * CURRENT PLAYER 
          */
         JLabel currentPlayerText = new JLabel("Current Player: ");
+        
         currentPlayerText.setFont(new Font("Arial", Font.BOLD, 10));
         currentPlayerText.setPreferredSize(elementDimension);
 
@@ -149,6 +195,13 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
                 return label;
             }
         });
+
+        /*
+         * RoundCount
+         */        
+        roundCound.setFont(new Font("Arial", Font.BOLD, 10));
+        roundCound.setPreferredSize(elementDimension);
+        roundCound.setText("Rounds: " + frame.getPrototype().getGame().getRoundCount() + "/" +  frame.getPrototype().getGame().finishGame );
         
         /*
          * ADD COMPONENTS TO PANEL
@@ -157,11 +210,13 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         this.add(newGame);
         this.add(savePanel);
         this.add(save);
+        this.add(loadPanel);
         this.add(load);
         this.add(players);
         this.add(currentPlayerText);
         this.add(currentPlayer);
         this.add(nextPlayer);
+        this.add(roundCound);
 
     }
     /**
@@ -181,13 +236,30 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         currentPlayer.setText(fungoriumFrame.getPrototype().getKey(p));
         currentPlayer.setForeground(fungoriumFrame.getPlayerColor(p));
     }
+
+    /**
+     * Syncs the roundCount with the actual roundcount xd 
+     */
+    public void setRoundCount(){
+        int current = fungoriumFrame.getPrototype().getGame().getRoundCount();
+        int total = fungoriumFrame.getPrototype().getGame().finishGame;
+        
+        roundCound.setText("Rounds: " + current + "/" + total);
+    }
+    
+
     @Override
     public void reset() {
         fillPlayerList();
         setCurrentPlayer();
+        setRoundCount();
         players.setSelectedItem(null);
         currentPlayer.repaint();
         currentPlayer.revalidate();
+        roundCound.repaint();
+        roundCound.revalidate();
+        
+        
     }
     @Override
     protected void paintComponent(Graphics g) {
