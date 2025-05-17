@@ -15,6 +15,11 @@ import javax.swing.JPanel;
 public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     private FungoriumFrame fungoriumFrame;
     private JComboBox<Tekton> targetSelectorComboBox;
+
+    private final String[] out = new String[1];
+    JLabel actionInformation = new JLabel(out[0]);
+    JLabel informationLabel = new JLabel();
+
     public ActionSelectorPanel(FungoriumFrame frame) {
         this.fungoriumFrame = frame;
         this.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 20));
@@ -50,16 +55,54 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         // grow mycelium button
         JButton growMyButton = new JButton("Grow mycelium");
         growMyButton.addActionListener(e -> {
-            p.handleInput(
+            out[0] = p.handleInput(
                 "growmy "
                 + p.getKey(p.getGame().getCurrentPlayer()) + " "
                 + p.getKey(mushroomBody.getLocation()) + " "
                 + p.getKey(targetSelectorComboBox.getSelectedItem())
             );
-            fungoriumFrame.redrawAll();
+            actionInformation.setText(out[0]);
+            redrawMushroom(mushroomBody);
         });
         this.add(growMyButton);
-        // TODO: rest; promote, spore spreading, count, dead?, actions
+
+        JButton spreadSporeButton = new JButton("Spread spore");
+        spreadSporeButton.addActionListener(e -> {
+            out[0] = p.handleInput(
+                "spreadsp "
+                + p.getKey(mushroomBody) + " "
+                + p.getKey(targetSelectorComboBox.getSelectedItem())
+            );
+            actionInformation.setText(out[0]);
+            redrawMushroom(mushroomBody);
+        });
+        this.add(spreadSporeButton);
+
+        JButton promoteButton = new JButton("Grow SuperMushroom");
+        promoteButton.addActionListener(e -> {
+            out[0] = p.handleInput(
+                "growmu "
+                + p.getKey(p.getGame().getCurrentPlayer()) + " "
+                + p.getKey(mushroomBody.getLocation()) + " -s"
+            );
+            actionInformation.setText(out[0]);
+            redrawMushroom(mushroomBody);
+        });
+        this.add(promoteButton);
+
+        informationLabel.setText("Status: " + (mushroomBody.getAlive() ? "alive" : "dead")+ "   ActionPoints: " + mushroomBody.getActions() + "   Spores: " + mushroomBody.getSpores().size());
+        informationLabel.setFont(informationLabel.getFont().deriveFont(20f));
+        
+        this.add(informationLabel);
+
+        actionInformation.setFont(informationLabel.getFont().deriveFont(20f));
+
+        this.add(actionInformation);
+
+        fungoriumFrame.redrawAll();
+        revalidate();
+        repaint();
+
     }
     public void selectObject(Insect insect) {
         
@@ -147,5 +190,9 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     @Override
     public void redraw() {
         // can be empty for now
+    }
+
+    public void redrawMushroom(MushroomBody mb){
+        selectObject(mb);
     }
 }
