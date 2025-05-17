@@ -41,16 +41,28 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         fillTargetSelectorComboBox(center.getNeighbours());
         JComboBox<Insect> insectSelectorComboBox = new JComboBox<>(center.getInsects().toArray(new Insect[0]));
         setInsectSelectorComboBoxRenderer(insectSelectorComboBox);
+        Prototype p = fungoriumFrame.getPrototype();
         // grow button
         JButton growButton = new JButton("Grow");
         growButton.addActionListener(e -> {
-            mycelium.getMaster().initiateMyceliumGrowth(center, (Tekton)targetSelectorComboBox.getSelectedItem());
+            //mycelium.getMaster().initiateMyceliumGrowth(center, (Tekton)targetSelectorComboBox.getSelectedItem());
+            p.handleInput(
+                "growmy "
+                + p.getKey(mycelium.getMaster()) + " "
+                + p.getKey(center) + " "
+                + p.getKey(targetSelectorComboBox.getSelectedItem())
+            );
         });
         this.add(growButton);
         // eat insect button - currently tries eating every insect
         JButton eatInsecButton = new JButton("Eat insect");
         eatInsecButton.addActionListener(e -> {
-            mycelium.eatInsect((Insect)insectSelectorComboBox.getSelectedItem(), center);
+            //mycelium.eatInsect((Insect)insectSelectorComboBox.getSelectedItem(), center);
+            p.handleInput(
+                "eatin " 
+                + p.getKey(mycelium.getMaster()) + " "
+                + p.getKey(insectSelectorComboBox.getSelectedItem())
+            );
         });
         // cut label
         JLabel cutLabel = new JLabel();

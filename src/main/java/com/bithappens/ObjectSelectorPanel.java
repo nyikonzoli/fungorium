@@ -23,6 +23,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         selectedTekton = null;
         revalidate();
         repaint();
+        actionSelectorPanel.reset();
     }
     public void selectTekton(Tekton tekton) {
         reset();

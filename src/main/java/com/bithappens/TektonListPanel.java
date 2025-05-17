@@ -84,7 +84,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
     public static String tektonHTMLGenerator(FungoriumFrame frame, Tekton t) {
         Prototype p = frame.getPrototype();
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><font color='black'>" + p.getKey(t) + " (" + t.getClass().getName() + ")</font><br>");
+        sb.append("<html><font color='black'>" + p.getKey(t) + " (" + t.getClass().getSimpleName() + ")</font><br>");
         if(t.getMushroomBody() != null) {
             MushroomBody mb = t.getMushroomBody();
             sb.append("<font color='black'>Mushroom: </font>");
