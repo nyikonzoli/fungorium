@@ -33,7 +33,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
                 JButton mycButton = new JButton();
                 mycButton.setText(fungoriumFrame.getPrototype().getKey(mycelium));
                 mycButton.addActionListener(e -> {
-                    actionSelectorPanel.selectObject(mycelium);
+                    actionSelectorPanel.selectObject(tekton, mycelium);
                     System.out.println("Mycelium selected");
                 });
                 this.add(mycButton);
