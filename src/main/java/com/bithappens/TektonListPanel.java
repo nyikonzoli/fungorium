@@ -102,6 +102,9 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
             } else {
                 sb.append("M");
             }
+            if (!mb.alive) {
+                sb.append(" (Dead)");
+            }
             sb.append("</font><br>");
         }
         if (!t.getInsects().isEmpty()) {

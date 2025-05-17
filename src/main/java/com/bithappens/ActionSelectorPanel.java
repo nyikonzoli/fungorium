@@ -32,10 +32,35 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         repaint();
     }
     public void selectObject(MushroomBody mushroomBody) {
-        // TODO + super mushroom dolog + mycelium növesztés is, a szomszédos mezőkre
-        // mycelium növesztést megoldja Kristóf, kell a könnyű teszteléshez
-        
-        
+        reset();
+        Prototype p = fungoriumFrame.getPrototype();
+        // combo box fill
+        Tekton t = mushroomBody.getLocation();
+        if (!(mushroomBody instanceof SuperMushroomBody)) {
+            fillTargetSelectorComboBox(t.getNeighbours());
+        } else {
+            ArrayList<Tekton> reachables = new ArrayList<>(t.getNeighbours());
+            for (Tekton tekton : t.getNeighbours()) {
+                for (Tekton neighborOfNeighbors : tekton.getNeighbours()) {
+                    if (!reachables.contains(neighborOfNeighbors)) {
+                        reachables.add(neighborOfNeighbors);
+                    }
+                }
+            }
+            fillTargetSelectorComboBox(reachables);
+        }
+        // grow mycelium button
+        JButton growMyButton = new JButton("Grow mycelium");
+        growMyButton.addActionListener(e -> {
+            p.handleInput(
+                "growmy "
+                + p.getKey(p.getGame().getCurrentPlayer()) + " "
+                + p.getKey(mushroomBody.getLocation()) + " "
+                + p.getKey(targetSelectorComboBox.getSelectedItem())
+            );
+        });
+        this.add(growMyButton);
+        // TODO: rest; promote, spore spreading, count, dead?, actions
     }
     public void selectObject(Insect insect) {
         // TODO
@@ -46,9 +71,19 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         JComboBox<Insect> insectSelectorComboBox = new JComboBox<>(center.getInsects().toArray(new Insect[0]));
         setInsectSelectorComboBoxRenderer(insectSelectorComboBox);
         Prototype p = fungoriumFrame.getPrototype();
-        // grow button
-        JButton growButton = new JButton("Grow");
-        growButton.addActionListener(e -> {
+        // grow mushroom button
+        JButton growMuButton = new JButton("Grow mushroom");
+        growMuButton.addActionListener(e -> {
+            p.handleInput(
+                "growmu " 
+                + p.getKey(mycelium.getMaster()) + " "
+                + p.getKey(center)
+            );
+        });
+        this.add(growMuButton);
+        // grow mycelium button
+        JButton growMyButton = new JButton("Grow mycelium");
+        growMyButton.addActionListener(e -> {
             //mycelium.getMaster().initiateMyceliumGrowth(center, (Tekton)targetSelectorComboBox.getSelectedItem());
             p.handleInput(
                 "growmy "
@@ -57,7 +92,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 + p.getKey(targetSelectorComboBox.getSelectedItem())
             );
         });
-        this.add(growButton);
+        this.add(growMyButton);
         // eat insect button - currently tries eating every insect
         JButton eatInsecButton = new JButton("Eat insect");
         eatInsecButton.addActionListener(e -> {
