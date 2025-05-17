@@ -24,6 +24,6 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         // TODO
     }
     public void selectObject(Mycelium mycelium) {
-        // TODO
+        // TODO - kristófé
     }
 }
