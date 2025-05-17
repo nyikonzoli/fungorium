@@ -119,7 +119,6 @@ public class Tekton {
      * @return Returns whether the deduction was successful
      */
     public boolean deductNetworkAction(MushroomMaster mm){
-        // TODO: 
         // Mycelium gráfon át megkeresi az első olyan Tektont, amelyen van mm-hez tartozó MushroomBody,
         // amelynek van pontja, és azt le is vonja
         // Ha sikeresen levont egy networkon lévő gombáról pontot, true-val tér vissza
@@ -358,7 +357,7 @@ public class Tekton {
         Mycelium myc2 = null;
 
         //ezt a feltetelt nem kommentalom, trivialis
-        if(this.canConnect() && target.canConnect() && isNeighbour(target) && deductNetworkAction(master) && this.canAcceptMycFromMushroomMaster(master) && target.canAcceptMycFromMushroomMaster(master)){
+        if(this.canConnect() && target.canConnect() && isNeighbour(target) && this.canAcceptMycFromMushroomMaster(master) && target.canAcceptMycFromMushroomMaster(master) && deductNetworkAction(master)){
             if (this.canReachTektonViaMycelium(target)){    //ha mar van koztuk myc, akkor nem kotjuk ujra ossze
                 return myc2;
             } 

@@ -23,9 +23,10 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         selectedTekton = null;
         revalidate();
         repaint();
+        actionSelectorPanel.reset();
     }
     public void selectTekton(Tekton tekton) {
-        reset();
+        removeAll();
         selectedTekton = tekton;
         Player currentPlayer = fungoriumFrame.getPrototype().getGame().getCurrentPlayer();
         for (Mycelium mycelium : tekton.myceliums) {
@@ -33,7 +34,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
                 JButton mycButton = new JButton();
                 mycButton.setText(fungoriumFrame.getPrototype().getKey(mycelium));
                 mycButton.addActionListener(e -> {
-                    actionSelectorPanel.selectObject(mycelium);
+                    actionSelectorPanel.selectObject(tekton, mycelium);
                     System.out.println("Mycelium selected");
                 });
                 this.add(mycButton);
@@ -61,5 +62,9 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         }
         //repaint();
         //revalidate();
+    }
+    @Override
+    public void redraw() {
+        selectTekton(selectedTekton);
     }
 }

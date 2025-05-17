@@ -56,6 +56,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
             button.setText(TektonListPanel.tektonHTMLGenerator(fungoriumFrame, tekton));
             button.addActionListener(e -> {
                 System.out.println("gomb teszt klikk");
+                objectSelectorPanel.reset();
                 objectSelectorPanel.selectTekton(tekton);
                 tektonViewPanel.selectTekton(tekton);
             });
@@ -84,7 +85,7 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
     public static String tektonHTMLGenerator(FungoriumFrame frame, Tekton t) {
         Prototype p = frame.getPrototype();
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><font color='black'>" + p.getKey(t) + "</font><br>");
+        sb.append("<html><font color='black'>" + p.getKey(t) + " (" + t.getClass().getSimpleName() + ")</font><br>");
         if(t.getMushroomBody() != null) {
             MushroomBody mb = t.getMushroomBody();
             sb.append("<font color='black'>Mushroom: </font>");
@@ -101,6 +102,9 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
                 sb.append("S");
             } else {
                 sb.append("M");
+            }
+            if (!mb.alive) {
+                sb.append(" (Dead)");
             }
             sb.append("</font><br>");
         }
@@ -150,4 +154,8 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         }
     }
     */
+    @Override
+    public void redraw() {
+        reset();
+    }
 }

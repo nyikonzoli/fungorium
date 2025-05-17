@@ -85,6 +85,7 @@ public class FungoriumFrame extends JFrame {
         gbc.gridy = 2;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
+        //gbc.fill = GridBagConstraints.BOTH;
         this.add(objectSelectorPanel, gbc);
 
         // actionSelectorPanel - jobb alsó
@@ -135,6 +136,11 @@ public class FungoriumFrame extends JFrame {
     public void resetAll() {
         for (IFungoriumPanel panel : panels) {
             panel.reset();
+        }
+    }
+    public void redrawAll() {
+        for (IFungoriumPanel panel : panels) {
+            panel.redraw();
         }
     }
 }
