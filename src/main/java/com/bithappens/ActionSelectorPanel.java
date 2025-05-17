@@ -33,6 +33,8 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     }
     public void selectObject(MushroomBody mushroomBody) {
         // TODO + super mushroom dolog + mycelium növesztés is, a szomszédos mezőkre
+        // mycelium növesztést megoldja Kristóf, kell a könnyű teszteléshez
+        
         
     }
     public void selectObject(Insect insect) {

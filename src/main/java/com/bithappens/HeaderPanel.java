@@ -167,7 +167,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         nextPlayer.setMargin(new Insets(0, 0, 0, 0));
         nextPlayer.setFont(buttonFont);
         nextPlayer.addActionListener(e -> {
-            System.out.println("Next round pressed");
+            System.out.println("Next player pressed");
             fungoriumFrame.getPrototype().getGame().nextPlayer();
             System.out.println(fungoriumFrame.getPrototype().getKey(fungoriumFrame.getPrototype().getGame().getCurrentPlayer()));
             fungoriumFrame.resetAll();

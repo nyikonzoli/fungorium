@@ -44,19 +44,17 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
      * @param tekton Selected Tekton
      */
     public void selectTekton(Tekton tekton) {
-        reset();
         selectedTekton = tekton;
-        drawAll(tekton);
-        revalidate();
-        repaint();
+        redrawAll();
     }
-    // TODO: myceliumok megjelenítése
     /**
      * Draws adds all labels representing Tektons to the panel. Adds all neighbor connections as lines
      * to the lines list.
      * @param t Center Tekton on the panel
      */
-    private void drawAll(Tekton t) {
+    public void redrawAll() {
+        reset();
+        Tekton t = selectedTekton;
         // Center tekton
         labelFactory(t, 0, 0);
         // Circle radius
@@ -104,6 +102,8 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
             lines.add(new ColoredLine(new Point(xStringLabel, yStringLabel), new Point(x, y), Color.gray));
             labelFactory(sb.toString(), xStringLabel, yStringLabel);
         }
+        revalidate();
+        repaint();
     }
     private Color lineColorBetweenNeighbors(Tekton start, Tekton end) {
         Mycelium m = null;
