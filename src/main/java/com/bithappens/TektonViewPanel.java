@@ -53,7 +53,8 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
      * @param t Center Tekton on the panel
      */
     public void redrawAll() {
-        reset();
+        removeAll();
+        lines.clear();
         Tekton t = selectedTekton;
         // Center tekton
         labelFactory(t, 0, 0);
