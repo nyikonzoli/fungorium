@@ -566,7 +566,7 @@ public class Prototype {
 
         Insect cutInsect = (Insect)objects.get(command.get(1));
         Mycelium cutMyc = (Mycelium)objects.get(command.get(2));
-        ArrayList<Mycelium> tektonMyceliums = cutInsect.getLocation().getMyceliums();
+        ArrayList<Mycelium> tektonMyceliums = new ArrayList<>(cutInsect.getLocation().getMyceliums());
 
         InsectMaster im = cutInsect.getImaster();
         im.initiateMyceliumCutting(cutMyc, cutInsect);

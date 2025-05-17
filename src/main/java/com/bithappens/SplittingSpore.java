@@ -18,6 +18,7 @@ public class SplittingSpore extends Spore {
      */
     @Override
     public void applyEffect(Insect i){
+        i.setEffect("Insect splitted");
         i.decrementActionPoint(1);
         InsectMaster master = i.getImaster();
         master.insectSplit(i);

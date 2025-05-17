@@ -7,6 +7,7 @@ public class Insect {
     private int actionPoints;
     private boolean canCutMycelium = true;
     private boolean stunned = false;
+    private String effect;
 
     private InsectMaster imaster;
 
@@ -109,6 +110,14 @@ public class Insect {
         imaster = i;
     }
 
+    public void setEffect(String e){
+        effect = e;
+    }
+
+    public String getEffect(){
+        return effect;
+    }
+
 
 
     // METHODS
@@ -149,6 +158,7 @@ public class Insect {
     public void cutMycelium(Mycelium mycelium){
         if(canCutMycelium){
             mycelium.setCut(true);
+            mycelium.disappear();
             decrementActionPoint(1);
         }
     }

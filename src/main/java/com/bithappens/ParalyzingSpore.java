@@ -18,6 +18,7 @@ public class ParalyzingSpore extends Spore {
      */
     @Override
     public void applyEffect(Insect i){
+        i.setEffect("Insect Paralyzed");
         i.setActionPoints(0);
         i.setStunned(true);
     }

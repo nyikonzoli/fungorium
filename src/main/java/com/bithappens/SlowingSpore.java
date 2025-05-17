@@ -18,6 +18,7 @@ public class SlowingSpore extends Spore {
      */
     @Override
     public void applyEffect(Insect i){
+        i.setEffect("Insect Slowed");
         i.decrementActionPoint(2);
     }
 }
