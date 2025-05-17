@@ -2,6 +2,7 @@ package com.bithappens;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
@@ -17,7 +18,8 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     private JComboBox<Tekton> targetSelectorComboBox;
     public ActionSelectorPanel(FungoriumFrame frame) {
         this.fungoriumFrame = frame;
-        this.setLayout(new FlowLayout());
+        this.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 20));
+        this.setPreferredSize(new Dimension(800, 60));
         //debug color
         //setBackground(Color.RED);
     }
