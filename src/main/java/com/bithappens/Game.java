@@ -101,6 +101,7 @@ public class Game {
      */
     public void nextPlayer() {
         int nextIdx = players.indexOf(currentPlayer) + 1;
+        System.out.println(nextIdx + "" + players.size());
         if (nextIdx >= players.size())  {
             nextIdx = 0;
             nextRound();
