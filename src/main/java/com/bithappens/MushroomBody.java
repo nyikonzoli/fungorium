@@ -32,7 +32,7 @@ public class MushroomBody {
     public MushroomBody(Tekton l){
         location = l;
         alive = true;
-        sporeCount = 15;
+        sporeCount = 9;
         actions = 3;
         sporeLevel = new ArrayList<>();
     }
