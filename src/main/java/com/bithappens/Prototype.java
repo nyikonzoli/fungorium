@@ -8,7 +8,11 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+
 
 // Prototype to keep track of all object instances that can be referenced by one of the user's actions
 public class Prototype {
@@ -654,43 +658,118 @@ public class Prototype {
     
     /// RANDOM MAP GENERATION
 
-    public void generateSeededNewGame(long seed, int playerCount) {
+    public void randomMapGeneration(long seed, int playerCount) {
+        if (playerCount < 4) {
+            return;
+        }
+        
+        game = new Game();
+        objects.clear();
+        canSplitRandomly = true;
+
         ArrayList<Triangle> triangles = new ArrayList<>();
-        ArrayList<Point> points = new ArrayList<>();
+        Map<Integer, Set<Integer>> adjacency = new HashMap<>();
         Random rand = new Random(seed);
 
-        // base triangle
-        points.add(new Point(100, 100));
-        points.add(new Point(400, 100));
-        points.add(new Point(250, 400));
+        /*
+         * Generate graph
+         */
+        for (int i = 0; i < 3; i++) {
+            adjacency.put(i, new HashSet<>());
+        }
+        connect(0, 1, adjacency);
+        connect(1, 2, adjacency);
+        connect(2, 0, adjacency);
+
         triangles.add(new Triangle(0, 1, 2));
 
-        for (int i = 0; i < playerCount * 8; i++) {
-            // random háromszög remove, ami alapján létrejön az abba foglalt 3 új háromszög
+        int nextIndex = 3;
+        int imcount = playerCount / 2;
+        int mmcount = playerCount - imcount;
+        for (int i = 0; i < mmcount * 8; i++) {
             Triangle t = triangles.remove(rand.nextInt(triangles.size()));
 
-            // súlypontban új pont, random eltolással, hogy a háromszögön belül maradjon
-            double nx = (points.get(t.a).x + points.get(t.b).x + points.get(t.c).x) / 3.0 + rand.nextDouble() * 20 - 10;
-            double ny = (points.get(t.a).y + points.get(t.b).y + points.get(t.c).y) / 3.0 + rand.nextDouble() * 20 - 10;
+            int newPoint = nextIndex++;
+            adjacency.put(newPoint, new HashSet<>());
 
-            int newIndex = points.size();
-            points.add(new Point(nx, ny));
+            connect(newPoint, t.a, adjacency);
+            connect(newPoint, t.b, adjacency);
+            connect(newPoint, t.c, adjacency);
 
-            // 3 új háromszög
-            triangles.add(new Triangle(t.a, t.b, newIndex));
-            triangles.add(new Triangle(t.b, t.c, newIndex));
-            triangles.add(new Triangle(t.c, t.a, newIndex));
+            triangles.add(new Triangle(t.a, t.b, newPoint));
+            triangles.add(new Triangle(t.b, t.c, newPoint));
+            triangles.add(new Triangle(t.c, t.a, newPoint));
         }
-        // 6 type of tektons
-    }
-    static class Point {
-        double x, y;
-        public Point(double x, double y) {
-            this.x = x;
-            this.y = y;
+
+        /*
+         * Generate Tekton map from graph
+         */
+
+        ArrayList<Tekton> generatedTektons = new ArrayList<>();
+        for (Integer i : adjacency.keySet()) {
+            Tekton t;
+            int nextrand = rand.nextInt(10);
+            switch (nextrand) {
+                case 0:
+                    t = new HeterogeneousTekton();
+                    break;
+                case 1:
+                    t = new HealingTekton();
+                    break;
+                case 2:
+                    t = new AbsorbingTekton();
+                    break;
+                case 3:
+                    t = new DeadEndTekton();
+                    break;
+                case 4:
+                    t = new InfertileTekton();
+                    break;
+                default:
+                    t = new Tekton();
+                    break;
+            }
+            generatedTektons.add(t);
+        }
+        for (int i = 0; i < generatedTektons.size(); i++) {
+            Tekton t = generatedTektons.get(i);
+            Set<Integer> neighborIndices = adjacency.get(i);
+            for (Integer neighborIdx : neighborIndices) {
+                t.addNeighbour(generatedTektons.get(neighborIdx));
+            }
+            game.extendField(t);
+            objects.put("T" + i, t);
+        }
+        
+        ArrayList<Tekton> startTektons = new ArrayList<>();
+        for (int i = 0; i < mmcount; i++) {
+            MushroomMaster mmaster = new MushroomMaster();
+            Tekton start = generatedTektons.get(rand.nextInt(generatedTektons.size()));
+            startTektons.add(start);
+            MushroomBody mb = new MushroomBody(start);
+            start.setMushroomBody(mb);
+            mmaster.addMushroom(mb);
+            game.addPlayer(mmaster);
+            objects.put("mmaster" + i, mmaster);
+            objects.put("mb" + i, mb);
+        }
+        game.setCurrentPlayer(game.getPlayers().get(0));
+        for (int i = 0; i < imcount; i++) {
+            InsectMaster imaster = new InsectMaster();
+            Tekton start = startTektons.get(i);
+            Insect insect = new Insect(start, 10, imaster);
+            start.addInsect(insect);
+            imaster.addInsect(insect);
+            game.addPlayer(imaster);
+            objects.put("imaster" + i, imaster);
+            objects.put("insect" + i, insect);
         }
     }
 
+    private void connect(int u, int v, Map<Integer, Set<Integer>> adjacency) {
+        adjacency.get(u).add(v);
+        adjacency.get(v).add(u);
+    }
     static class Triangle {
         int a, b, c;
         public Triangle(int a, int b, int c) {
