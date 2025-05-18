@@ -651,4 +651,52 @@ public class Prototype {
         }
         return out;
     }
+    
+    /// RANDOM MAP GENERATION
+
+    public void generateSeededNewGame(long seed, int playerCount) {
+        ArrayList<Triangle> triangles = new ArrayList<>();
+        ArrayList<Point> points = new ArrayList<>();
+        Random rand = new Random(seed);
+
+        // base triangle
+        points.add(new Point(100, 100));
+        points.add(new Point(400, 100));
+        points.add(new Point(250, 400));
+        triangles.add(new Triangle(0, 1, 2));
+
+        for (int i = 0; i < playerCount * 8; i++) {
+            // random háromszög remove, ami alapján létrejön az abba foglalt 3 új háromszög
+            Triangle t = triangles.remove(rand.nextInt(triangles.size()));
+
+            // súlypontban új pont, random eltolással, hogy a háromszögön belül maradjon
+            double nx = (points.get(t.a).x + points.get(t.b).x + points.get(t.c).x) / 3.0 + rand.nextDouble() * 20 - 10;
+            double ny = (points.get(t.a).y + points.get(t.b).y + points.get(t.c).y) / 3.0 + rand.nextDouble() * 20 - 10;
+
+            int newIndex = points.size();
+            points.add(new Point(nx, ny));
+
+            // 3 új háromszög
+            triangles.add(new Triangle(t.a, t.b, newIndex));
+            triangles.add(new Triangle(t.b, t.c, newIndex));
+            triangles.add(new Triangle(t.c, t.a, newIndex));
+        }
+        // 6 type of tektons
+    }
+    static class Point {
+        double x, y;
+        public Point(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    static class Triangle {
+        int a, b, c;
+        public Triangle(int a, int b, int c) {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+        }
+    }
 }

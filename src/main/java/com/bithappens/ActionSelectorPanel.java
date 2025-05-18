@@ -104,7 +104,6 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         actionInformation.setFont(informationLabel.getFont().deriveFont(16f));
         this.add(actionInformation);
 
-        fungoriumFrame.redrawAll();
         revalidate();
         repaint();
 
@@ -121,6 +120,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 + p.getKey(targetSelectorComboBox.getSelectedItem())
             );
             actionInformation.setText(out[0]);
+            fungoriumFrame.redrawAll();
         });
         this.add(moveButton);
 
@@ -137,6 +137,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
             else{
                 actionInformation.setText("No Myceliums on Tekton");
             }
+            fungoriumFrame.redrawAll();
         });
         this.add(cutButton);
 
@@ -149,14 +150,13 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 );
                 actionInformation.setText(out[0]+ ", " + insect.getEffect());
             }
-
+            fungoriumFrame.redrawAll();
         });
         this.add(eatButton);
 
         actionInformation.setFont(informationLabel.getFont().deriveFont(16f));
         this.add(actionInformation);
 
-        fungoriumFrame.redrawAll();
         revalidate();
         repaint();
 
