@@ -1,0 +1,30 @@
+<gamestate> 2 mmaster1 m mmaster2 m imaster1 i imaster2 i
+<current> imaster1
+<tekton> t1 Tekton
+<neighbors> t2 tHetero t3
+<mushroom> mb1 mmaster1 1 15 1 CutBlockingSpore SpeedingSpore
+<mycelium> m1 mmaster1 t2 0 3
+<tekton> t2 Tekton
+<neighbors> t1 tHetero tA
+<insect> insect1 imaster1 4 1 0
+<mycelium> m1 mmaster1 t1 0 3
+<tekton> t3 Tekton
+<neighbors> t1 tHetero tHealing
+<tekton> tHetero HeterogeneousTekton
+<neighbors> t1 t2 tA t4 t6 tHealing t3
+<tekton> tA AbsorbingTekton
+<neighbors> t2 tHetero t4
+<tekton> tHealing HealingTekton
+<neighbors> t3 tHetero t6 tI t5
+<tekton> t4 Tekton
+<neighbors> tHetero tA tD t6
+<tekton> t5 Tekton
+<neighbors> tHealing tI
+<tekton> tI InfertileTekton
+<neighbors> t5 tHealing t6
+<tekton> t6 Tekton
+<neighbors> tHealing tI tD t4 tHetero
+<tekton> tD DeadEndTekton
+<neighbors> t6 t4
+<mushroom> mb2 mmaster2 1 15 1 SlowingSpore SpeedingSpore
+<insect> insect2 imaster2 5 1 0

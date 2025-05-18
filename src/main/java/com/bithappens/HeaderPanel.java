@@ -7,7 +7,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.time.ZonedDateTime;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -137,11 +136,13 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
             String loadFileName = loadTextField.getText();
             loadTextField.setText("");
             if (loadFileName != null && !loadFileName.isBlank()) {
-                String result = fungoriumFrame.getPrototype().handleInput("load " + loadFileName);
+                String result = p.handleInput("load " + loadFileName);
                 JOptionPane.showMessageDialog(null, result);
                 fungoriumFrame.resetAll();
                 //TODO: panelek frissiteses az uj allapotra ??
 
+                fungoriumFrame.dispose();
+                FungoriumFrame newFrame = new FungoriumFrame(p);
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Betöltés megszakítva vagy érvénytelen név.");

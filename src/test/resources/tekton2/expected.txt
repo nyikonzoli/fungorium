@@ -3,16 +3,16 @@
 <tekton> th HeterogeneousTekton
 <neighbors> td tn1 tn2
 <mushroom> mu1 mm1 1 2 1
-<mycelium> m1 mm1 tn2 0 20
-<mycelium> m2 mm1 td 0 20
-<mycelium> m3 mm2 tn1 0 20
+<mycelium> m1 mm1 tn2 0 3
+<mycelium> m2 mm1 td 0 3
+<mycelium> m3 mm2 tn1 0 3
 <tekton> td DeadEndTekton
 <neighbors> th tn1 tn2
-<mycelium> m2 mm1 th 0 20
+<mycelium> m2 mm1 th 0 3
 <tekton> tn1 Tekton
 <neighbors> th td tn2
 <mushroom> mu2 mm2 1 2 2
-<mycelium> m3 mm2 th 0 20
+<mycelium> m3 mm2 th 0 3
 <tekton> tn2 Tekton
 <neighbors> th td tn1
-<mycelium> m1 mm1 th 0 20
+<mycelium> m1 mm1 th 0 3
