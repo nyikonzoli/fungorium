@@ -150,6 +150,9 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
                 );
                 actionInformation.setText(out[0]+ ", " + insect.getEffect());
             }
+            else{
+                actionInformation.setText("No Spore on Tekton");
+            }
             fungoriumFrame.redrawAll();
         });
         this.add(eatButton);
@@ -210,13 +213,6 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
             fungoriumFrame.redrawAll();
         });
         this.add(eatInsecButton);
-        // cut label
-        // JLabel cutLabel = new JLabel();
-        // cutLabel.setText((mycelium.isCut() ? "Cut" : "Not cut"));
-        // this.add(cutLabel);
-        // ttl label
-        //JLabel ttlLabel = new JLabel("Time to live: " + mycelium.getTimeToLive());
-        //this.add(ttlLabel);
 
         updateInformationLabel(mycelium);
         informationLabel.setFont(informationLabel.getFont().deriveFont(16f));
@@ -271,6 +267,6 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         informationLabel.setText((mycelium.isCut() ? "Cut" : "Not cut") + "   Time to live: " + mycelium.getTimeToLive());
     }
     private void updateInformationLabel(Insect insect){
-        informationLabel.setText("   Action Points: " + insect.getActionPoints() + ((insect.isStunned()) ? " Stunned" : " Not stunned") + ((insect.getCanCutMycelium()) ? " Can cut" : " Can't cut"));
+        informationLabel.setText("   Action Points: " + insect.getActionPoints() + ((insect.isStunned()) ? "   Stunned" : "   Not stunned") + ((insect.getCanCutMycelium()) ? "   Can cut" : "   Can't cut"));
     }
 }
