@@ -154,6 +154,10 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         });
         this.add(eatButton);
 
+        updateInformationLabel(insect);
+        informationLabel.setFont(informationLabel.getFont().deriveFont(16f));
+        this.add(informationLabel);
+
         actionInformation.setFont(informationLabel.getFont().deriveFont(16f));
         this.add(actionInformation);
 
@@ -259,11 +263,14 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         // can be empty for now
     }
 
-    public void updateInformationLabel(MushroomBody mushroomBody){
+    private void updateInformationLabel(MushroomBody mushroomBody){
         informationLabel.setText("Status: " + (mushroomBody.getAlive() ? "alive" : "dead")+ "   ActionPoints: " + mushroomBody.getActions() + "   Spores: " + mushroomBody.getSpores().size() + "   ");
     }
 
-    public void updateInformationLabel(Mycelium mycelium){
+    private void updateInformationLabel(Mycelium mycelium){
         informationLabel.setText((mycelium.isCut() ? "Cut" : "Not cut") + "   Time to live: " + mycelium.getTimeToLive());
+    }
+    private void updateInformationLabel(Insect insect){
+        informationLabel.setText("   Action Points: " + insect.getActionPoints() + ((insect.isStunned()) ? " Stunned" : " Not stunned") + ((insect.getCanCutMycelium()) ? " Can cut" : " Can't cut"));
     }
 }
