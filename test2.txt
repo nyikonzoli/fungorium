@@ -1,0 +1,46 @@
+<gamestate> 5 mmaster0 m mmaster1 m mmaster2 m imaster0 i imaster1 i imaster2 i
+<current> mmaster0
+<tekton> T0 Tekton
+<neighbors> T16 T1 T2 T3 T5 T8 T13
+<tekton> T1 DeadEndTekton
+<neighbors> T0 T2 T6
+<mushroom> mb1 mmaster1 1 15 1 CutBlockingSpore RegularSpore SplittingSpore SpeedingSpore SplittingSpore
+<insect> insect1 imaster1 5 1 0
+<tekton> T2 Tekton
+<neighbors> T0 T1 T4 T9 T10 T11-1
+<tekton> T3 Tekton
+<neighbors> T0 T17 T4 T6 T7 T10 T14 T15
+<tekton> T4 Tekton
+<neighbors> T2 T3 T8 T13
+<tekton> T5 Tekton
+<neighbors> T0 T7
+<tekton> T6 HeterogeneousTekton
+<neighbors> T1 T3 T11-2 T12
+<mushroom> mb2 mmaster2 1 15 1 CutBlockingSpore SplittingSpore RegularSpore CutBlockingSpore SplittingSpore
+<insect> insect2 imaster2 5 1 0
+<tekton> T7 InfertileTekton
+<neighbors> T3 T5
+<tekton> T8 Tekton
+<neighbors> T0 T4 T14
+<tekton> T9 Tekton
+<neighbors> T2
+<tekton> T10 AbsorbingTekton
+<neighbors> T2 T3 T12
+<tekton> T12 HeterogeneousTekton
+<neighbors> T6 T10
+<tekton> T13 Tekton
+<neighbors> T0 T4
+<mushroom> mb0 mmaster0 1 15 1 CutBlockingSpore SlowingSpore SlowingSpore SplittingSpore SplittingSpore
+<insect> insect0 imaster0 5 1 0
+<tekton> T14 InfertileTekton
+<neighbors> T3 T8
+<tekton> T15 HealingTekton
+<neighbors> T3
+<tekton> T16 HealingTekton
+<neighbors> T0
+<tekton> T17 HealingTekton
+<neighbors> T3
+<tekton> T11-1 Tekton
+<neighbors> T2 T11-2
+<tekton> T11-2 Tekton
+<neighbors> T6 T11-1
