@@ -28,7 +28,7 @@ public class Tekton {
         spores = new ArrayList<>();
         myceliums = new ArrayList<>();
         insects = new ArrayList<>();
-        mushroomBody = null;
+        //mushroomBody = null;
     }
 
     
