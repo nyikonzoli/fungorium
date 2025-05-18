@@ -180,7 +180,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
                 Tekton splitTekton = p.getGame().getGameField().get(splitTektonIndex);
                 System.out.println(splitTekton.toString());
                 String out = p.handleInput(
-                    "split " + 
+                    "split " +
                     p.getKey(splitTekton)
                 );
                 System.out.println(out);

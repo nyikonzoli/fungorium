@@ -187,8 +187,8 @@ public class Tekton {
         int sporeMid = spores.size() / 2;
 
         //elso fele ide masodik fele oda
-        ArrayList<Tekton> aNneighbours = new ArrayList<>(neighbours.subList(0, mid));
-        aNneighbours.add(tektonB);
+        ArrayList<Tekton> aNeighbours = new ArrayList<>(neighbours.subList(0, mid));
+        aNeighbours.add(tektonB);
         ArrayList<Tekton> bNeighbours = new ArrayList<>(neighbours.subList(mid, neighbours.size()));
         bNeighbours.add(tektonA);
 
@@ -197,8 +197,15 @@ public class Tekton {
         ArrayList<Spore> aSpores = new ArrayList<>(spores.subList(0, sporeMid));
         ArrayList<Spore> bSpores = new ArrayList<>(spores.subList(sporeMid, spores.size()));
 
-        tektonA.setNeighbours(aNneighbours);
+        tektonA.setNeighbours(aNeighbours);
         tektonB.setNeighbours(bNeighbours);
+
+        for (Tekton neighbor : aNeighbours) {
+            replaceInNeighbour(neighbor, this, tektonA);
+        }
+        for (Tekton neighbor : bNeighbours) {
+            replaceInNeighbour(neighbor, this, tektonB);
+        }
 
         tektonA.setSpores(aSpores);
         tektonB.setSpores(bSpores);
@@ -208,6 +215,14 @@ public class Tekton {
         newTektons.add(tektonB);
 
         return newTektons;
+    }
+
+    public void replaceInNeighbour(Tekton neighbor, Tekton oldTekton, Tekton newTekton) {
+        ArrayList<Tekton> nList = neighbor.getNeighbours();
+        int index = nList.indexOf(oldTekton);
+        if (index != -1) {
+            nList.set(index, newTekton);
+        }
     }
 
 
@@ -225,6 +240,10 @@ public class Tekton {
      */
     public void addNeighbours(ArrayList<Tekton> tektons){
         neighbours.addAll(tektons);
+    }
+
+    public void removeNeighbor(Tekton t){
+        neighbours.remove(t);
     }
 
     /**

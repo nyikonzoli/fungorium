@@ -614,10 +614,7 @@ public class Prototype {
             objects.put(splitTektonName + "-1", twoNewTektons.get(0));
             objects.put(splitTektonName + "-2", twoNewTektons.get(1));
         
-            boolean removeSuccesful = game.getGameField().remove(splitTekton);
-            if (!removeSuccesful) {
-                return "Split failure";
-            }
+            game.shrinkField(splitTekton);
             return "Split success: " + command.get(1) + "-1, " + command.get(1) + "-2";
         }
         return "Split failed (invalid input or Tekton cant break (has insect or mushroom))";

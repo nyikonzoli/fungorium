@@ -229,6 +229,9 @@ public class Game {
      * @param t The Tekton to remove from the game field.
      */
     public void shrinkField(Tekton t){
+        for (Tekton currentTekton : gameField) {
+            currentTekton.removeNeighbor(t);
+        }
         gameField.remove(t);
     }
 
