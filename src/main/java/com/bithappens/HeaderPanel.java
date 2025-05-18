@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.time.ZonedDateTime;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -27,6 +29,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
     private JLabel roundCound = new JLabel();
     private FungoriumFrame fungoriumFrame;
     private ImageIcon backgroundImage;
+    private Prototype p;
     /**
      * Constructor of HeaderPanel that sets up the panel
      * @param frame FungoriumFrame that contains the header panel
@@ -36,6 +39,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
          * SET UP PANEL
          */
         fungoriumFrame = frame;
+        p = fungoriumFrame.getPrototype();
         //this.setBounds(0, 0, 1800, 150);
         this.setBackground(Color.white);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -167,6 +171,22 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         nextPlayer.setMargin(new Insets(0, 0, 0, 0));
         nextPlayer.setFont(buttonFont);
         nextPlayer.addActionListener(e -> {
+
+            // SPLIT RANDOM IDOKOZONKENT
+            long randomSplit = ZonedDateTime.now().toInstant().toEpochMilli();
+            if (randomSplit % 2 == 0) {
+                Random r = new Random();
+                int splitTektonIndex = r.nextInt(p.getGame().getGameField().size());
+                Tekton splitTekton = p.getGame().getGameField().get(splitTektonIndex);
+                System.out.println(splitTekton.toString());
+                String out = p.handleInput(
+                    "split " + 
+                    p.getKey(splitTekton)
+                );
+                System.out.println(out);
+            }
+            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli());
+
             System.out.println("Next player pressed");
             fungoriumFrame.getPrototype().getGame().nextPlayer();
             System.out.println(fungoriumFrame.getPrototype().getKey(fungoriumFrame.getPrototype().getGame().getCurrentPlayer()));
