@@ -70,16 +70,23 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         newGame.setPreferredSize(elementDimension);
         newGame.setFont(buttonFont);
         newGame.addActionListener(e -> {
-            // TODO: implement
-            String numberOfPlayerString = numberOfPlayers.getText();
+            //String numberOfPlayerString = numberOfPlayers.getText();
             
-            fungoriumFrame.getPrototype().handleInput("newgame");
-            
-
-
-
-
+            //fungoriumFrame.getPrototype().handleInput("newgame");
+            int playerCount = 0;
+            try {
+                playerCount = Integer.parseInt(numberOfPlayers.getText());
+            } catch(NumberFormatException exc) {
+                numberOfPlayers.setText("NEED A NUMBER");
+                return;
+            }
+            Random rand = new Random();
+            long seed = rand.nextLong();
+            // for debug uncomment:
+            // seed = 200212251010
+            p.randomMapGeneration(seed, playerCount);
             fungoriumFrame.setPlayerColors();
+            fungoriumFrame.resetAll();
         });
         /*
          * SAVE GAME PANEL
@@ -102,8 +109,8 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
             if (saveFileName != null && !saveFileName.isBlank()) {
                 String result = fungoriumFrame.getPrototype().handleInput("save " + saveFileName);
                 JOptionPane.showMessageDialog(null, result);
-                //fungoriumFrame.resetAll();
-                //TODO: panelek frissiteses az uj allapotra
+                fungoriumFrame.resetAll();
+                //TODO: panelek frissiteses az uj allapotra ??
 
             } else {
                 JOptionPane.showMessageDialog(null, "Mentés megszakítva vagy érvénytelen név.");
@@ -132,8 +139,8 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
             if (loadFileName != null && !loadFileName.isBlank()) {
                 String result = fungoriumFrame.getPrototype().handleInput("load " + loadFileName);
                 JOptionPane.showMessageDialog(null, result);
-                //fungoriumFrame.resetAll();
-                //TODO: panelek frissiteses az uj allapotra
+                fungoriumFrame.resetAll();
+                //TODO: panelek frissiteses az uj allapotra ??
 
                 
             } else {
