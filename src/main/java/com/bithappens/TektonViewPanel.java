@@ -20,7 +20,7 @@ public class TektonViewPanel extends JPanel implements IFungoriumPanel{
     private Tekton selectedTekton;
     private ArrayList<ColoredLine> lines = new ArrayList<>();
     // Tekton label size
-    private Dimension labelDimension = new Dimension(80, 80);
+    private Dimension labelDimension = new Dimension(100, 100);
     /**
      * Constoructor of TektonViewPanel, sets a FungoriumFrame as the container containing it
      * @param frame FungoriumFrame containing the panel
