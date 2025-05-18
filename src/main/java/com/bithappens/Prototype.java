@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 
 // Prototype to keep track of all object instances that can be referenced by one of the user's actions
 public class Prototype {
@@ -14,6 +16,7 @@ public class Prototype {
     // Game is stored differently, there can only be 1 Game instance per Prototype (the game instance
     // also has no explicit name and can't be referenced by the user in any of the commands' arguments)
     private Game game;
+    private boolean canSplitRandomly = false;
     public Game getGame() { return game; }
     public void setGame(Game game) { this.game = game; }
 
@@ -106,6 +109,7 @@ public class Prototype {
      */
     private String newgame(ArrayList<String> command) {
         objects.clear();
+        canSplitRandomly = true;
         game = new Game();
         Tekton t1 = new Tekton();
         Tekton t2 = new Tekton();
@@ -593,6 +597,9 @@ public class Prototype {
      */
     private String nextplayer() {
         game.nextPlayer();
+        if (canSplitRandomly) {
+            randomSplit();
+        }
         return "Next player";
     }
     /**
@@ -625,5 +632,23 @@ public class Prototype {
      */
     private String print() {
         return SaveGame.objectStateToString(this);
+    }
+
+    private String randomSplit() {
+        Random r = new Random();
+        String out = "";
+        //long randomSplit = ZonedDateTime.now().toInstant().toEpochMilli();
+        if (r.nextInt(100) % 20 == 0) {
+            int splitTektonIndex = r.nextInt(game.getGameField().size());
+            Tekton splitTekton = game.getGameField().get(splitTektonIndex);
+            String splitTektonKey = getKey(splitTekton);
+            System.out.println(splitTektonKey);
+            out = handleInput(
+                "split " +
+                splitTektonKey
+            );
+            //System.out.println(out);
+        }
+        return out;
     }
 }

@@ -173,24 +173,24 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         nextPlayer.addActionListener(e -> {
 
             // TESZT
-            GameOver go = new GameOver(frame);
+            //GameOver go = new GameOver(frame);
 
-            // SPLIT RANDOM IDOKOZONKENT
-            long randomSplit = ZonedDateTime.now().toInstant().toEpochMilli();
-            if (randomSplit % 10 == 0) {
-                Random r = new Random();
-                int splitTektonIndex = r.nextInt(p.getGame().getGameField().size());
-                Tekton splitTekton = p.getGame().getGameField().get(splitTektonIndex);
-                System.out.println(splitTekton.toString());
-                String out = p.handleInput(
-                    "split " +
-                    p.getKey(splitTekton)
-                );
-                System.out.println(out);
-            }
+            // SPLIT RANDOM IDOKOZONKENT - athelyezve kor eleji akciora uj kor esetere
+            // long randomSplit = ZonedDateTime.now().toInstant().toEpochMilli();
+            // if (randomSplit % 10 == 0) {
+            //     Random r = new Random();
+            //     int splitTektonIndex = r.nextInt(p.getGame().getGameField().size());
+            //     Tekton splitTekton = p.getGame().getGameField().get(splitTektonIndex);
+            //     System.out.println(splitTekton.toString());
+            //     String out = p.handleInput(
+            //         "split " +
+            //         p.getKey(splitTekton)
+            //     );
+            //     System.out.println(out);
+            // }
 
             System.out.println("Next player pressed");
-            fungoriumFrame.getPrototype().getGame().nextPlayer();
+            fungoriumFrame.getPrototype().handleInput("nextplayer");
 
             // Game Over call
             if (fungoriumFrame.getPrototype().getGame().getGameOver()) {
