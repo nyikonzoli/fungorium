@@ -1,5 +1,6 @@
 package com.bithappens;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -28,6 +29,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         this.setPreferredSize(new Dimension(800, 60));
         //debug color
         //setBackground(Color.RED);
+        this.setBackground(new Color(196, 159, 130));
     }
     @Override
     public void reset() {
