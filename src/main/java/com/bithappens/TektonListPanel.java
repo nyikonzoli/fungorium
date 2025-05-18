@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +33,8 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         scrollPane = new JScrollPane(gridPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(100, 600));
+        this.setMaximumSize(new Dimension(100, 600));
+        this.setMinimumSize(new Dimension(100, 600));
 
         reset();     
         this.add(scrollPane);  
