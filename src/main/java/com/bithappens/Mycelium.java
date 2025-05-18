@@ -8,7 +8,7 @@ import java.util.Set;
  * Represents a mycelium connection between two tectonic plates in the game.
  */
 public class Mycelium {
-    static int INITITAL_TTL = 20;
+    static int INITITAL_TTL = 3;
 
     private MushroomMaster grower;
     private int timeToLive;
@@ -16,8 +16,6 @@ public class Mycelium {
 
     private Tekton tektonStart, tektonEnd;
     private boolean hasBeenCut = false;
-
-    
 
     /**
      * Default constructor for Mycelium.
