@@ -158,7 +158,6 @@ public class Insect {
     public void cutMycelium(Mycelium mycelium){
         if(canCutMycelium){
             mycelium.setCut(true);
-            mycelium.disappear();
             decrementActionPoint(1);
         }
     }
