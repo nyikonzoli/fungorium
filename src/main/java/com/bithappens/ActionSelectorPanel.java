@@ -173,7 +173,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
             out[0] = p.handleInput(
                 "growmu " 
                 + p.getKey(mycelium.getMaster()) + " "
-                + p.getKey(center)
+                + p.getKey(mycelium.getTektonEnd())
             );
             actionInformation.setText(out[0]);
             fungoriumFrame.redrawAll();

@@ -11,7 +11,8 @@ import java.util.Set;
  * Tektons can have neighbors, spores, mycelium connections, insects, and mushrooms growing on them.
  */
 public class Tekton {
-    static int MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH = 9;
+    // TESZT MIATT LEJJEBB LETT VÉVE
+    static int MINIMUM_SPORE_COUNT_FOR_MUSHROOM_GROWTH = 3;
 
     protected ArrayList<Tekton> neighbours;
     protected ArrayList<Spore> spores;

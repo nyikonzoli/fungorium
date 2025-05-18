@@ -152,7 +152,7 @@ public class MushroomBody {
     public void spreadSpore(Tekton t, MushroomMaster mmaster){
         boolean neighboring = getLocation().isNeighbour(t);
 
-        if(alive && neighboring && sporeCount >= 3 && sporeLevel.size() >= 3){
+        if(alive && neighboring && sporeCount >= 3 && sporeLevel.size() >= 3 && actions > 0){
             
             ArrayList<Spore> thrownSpores = new ArrayList<>();
             for (int i = 0; i < SPORE_SPREAD_COUNT; i++) {
@@ -163,6 +163,7 @@ public class MushroomBody {
                 sporeCount--;
             }
             t.addSpores(thrownSpores);
+            actions--;
 
             if (sporeCount == 0) {
                 die();
@@ -177,7 +178,7 @@ public class MushroomBody {
      */
     public SuperMushroomBody promoteToSuperMushroomBody(){
 
-        if(!alive){
+        if(!alive || actions <= 0){
             return null;
         }
 
