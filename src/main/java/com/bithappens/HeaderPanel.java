@@ -183,7 +183,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         nextPlayer.addActionListener(e -> {
 
             // TESZT
-            //GameOver go = new GameOver(frame);
+            GameOver go = new GameOver(frame);
 
             // SPLIT RANDOM IDOKOZONKENT - athelyezve kor eleji akciora uj kor esetere
             // long randomSplit = ZonedDateTime.now().toInstant().toEpochMilli();

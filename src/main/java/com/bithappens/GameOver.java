@@ -5,11 +5,16 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -53,18 +58,36 @@ public class GameOver extends JFrame{
     }
 
     public void addElements(){
-        JPanel panel = new JPanel();
+
+        ImageIcon windowIcon = new ImageIcon("src/main/resources/window-icon.png");
+        this.setIconImage(windowIcon.getImage());
+
+        BufferedImage bgImage;
+        try {
+            bgImage = ImageIO.read(new File("src/main/resources/GameOverImage.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(Color.BLACK);
+        panel.setBorder(BorderFactory.createEmptyBorder(60, 20, 20, 20));
+        panel.setOpaque(false);
 
         Font titlePixel = loadPixelFont(64f);
         Font playersPixel = loadPixelFont(24f);
         Font buttonPixel = loadPixelFont(24f);
-        Dimension buttonSize = new Dimension(300, 80);
+        Dimension buttonSize = new Dimension(240, 80);
 
         JLabel titleLabel = new JLabel("GAME OVER");
         titleLabel.setFont(titlePixel);
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(Color.BLACK);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
@@ -72,8 +95,8 @@ public class GameOver extends JFrame{
         JLabel imLabel = new JLabel("Winner InsectMaster: " + imasterWinner);
         mmLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         imLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mmLabel.setForeground(Color.WHITE);
-        imLabel.setForeground(Color.WHITE);
+        mmLabel.setForeground(Color.BLACK);
+        imLabel.setForeground(Color.BLACK);
 
         mmLabel.setFont(playersPixel);
         imLabel.setFont(playersPixel);
@@ -88,7 +111,6 @@ public class GameOver extends JFrame{
         newGameButton.setMaximumSize(buttonSize);
         exitButton.setMaximumSize(buttonSize);
 
-        // Add spacing and components
         panel.add(Box.createVerticalStrut(60));
         panel.add(titleLabel);
         panel.add(Box.createRigidArea(new Dimension(0, 100)));
@@ -100,7 +122,6 @@ public class GameOver extends JFrame{
         panel.add(Box.createRigidArea(new Dimension(0, 40)));
         panel.add(exitButton);
 
-        // Button actions
         newGameButton.addActionListener(e -> {
             dispose();
             fframe.dispose();
