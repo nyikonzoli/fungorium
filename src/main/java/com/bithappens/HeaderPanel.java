@@ -143,6 +143,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
 
                 fungoriumFrame.dispose();
                 FungoriumFrame newFrame = new FungoriumFrame(p);
+                setCurrentPlayer();
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Betöltés megszakítva vagy érvénytelen név.");

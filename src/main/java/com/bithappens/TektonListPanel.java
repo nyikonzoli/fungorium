@@ -79,6 +79,9 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         */
     }
     private static String getFontColor(Color c) {
+        if(c == null){
+            return "";
+        }
         return "<font color='rgb(" + c.getRed() + "," + c.getGreen() + "," + c.getBlue() +")'>";
     }
 
