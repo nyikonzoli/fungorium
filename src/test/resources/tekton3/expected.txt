@@ -1,7 +1,7 @@
 <gamestate> 0 mm1 m
 <current> mm1
 <tekton> tn Tekton
-<neighbors> ti
+<neighbors> ti-2
 <mushroom> mu1 mm1 1 2 1
 <tekton> ti-1 Tekton
 <neighbors> ti-2
