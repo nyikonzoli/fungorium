@@ -658,7 +658,11 @@ public class Prototype {
     }
     
     /// RANDOM MAP GENERATION
-
+    /**
+     * Generates a seeded pseudorandom Tekton field and starts a new game on it
+     * @param seed Generation seed
+     * @param playerCount Number of players
+     */
     public void randomMapGeneration(long seed, int playerCount) {
         if (playerCount < 4) {
             return;
@@ -672,14 +676,8 @@ public class Prototype {
         int mmcount = playerCount - imcount;
 
         Random rand = new Random(seed);
-        
-
-        Map<Integer, Set<Integer>> adjacency = TriangulatedGraph.generateTriangulatedGraph(seed, mmcount * 6);
-
-
-        
-
-        
+        int tektonMultiplier = 6;
+        Map<Integer, Set<Integer>> adjacency = TriangulatedGraph.generateTriangulatedGraph(seed, mmcount * tektonMultiplier);
 
         /*
          * Generate Tekton map from graph
@@ -711,6 +709,7 @@ public class Prototype {
             }
             generatedTektons.add(t);
         }
+        // Tekton generation
         for (int i = 0; i < generatedTektons.size(); i++) {
             Tekton t = generatedTektons.get(i);
             Set<Integer> neighborIndices = adjacency.get(i);
@@ -718,9 +717,9 @@ public class Prototype {
                 t.addNeighbour(generatedTektons.get(neighborIdx));
             }
             game.extendField(t);
-            objects.put("T" + i, t);
+            objects.put("T" + (i+1), t);
         }
-        
+        // MushroomMaster generation
         ArrayList<Tekton> startTektons = new ArrayList<>();
         for (int i = 0; i < mmcount; i++) {
             MushroomMaster mmaster = new MushroomMaster();
@@ -730,10 +729,11 @@ public class Prototype {
             start.setMushroomBody(mb);
             mmaster.addMushroom(mb);
             game.addPlayer(mmaster);
-            objects.put("mmaster" + i, mmaster);
-            objects.put("mb" + i, mb);
+            objects.put("mmaster" + (i+1), mmaster);
+            objects.put("mb" + (i+1), mb);
         }
         game.setCurrentPlayer(game.getPlayers().get(0));
+        // InsectMaster generation
         for (int i = 0; i < imcount; i++) {
             InsectMaster imaster = new InsectMaster();
             Tekton start = startTektons.get(i);
@@ -741,8 +741,8 @@ public class Prototype {
             start.addInsect(insect);
             imaster.addInsect(insect);
             game.addPlayer(imaster);
-            objects.put("imaster" + i, imaster);
-            objects.put("insect" + i, insect);
+            objects.put("imaster" + (i+1), imaster);
+            objects.put("insect" + (i+1), insect);
         }
     }
 }
