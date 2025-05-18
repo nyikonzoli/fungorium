@@ -6,7 +6,7 @@ import java.util.List;
  * Represents the game, managing players, game field, and rounds.
  */
 public class Game {
-    int finishGame = 10;
+    int finishGame = 20;
 
     private List<Player> players;
 
