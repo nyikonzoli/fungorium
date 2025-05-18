@@ -209,7 +209,7 @@ public class Prototype {
         tDNeighbours.add(t4);
         tD.addNeighbours(tDNeighbours);
 
-        Insect insect1 = new Insect(t1, 10, imaster1);
+        Insect insect1 = new Insect(t1, 3, imaster1);
         t1.addInsect(insect1);
         imaster1.addInsect(insect1);
 
@@ -217,7 +217,7 @@ public class Prototype {
         t1.setMushroomBody(mb1);
         mmaster1.addMushroom(mb1);
 
-        Insect insect2 = new Insect(tD, 10, imaster2);
+        Insect insect2 = new Insect(tD, 3, imaster2);
         tD.addInsect(insect2);
         imaster2.addInsect(insect2);
 
@@ -737,7 +737,7 @@ public class Prototype {
         for (int i = 0; i < imcount; i++) {
             InsectMaster imaster = new InsectMaster();
             Tekton start = startTektons.get(i);
-            Insect insect = new Insect(start, 10, imaster);
+            Insect insect = new Insect(start, 3, imaster);
             start.addInsect(insect);
             imaster.addInsect(insect);
             game.addPlayer(imaster);
