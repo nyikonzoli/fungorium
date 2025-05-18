@@ -78,7 +78,22 @@ public class MushroomMaster extends Player{
      * @param m the MushroomBody to be promoted
      */
     public void initiateSuperMushroomGrowth(MushroomBody m){
-        SuperMushroomBody smb = m.promoteToSuperMushroomBody();
+        // ultra based last minute hack fix
+        if (m instanceof SuperMushroomBody) return;
+        int mbcount = 0;
+        int smbcount = 0;
+        for (MushroomBody mb : mushrooms) {
+            if (!(mb instanceof SuperMushroomBody)) {
+                mbcount++;
+            } else {
+                smbcount++;
+            }
+        }
+        SuperMushroomBody smb = null;
+
+        if (mbcount / 3 > smbcount) {
+            smb = m.promoteToSuperMushroomBody();
+        }
 
         if(smb != null){
             mushrooms.remove(m);

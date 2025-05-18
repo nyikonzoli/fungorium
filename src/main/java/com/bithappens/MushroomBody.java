@@ -181,7 +181,6 @@ public class MushroomBody {
         if(!alive || actions <= 0){
             return null;
         }
-
         Tekton l = location;
         die();
         SuperMushroomBody smb = new SuperMushroomBody(l);
