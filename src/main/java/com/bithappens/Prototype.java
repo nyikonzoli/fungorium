@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -662,44 +663,23 @@ public class Prototype {
         if (playerCount < 4) {
             return;
         }
-        
+
         game = new Game();
         objects.clear();
         canSplitRandomly = true;
 
-        ArrayList<Triangle> triangles = new ArrayList<>();
-        Map<Integer, Set<Integer>> adjacency = new HashMap<>();
-        Random rand = new Random(seed);
-
-        /*
-         * Generate graph
-         */
-        for (int i = 0; i < 3; i++) {
-            adjacency.put(i, new HashSet<>());
-        }
-        connect(0, 1, adjacency);
-        connect(1, 2, adjacency);
-        connect(2, 0, adjacency);
-
-        triangles.add(new Triangle(0, 1, 2));
-
-        int nextIndex = 3;
         int imcount = playerCount / 2;
         int mmcount = playerCount - imcount;
-        for (int i = 0; i < mmcount * 8; i++) {
-            Triangle t = triangles.remove(rand.nextInt(triangles.size()));
 
-            int newPoint = nextIndex++;
-            adjacency.put(newPoint, new HashSet<>());
+        Random rand = new Random(seed);
+        
 
-            connect(newPoint, t.a, adjacency);
-            connect(newPoint, t.b, adjacency);
-            connect(newPoint, t.c, adjacency);
+        Map<Integer, Set<Integer>> adjacency = TriangulatedGraph.generateTriangulatedGraph(seed, mmcount * 6);
 
-            triangles.add(new Triangle(t.a, t.b, newPoint));
-            triangles.add(new Triangle(t.b, t.c, newPoint));
-            triangles.add(new Triangle(t.c, t.a, newPoint));
-        }
+
+        
+
+        
 
         /*
          * Generate Tekton map from graph
@@ -763,19 +743,6 @@ public class Prototype {
             game.addPlayer(imaster);
             objects.put("imaster" + i, imaster);
             objects.put("insect" + i, insect);
-        }
-    }
-
-    private void connect(int u, int v, Map<Integer, Set<Integer>> adjacency) {
-        adjacency.get(u).add(v);
-        adjacency.get(v).add(u);
-    }
-    static class Triangle {
-        int a, b, c;
-        public Triangle(int a, int b, int c) {
-            this.a = a;
-            this.b = b;
-            this.c = c;
         }
     }
 }
