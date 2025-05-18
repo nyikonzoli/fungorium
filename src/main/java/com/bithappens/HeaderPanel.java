@@ -185,10 +185,17 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
                 );
                 System.out.println(out);
             }
-            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli());
 
             System.out.println("Next player pressed");
             fungoriumFrame.getPrototype().getGame().nextPlayer();
+
+            // Game Over call
+            if (fungoriumFrame.getPrototype().getGame().getGameOver()) {
+                String mm = p.getKey(fungoriumFrame.getPrototype().getGame().getTopMushroomMasters().get(0));
+                String im = p.getKey(fungoriumFrame.getPrototype().getGame().getTopInsectMasters().get(0));
+                GameOver gameOver = new GameOver(mm, im, frame);
+            }
+
             System.out.println(fungoriumFrame.getPrototype().getKey(fungoriumFrame.getPrototype().getGame().getCurrentPlayer()));
             fungoriumFrame.resetAll();
         });

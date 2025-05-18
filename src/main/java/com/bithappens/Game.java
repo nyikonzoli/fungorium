@@ -91,6 +91,14 @@ public class Game {
         topInsectMasters = masters;
     }
 
+    public boolean getGameOver(){
+        return gameOver;
+    }
+
+    public void setGameOver(boolean go){
+        gameOver = go;
+    }
+
 
     /**
      * Starts the game, setting up the initial game state.
