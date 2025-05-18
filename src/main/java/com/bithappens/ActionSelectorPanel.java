@@ -33,6 +33,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     public void reset() {
         out[0] = "";
         actionInformation.setText(out[0]);
+        informationLabel.setText("");
         removeAll();
         revalidate();
         repaint();
@@ -40,6 +41,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     
     public void selectObject(MushroomBody mushroomBody) {
         reset();
+        updateInformationLabel(mushroomBody);
         // combo box fill
         Tekton t = mushroomBody.getLocation();
         if (!(mushroomBody instanceof SuperMushroomBody)) {
@@ -66,6 +68,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
             );
             actionInformation.setText(out[0]);
             updateInformationLabel(mushroomBody);
+            fungoriumFrame.redrawAll();
         });
         this.add(growMyButton);
 
@@ -78,6 +81,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
             );
             actionInformation.setText(out[0]);
             updateInformationLabel(mushroomBody);
+            fungoriumFrame.redrawAll();
         });
         this.add(spreadSporeButton);
 
@@ -90,6 +94,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
             );
             actionInformation.setText(out[0]);
             updateInformationLabel(mushroomBody);
+            fungoriumFrame.redrawAll();
         });
         this.add(promoteButton);
 
@@ -158,6 +163,7 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     }
     public void selectObject(Tekton center, Mycelium mycelium) {
         reset();
+        updateInformationLabel(mycelium);
         fillTargetSelectorComboBox(center.getNeighbours());
         JComboBox<Insect> insectSelectorComboBox = new JComboBox<>(center.getInsects().toArray(new Insect[0]));
         setInsectSelectorComboBoxRenderer(insectSelectorComboBox);
@@ -201,14 +207,14 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         });
         this.add(eatInsecButton);
         // cut label
-        JLabel cutLabel = new JLabel();
-        cutLabel.setText((mycelium.isCut() ? "Cut" : "Not cut"));
-        this.add(cutLabel);
+        // JLabel cutLabel = new JLabel();
+        // cutLabel.setText((mycelium.isCut() ? "Cut" : "Not cut"));
+        // this.add(cutLabel);
         // ttl label
         //JLabel ttlLabel = new JLabel("Time to live: " + mycelium.getTimeToLive());
         //this.add(ttlLabel);
 
-        informationLabel.setText((mycelium.isCut() ? "Cut" : "Not cut") + "   Time to live: " + mycelium.getTimeToLive());
+        updateInformationLabel(mycelium);
         informationLabel.setFont(informationLabel.getFont().deriveFont(16f));
         
         this.add(informationLabel);
@@ -255,5 +261,9 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
 
     public void updateInformationLabel(MushroomBody mushroomBody){
         informationLabel.setText("Status: " + (mushroomBody.getAlive() ? "alive" : "dead")+ "   ActionPoints: " + mushroomBody.getActions() + "   Spores: " + mushroomBody.getSpores().size() + "   ");
+    }
+
+    public void updateInformationLabel(Mycelium mycelium){
+        informationLabel.setText((mycelium.isCut() ? "Cut" : "Not cut") + "   Time to live: " + mycelium.getTimeToLive());
     }
 }
