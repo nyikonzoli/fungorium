@@ -172,6 +172,9 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         nextPlayer.setFont(buttonFont);
         nextPlayer.addActionListener(e -> {
 
+            // TESZT
+            GameOver go = new GameOver(frame);
+
             // SPLIT RANDOM IDOKOZONKENT
             long randomSplit = ZonedDateTime.now().toInstant().toEpochMilli();
             if (randomSplit % 10 == 0) {

@@ -28,7 +28,6 @@ public class Menu {
         prototype.handleInput("save autosave.txt");
         sc.close();
         System.out.println("\n");
-        
     }
 
 
