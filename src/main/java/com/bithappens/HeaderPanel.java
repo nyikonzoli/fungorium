@@ -174,7 +174,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
 
             // SPLIT RANDOM IDOKOZONKENT
             long randomSplit = ZonedDateTime.now().toInstant().toEpochMilli();
-            if (randomSplit % 2 == 0) {
+            if (randomSplit % 10 == 0) {
                 Random r = new Random();
                 int splitTektonIndex = r.nextInt(p.getGame().getGameField().size());
                 Tekton splitTekton = p.getGame().getGameField().get(splitTektonIndex);

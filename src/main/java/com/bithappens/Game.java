@@ -16,6 +16,8 @@ public class Game {
     private Player currentPlayer;
     private List<Tekton> gameField;
     private int roundCount;
+
+    private boolean gameOver;
     
     /**
      * Setter for roundcount
@@ -35,6 +37,7 @@ public class Game {
         topMushroomMasters = new ArrayList<>();
         gameField = new ArrayList<>();
         roundCount = 0;
+        gameOver = false;
     }
 
     /**
@@ -122,7 +125,9 @@ public class Game {
             t.onRoundStart();
         }
 
-        winCheck(); 
+        if(!gameOver){
+            gameOver = winCheck(); 
+        }
     }
 
     /**
@@ -136,7 +141,7 @@ public class Game {
     /**
      * updates top players and ends the game, when its over
      */
-    public void winCheck(){
+    public boolean winCheck(){
         if(roundCount >= finishGame){
 
             topInsectMasters.clear();
@@ -173,13 +178,14 @@ public class Game {
 
             
             if (topInsectMasters.size() == 1 && topMushroomMasters.size() == 1){
-                end(); 
+                end();
+                return true;
             } else{
                 finishGame++; //the game goes on until there is 1 winner from each team
-                nextRound();
+                return false;
             }
         }
-
+        return false;
     }
 
 
