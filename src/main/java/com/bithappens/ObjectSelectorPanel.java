@@ -39,6 +39,8 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         
         if (currentPlayer instanceof MushroomMaster) {
             backgroundImage = new ImageIcon("src/main/resources/object-selector-mm-final.png");
+        } else {
+            backgroundImage = new ImageIcon("src/main/resources/object-selector-im.png");
         }
         for (Mycelium mycelium : tekton.myceliums) {
             if (currentPlayer.equals(mycelium.getMaster())) {
