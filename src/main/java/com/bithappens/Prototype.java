@@ -607,17 +607,20 @@ public class Prototype {
         String splitTektonName = command.get(1);
         ArrayList<Tekton> twoNewTektons = splitTekton.split();
         
-        game.extendField(twoNewTektons.get(0));
-        game.extendField(twoNewTektons.get(1));   
+        if(twoNewTektons != null){
+            game.extendField(twoNewTektons.get(0));
+            game.extendField(twoNewTektons.get(1));   
         
-        objects.put(splitTektonName + "-1", twoNewTektons.get(0));
-        objects.put(splitTektonName + "-2", twoNewTektons.get(1));
+            objects.put(splitTektonName + "-1", twoNewTektons.get(0));
+            objects.put(splitTektonName + "-2", twoNewTektons.get(1));
         
-        boolean removeSuccesful = game.getGameField().remove(splitTekton);
-        if (!removeSuccesful) {
-            return "Split failure";
+            boolean removeSuccesful = game.getGameField().remove(splitTekton);
+            if (!removeSuccesful) {
+                return "Split failure";
+            }
+            return "Split success: " + command.get(1) + "-1, " + command.get(1) + "-2";
         }
-        return "Split success: " + command.get(1) + "-1, " + command.get(1) + "-2";
+        return "Split failed (invalid input or Tekton cant break (has insect or mushroom))";
     }
     /**
      * Handles the input of a "print" command.

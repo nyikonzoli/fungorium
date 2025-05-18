@@ -28,6 +28,7 @@ public class Tekton {
         spores = new ArrayList<>();
         myceliums = new ArrayList<>();
         insects = new ArrayList<>();
+        mushroomBody = null;
     }
 
     
@@ -170,7 +171,7 @@ public class Tekton {
      * @return The 2 new tecton
      */
     public ArrayList<Tekton> split(){
-        if(hasInsect()){
+        if(hasInsect() || hasMushroom()){
             return null;
         }
 
@@ -404,6 +405,10 @@ public class Tekton {
      */
     public boolean hasInsect(){
         return !insects.isEmpty();
+    }
+
+    public boolean hasMushroom(){
+        return mushroomBody != null;
     }
     /**
      * Used to be decreaseTTL. Now only returns the appropriate integer to add to TTL on this Tekton.
