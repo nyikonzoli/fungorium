@@ -2,7 +2,9 @@ package com.bithappens;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -10,6 +12,7 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
     private ActionSelectorPanel actionSelectorPanel;
     private FungoriumFrame fungoriumFrame;
     private Tekton selectedTekton;
+    private ImageIcon backgroundImage;
     public ObjectSelectorPanel(FungoriumFrame frame, ActionSelectorPanel actionSelectorPanel) {
         fungoriumFrame = frame;
         this.actionSelectorPanel = actionSelectorPanel;
@@ -17,11 +20,13 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         this.setMinimumSize(new Dimension(350, 80));
         this.setMaximumSize(new Dimension(350, 80));
         //debug backgorund
-        setBackground(Color.MAGENTA);
+        setBackground(new Color(36, 94, 50));
+        backgroundImage = new ImageIcon("src/main/resources/object-selector-default.png");
     }
     @Override
     public void reset() {
         removeAll();
+        backgroundImage = new ImageIcon("src/main/resources/object-selector-default.png");
         selectedTekton = null;
         revalidate();
         repaint();
@@ -31,6 +36,10 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         removeAll();
         selectedTekton = tekton;
         Player currentPlayer = fungoriumFrame.getPrototype().getGame().getCurrentPlayer();
+        
+        if (currentPlayer instanceof MushroomMaster) {
+            backgroundImage = new ImageIcon("src/main/resources/object-selector-mm-final.png");
+        }
         for (Mycelium mycelium : tekton.myceliums) {
             if (currentPlayer.equals(mycelium.getMaster())) {
                 JButton mycButton = new JButton();
@@ -68,5 +77,11 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
     @Override
     public void redraw() {
         selectTekton(selectedTekton);
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        // Draw background image
+        g.drawImage(backgroundImage.getImage(), 0, 0, this);
     }
 }

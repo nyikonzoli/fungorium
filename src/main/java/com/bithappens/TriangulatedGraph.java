@@ -11,7 +11,13 @@ public class TriangulatedGraph {
             this.c = c;
         }
     }
-
+    /**
+     * Pseudorandomly generates a triangulated graph (without crossing edges) with regards to the topology of the 
+     * Tekton field (so no neighbor of a center Tekton can have more than 2 other neighbors that neighbor the center Tekton)
+     * @param seed Seed needed to seeded random generation
+     * @param pointCount Number of points in the desired graph
+     * @return A Map where the first Integer value is the index of a point and the second Set contains the indices of neighboring points
+     */
     public static Map<Integer, Set<Integer>> generateTriangulatedGraph(long seed, int pointCount) {
         if (pointCount < 3) {
             throw new IllegalArgumentException("Minimum 3 pont kell.");
@@ -32,60 +38,60 @@ public class TriangulatedGraph {
 
         int nextIndex = 3;
 
-        // Addig szúrunk be, míg el nem érjük a kívánt pontszámot
         while (nextIndex < pointCount) {
             Triangle t = triangles.remove(rand.nextInt(triangles.size()));
 
             int newPoint = nextIndex++;
             adjacency.put(newPoint, new HashSet<>());
 
-            // új pontot kapcsoljuk a három meglévőhöz
-            if (canConnect(newPoint, t.a, adjacency)) {
-                connect(newPoint, t.a, adjacency);
-            }
-            if (canConnect(newPoint, t.b, adjacency)) {
-                connect(newPoint, t.b, adjacency);
-            }
-            if (canConnect(newPoint, t.c, adjacency)) {
-                connect(newPoint, t.c, adjacency);
-            }
+            // új pont a három meglévőhöz
 
-            // három új háromszög keletkezik
+            connect(newPoint, t.a, adjacency);
+            connect(newPoint, t.b, adjacency);
+            connect(newPoint, t.c, adjacency);
+            // három új háromszög 
             triangles.add(new Triangle(t.a, t.b, newPoint));
             triangles.add(new Triangle(t.b, t.c, newPoint));
             triangles.add(new Triangle(t.c, t.a, newPoint));
         }
-
-
-        // remove evil edges
-
-
-
         return adjacency;
     }
-
+    /**
+     * Connects the two points with an edge represented by adding the two neighborint points' indices
+     * to eachothers neighbors
+     * @param u First point's index
+     * @param v Second point's index
+     * @param adjacency Adjacency Map
+     */
     private static void connect(int u, int v, Map<Integer, Set<Integer>> adjacency) {
+        if (!canConnect(u, v, adjacency)) return;
         adjacency.get(u).add(v);
         adjacency.get(v).add(u);
     }
+    /**
+     * Returns whether the two points can actually be connected, so that it's going to be a possible field of Tektons
+     * @param u First point's index
+     * @param v First point's index
+     * @param adjacency Adjacency Map
+     * @return Whether they can be connected without violating the Tekton field's criteria
+     */
     private static boolean canConnect(int u, int v, Map<Integer, Set<Integer>> adjacency) {
-    // ellenőrizzük, hogy van-e közös szomszéd, akinél 2-nél több szomszéd lesz
-    Set<Integer> neighborsU = adjacency.get(u);
-    Set<Integer> neighborsV = adjacency.get(v);
-
-    for (Integer n : neighborsU) {
-        if (neighborsV.contains(n)) {
-            // megszámoljuk, hány közös szomszéd van u és v között n számára
-            int count = 0;
-            for (Integer x : adjacency.get(n)) {
-                if (x.equals(u) || x.equals(v)) count++;
-            }
-            if (count >= 2) {
-                return false;
+        // ellenőrizzük, hogy van-e közös szomszéd, akinél 2-nél több szomszéd lesz
+        Set<Integer> neighborsU = adjacency.get(u);
+        Set<Integer> neighborsV = adjacency.get(v);
+        for (Integer n : neighborsU) {
+            if (neighborsV.contains(n)) {
+                // megszámoljuk, hány közös szomszéd van u és v között n számára
+                int count = 0;
+                for (Integer x : adjacency.get(n)) {
+                    if (x.equals(u) || x.equals(v)) count++;
+                }
+                if (count >= 2) {
+                    return false;
+                }
             }
         }
+        return true;
     }
-    return true;
-}
    
 }

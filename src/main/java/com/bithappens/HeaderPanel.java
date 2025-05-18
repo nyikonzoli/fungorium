@@ -40,7 +40,7 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
         fungoriumFrame = frame;
         p = fungoriumFrame.getPrototype();
         //this.setBounds(0, 0, 1800, 150);
-        this.setBackground(Color.white);
+        this.setBackground(new Color(196, 159, 130));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         // Buttons' font to use
         Font buttonFont = new Font("Arial", Font.BOLD, 10);
@@ -76,7 +76,8 @@ public class HeaderPanel extends JPanel implements IFungoriumPanel {
             try {
                 playerCount = Integer.parseInt(numberOfPlayers.getText());
             } catch(NumberFormatException exc) {
-                numberOfPlayers.setText("NEED A NUMBER");
+                numberOfPlayers.setText("");
+                JOptionPane.showMessageDialog(null, "Not a number: need at least 4 players");
                 return;
             }
             Random rand = new Random();
