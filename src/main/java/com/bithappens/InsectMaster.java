@@ -91,8 +91,10 @@ public class InsectMaster extends Player {
      */
     @Override
     public void onRoundStart(){
-        for(int i = 0; i < insects.size(); i++){
-            insects.get(i).setActionPoints(5);
+        for(Insect i : insects){
+            i.setActionPoints(5);
+            i.setCanCutMycelium(true);
+            i.setStunned(false);
         }
     }
 
