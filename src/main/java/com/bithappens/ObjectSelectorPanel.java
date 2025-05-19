@@ -13,6 +13,11 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
     private FungoriumFrame fungoriumFrame;
     private Tekton selectedTekton;
     private ImageIcon backgroundImage;
+    /**
+     * Constructor of ObjectSelectorPanel
+     * @param frame FungoriumFrame containing the panel
+     * @param actionSelectorPanel ActionSelectorPanel that this panel controls
+     */
     public ObjectSelectorPanel(FungoriumFrame frame, ActionSelectorPanel actionSelectorPanel) {
         fungoriumFrame = frame;
         this.actionSelectorPanel = actionSelectorPanel;
@@ -32,6 +37,10 @@ public class ObjectSelectorPanel extends JPanel implements IFungoriumPanel{
         repaint();
         actionSelectorPanel.reset();
     }
+    /**
+     * Selects a Tekton's content to be displayed
+     * @param tekton Tekton that's content needs to be displayed
+     */
     public void selectTekton(Tekton tekton) {
         removeAll();
         selectedTekton = tekton;

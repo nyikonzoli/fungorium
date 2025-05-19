@@ -20,7 +20,12 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
     private JScrollPane scrollPane;
     private JPanel gridPanel;
     //private ArrayList<JButton> tektonButtons = new ArrayList<>(); 
-
+    /**
+     * Constructor of TektonListPanel
+     * @param frame FungoriumFrame containing the panel
+     * @param tektonViewPanel TektonViewPanel controlled by this panel
+     * @param objectSelectorPanel ObjectSelectorPanel controlled by this panel
+     */
     public TektonListPanel(FungoriumFrame frame, TektonViewPanel tektonViewPanel, ObjectSelectorPanel objectSelectorPanel) {
         fungoriumFrame = frame;
         this.tektonViewPanel = tektonViewPanel;
@@ -78,13 +83,23 @@ public class TektonListPanel extends JPanel implements IFungoriumPanel /*, Actio
         scrollPane.revalidate();
         */
     }
+    /**
+     * Function that returns a HTML font
+     * @param c Color of the HTML font
+     * @return String containing the HTML font 
+     */
     private static String getFontColor(Color c) {
         if(c == null){
             return "";
         }
         return "<font color='rgb(" + c.getRed() + "," + c.getGreen() + "," + c.getBlue() +")'>";
     }
-
+    /**
+     * Generates a HTML string describing a Tekton
+     * @param frame FungoriumFrame 
+     * @param t Tekton to be described
+     * @return String containing valid HTML code
+     */
     public static String tektonHTMLGenerator(FungoriumFrame frame, Tekton t) {
         Prototype p = frame.getPrototype();
         StringBuilder sb = new StringBuilder();

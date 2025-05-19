@@ -21,7 +21,10 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     JLabel actionInformation = new JLabel(out[0]);
     JLabel informationLabel = new JLabel();
     Prototype p;
-
+    /**
+     * Constructor of ActionSelectorPanel
+     * @param frame FungoriumFrame containing the panel
+     */
     public ActionSelectorPanel(FungoriumFrame frame) {
         this.fungoriumFrame = frame;
         p = fungoriumFrame.getPrototype();
@@ -40,7 +43,10 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         revalidate();
         repaint();
     }
-    
+    /**
+     * Selects a game object's actions to be displayed
+     * @param mushroomBody MushroomBody actions to be displayed
+     */
     public void selectObject(MushroomBody mushroomBody) {
         reset();
         updateInformationLabel(mushroomBody);
@@ -110,6 +116,10 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         repaint();
 
     }
+    /**
+     * Select a game object's actions to be displayed
+     * @param insect Insect's actions to be displayed
+     */
     public void selectObject(Insect insect) {
         reset();
         fillTargetSelectorComboBox(insect.getLocation().getNeighbours());
@@ -175,6 +185,11 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         repaint();
 
     }
+    /**
+     * Selects a game object's actions to be displayed
+     * @param center Center Tekton containing the Mycelium
+     * @param mycelium Mycelium to be displayed
+     */
     public void selectObject(Tekton center, Mycelium mycelium) {
         reset();
         updateInformationLabel(mycelium);
@@ -233,7 +248,10 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
         revalidate();
         repaint();
     }
-    
+    /**
+     * Fills the targetSelectorComboBox' content
+     * @param tektonList List of Tektons to fill up the content of the ComboBox
+     */
     private void fillTargetSelectorComboBox(ArrayList<Tekton> tektonList) {
         targetSelectorComboBox = new JComboBox<>(tektonList.toArray(new Tekton[0]));
         targetSelectorComboBox.setRenderer(new DefaultListCellRenderer() {
@@ -248,6 +266,10 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
             });
         this.add(targetSelectorComboBox);
     }
+    /**
+     * Sets up the insectSelectorComboBox
+     * @param comboBox
+     */
     private void setInsectSelectorComboBoxRenderer(JComboBox<Insect> comboBox) {
         comboBox.setRenderer(new DefaultListCellRenderer() {
                 @Override
@@ -265,14 +287,24 @@ public class ActionSelectorPanel extends JPanel implements IFungoriumPanel{
     public void redraw() {
         // can be empty for now
     }
-
+    /**
+     * Updates the InformationLabel according to the object received in the parameter
+     * @param mushroomBody
+     */
     private void updateInformationLabel(MushroomBody mushroomBody){
         informationLabel.setText("Status: " + (mushroomBody.getAlive() ? "alive" : "dead")+ "   ActionPoints: " + mushroomBody.getActions() + "   Spores: " + mushroomBody.getSpores().size() + "   ");
     }
-
+    /**
+     * Updates the InformationLabel according to the object received in the parameter
+     * @param mycelium
+     */
     private void updateInformationLabel(Mycelium mycelium){
         informationLabel.setText((mycelium.isCut() ? "Cut" : "Not cut") + "   Time to live: " + mycelium.getTimeToLive());
     }
+    /**
+     * Updates the InformationLabel according to the object received in the parameter
+     * @param insect
+     */
     private void updateInformationLabel(Insect insect){
         informationLabel.setText("   Action Points: " + insect.getActionPoints() + ((insect.isStunned()) ? "   Stunned" : "   Not stunned") + ((insect.getCanCutMycelium()) ? "   Can cut" : "   Can't cut"));
     }
